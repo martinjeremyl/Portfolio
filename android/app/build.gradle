@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: "io.fabric"
 
 import com.android.build.OutputFile
 
@@ -72,6 +73,10 @@ import com.android.build.OutputFile
  * ]
  */
 
+project.ext.react = [
+    entryFile: "index.js"
+]
+
 apply from: "../../node_modules/react-native/react.gradle"
 
 /**
@@ -94,11 +99,11 @@ android {
     dexOptions {
         javaMaxHeapSize "4g"
     }
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.rnfirebasestarter"
+        applicationId "com.invertase.rnfirebasestarter"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -148,19 +153,23 @@ dependencies {
     }
 
     // RNFirebase required dependencies
-    compile "com.google.firebase:firebase-core:11.4.2"
-    compile "com.google.android.gms:play-services-base:11.4.2"
+    compile "com.google.firebase:firebase-core:11.8.0"
+    compile "com.google.android.gms:play-services-base:11.8.0"
 
     // RNFirebase optional dependencies
-    compile "com.google.firebase:firebase-ads:11.4.2"
-    compile "com.google.firebase:firebase-auth:11.4.2"
-    compile "com.google.firebase:firebase-config:11.4.2"
-    compile "com.google.firebase:firebase-crash:11.4.2"
-    compile "com.google.firebase:firebase-database:11.4.2"
-    compile "com.google.firebase:firebase-firestore:11.4.2"
-    compile "com.google.firebase:firebase-messaging:11.4.2"
-    compile "com.google.firebase:firebase-perf:11.4.2"
-    compile "com.google.firebase:firebase-storage:11.4.2"
+    compile "com.google.firebase:firebase-ads:11.8.0"
+    compile "com.google.firebase:firebase-auth:11.8.0"
+    compile "com.google.firebase:firebase-config:11.8.0"
+    compile "com.google.firebase:firebase-crash:11.8.0"
+    compile "com.google.firebase:firebase-database:11.8.0"
+    compile "com.google.firebase:firebase-firestore:11.8.0"
+    compile "com.google.firebase:firebase-messaging:11.8.0"
+    compile "com.google.firebase:firebase-perf:11.8.0"
+    compile "com.google.firebase:firebase-storage:11.8.0"
+    
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+        transitive = true
+    }
 
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"

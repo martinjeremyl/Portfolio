@@ -1,4 +1,4 @@
-package com.rnfirebasestarter;
+package com.invertase.rnfirebasestarter;
 
 import android.app.Application;
 
@@ -20,6 +20,7 @@ import io.invertase.firebase.firestore.RNFirebaseFirestorePackage; // Firebase F
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage; // Firebase Cloud Messaging
 import io.invertase.firebase.perf.RNFirebasePerformancePackage; // Firebase Performance
 import io.invertase.firebase.storage.RNFirebaseStoragePackage; // Firebase Storage
+import io.invertase.firebase.fabric.crashlytics.RNFirebaseCrashlyticsPackage; // Crashlytics
 
 import java.util.Arrays;
 import java.util.List;
@@ -47,8 +48,14 @@ public class MainApplication extends Application implements ReactApplication {
         new RNFirebaseFirestorePackage(),
         new RNFirebaseMessagingPackage(),
         new RNFirebasePerformancePackage(),
-        new RNFirebaseStoragePackage()
+        new RNFirebaseStoragePackage(),
+        new RNFirebaseCrashlyticsPackage()
       );
+    }
+    
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
     }
   };
 
