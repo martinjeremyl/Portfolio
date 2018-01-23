@@ -5,9 +5,10 @@
       "plugins": [
         "transform-react-jsx-source",
         [
-          "babel-root-slash-import",
+          "babel-plugin-root-import",
           {
-            "rootPathSuffix": "src"
+            "rootPathSuffix": "src",
+            "rootPathPrefix": "@"
           }
         ]
       ]
