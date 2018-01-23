@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {
     "babel-eslint": "8.2.1",
-    "babel-root-slash-import": "1.1.0",
+    "babel-plugin-root-import": "5.1.0",
     "eslint": "4.16.0",
     "eslint-config-standard": "11.0.0-beta.0",
     "eslint-config-standard-react": "5.0.0",
