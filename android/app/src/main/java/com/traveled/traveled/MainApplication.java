@@ -1,4 +1,4 @@
-package com.invertase.rnfirebasestarter;
+package com.traveled.traveled;
 
 import android.app.Application;
 
