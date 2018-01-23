@@ -1,4 +1,4 @@
-import ExampleStore from '@/stores/ExampleStore'
+import ExampleStore from '~/stores/ExampleStore'
 
 export default {
   example: ExampleStore
