@@ -1,30 +1,27 @@
 import React from 'react'
-// import { StyleSheet, Text, View } from 'react-native'
-import { Provider } from 'mobx-react'
+import { StyleSheet, View } from 'react-native'
+// import { Provider } from 'mobx-react'
 import MenuVoyageComponent from './src/components/MenuVoyageComponent'
-
 // import stores from './src/stores'
-import moduleListeStores from './src/stores/ModuleListeStores'
-
-const test = {
-  modulesListe: moduleListeStores
-}
 
 export default class App extends React.Component {
   render () {
     return (
-      <Provider {...test}>
+      // <Provider {...stores}>
+      <View style={styles.container}>
         <MenuVoyageComponent />
-      </Provider>
+      </View>
+
+      // </Provider>
     )
   }
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center'
-//   }
-// })
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+})
