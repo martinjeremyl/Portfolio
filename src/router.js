@@ -1,1 +1,14 @@
-// On mettra les routes ici les potos :)
+import React from 'react'
+import { Scene, Router, Stack } from 'react-native-router-flux'
+
+import Example from '~/components/ExampleComponent'
+
+export default () => (
+  <Router>
+    <Stack key='root'>
+      <Scene key='login' component={Example} title='Login' />
+      <Scene key='register' component={Example} title='Register' />
+      <Scene key='home' component={Example} />
+    </Stack>
+  </Router>
+)
