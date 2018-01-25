@@ -9,3 +9,5 @@ cache:
 script:
   - yarn lint
   
+notifications:
+  email: false
