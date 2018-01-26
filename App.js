@@ -12,10 +12,11 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
+    console.log("will mount");
     firebase
       .firestore()
       .collection("cities")
-      .doc("hello")
+      .doc("ezjzcjknxezkjn")
       .set({
         name: "Los Angeles",
         state: "CA",
