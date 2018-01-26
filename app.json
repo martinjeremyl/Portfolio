@@ -1,4 +1,7 @@
 {
   "name": "Traveled",
-  "displayName": "Traveled"
+  "displayName": "Traveled",
+  "expo": {
+    "sdkVersion": "23.0.0"
+  }
 }

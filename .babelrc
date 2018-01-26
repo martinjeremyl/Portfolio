@@ -5,7 +5,13 @@
   "env": {
     "development": {
       "plugins": [
-        "transform-react-jsx-source"
+        "transform-react-jsx-source", [
+          "babel-plugin-root-import",
+          {
+            "rootPathSuffix": "src",
+            "rootPathPrefix": "~"
+          }
+        ]
       ]
     }
   }
