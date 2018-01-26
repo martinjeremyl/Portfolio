@@ -16,7 +16,6 @@ class ModuleListeStores {
 
   @computed
   get allMyModules () {
-    console.log('here', this.modulesListe)
     return this.modulesListe
   }
 }
