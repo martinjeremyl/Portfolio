@@ -28,7 +28,7 @@
     "rename": "node ./bin/rename.js",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint App.js src/**"
+    "lint": "eslint ."
   },
   "jest": {
     "preset": "react-native"
