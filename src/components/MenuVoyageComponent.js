@@ -5,10 +5,6 @@ import { getModuleNameById } from '~/util'
 import { Actions } from 'react-native-router-flux'
 import { LOGEMENTS, TRANSPORTS, DEPENSES, ACTIVITES, DOCUMENTS, LISTES } from '~/constants'
 
-// exemple d'import absolu a partir du dossier src :
-// il suffit de mettre /nom_de_dossier/nom_de_fichier
-// import { db } from '@/config/firebase'
-
 class MenuVoyageComponent extends Component {
   constructor (props) {
     super(props)
@@ -50,12 +46,12 @@ class MenuVoyageComponent extends Component {
     }
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.listenForModules(this.moduleListeRef)
   }
 
   // Récupération des modules
-  listenForModules (moduleListe) {
+  listenForModules = (moduleListe) => {
     moduleListe.on('value', (snap) => {
       // get children as an array
       var items = []
@@ -77,8 +73,6 @@ class MenuVoyageComponent extends Component {
 
   render () {
     return (
-      // <FlatList data={this.state.dataSource}
-      //   renderItem={({item}) => <Text>{item.libelle}</Text>} />
       <View>
         {this.state.dataSource.map(mod =>
           <Button
