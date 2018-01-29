@@ -16,13 +16,12 @@ export default class AuthComponent extends Component {
   }
 
   componentWillMount () {
-    storage.get('userToken')
-      .then(userToken => {
-        // TODO: Redirect to home if logged in (userToken !== null)
-        // Possiblement du code inutile, à voir comment se comporte l'authentification de firebase
-        console.log('is user logged in?', userToken !== null)
-        console.log('userToken', userToken, typeof userToken)
-      })
+    storage.get('userToken').then(userToken => {
+      // TODO: Redirect to home if logged in (userToken !== null)
+      // Possiblement du code inutile, à voir comment se comporte l'authentification de firebase
+      console.log('is user logged in?', userToken !== null)
+      console.log('userToken', userToken, typeof userToken)
+    })
 
     // Listener qui vérifie si l'authentification a changé
     auth.onAuthStateChanged(firebaseUser => {
@@ -95,7 +94,7 @@ export default class AuthComponent extends Component {
     }
   }
 
-  validateEmail = (email) => {
+  validateEmail = email => {
     // eslint-disable-next-line
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return re.test(email.toLowerCase())
@@ -122,9 +121,7 @@ export default class AuthComponent extends Component {
             onChangeText={password => this.setState({ password: password })}
           />
         </View>
-        {
-          this.state.error && <Text style={styles.error}>{this.state.txtError}</Text>
-        }
+        {this.state.error && <Text style={styles.error}>{this.state.txtError}</Text>}
         <View style={styles.field}>
           <Button onPress={this.signup} title='Inscription' />
           <Button onPress={this.login} title='Connexion' />
