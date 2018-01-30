@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 import storage from '~/storage'
 import { auth } from '~/config/firebase'
@@ -126,6 +127,14 @@ export default class AuthComponent extends Component {
           <Button onPress={this.signup} title='Inscription' />
           <Button onPress={this.login} title='Connexion' />
           <Button onPress={this.logout} title='Déconnexion' />
+        </View>
+        <View style={styles.field}>
+          <Button
+            title='Créer un voyage'
+            onPress={() => {
+              Actions.formPartOne()
+            }}
+          />
         </View>
       </View>
     )

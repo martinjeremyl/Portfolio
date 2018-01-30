@@ -1,4 +1,3 @@
-// Libellés des modules à afficher dans l'application. Ils doivent être utilisés lors de la création des voyages
 export const LOGEMENTS = 'LOGEMENTS'
 
 export const TRANSPORTS = 'TRANSPORTS'

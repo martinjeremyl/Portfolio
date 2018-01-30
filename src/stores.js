@@ -1,5 +1,5 @@
-import ExampleStore from '~/stores/ExampleStore'
+import TravelCreation from '~/stores/TravelCreation'
 
 export default {
-  example: ExampleStore
+  travelCreation: TravelCreation
 }

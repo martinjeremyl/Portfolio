@@ -5,7 +5,6 @@ import CreationScreenOne from '~/screens/CreationScreenOne'
 import CreationScreenTwo from '~/screens/CreationScreenTwo'
 import CreationScreenThree from '~/screens/CreationScreenThree'
 import CreationScreenRecap from '~/screens/CreationScreenRecap'
-import Example from '~/components/ExampleComponent'
 import AuthComponent from '~/components/AuthComponent'
 import MenuVoyageComponent from '~/components/MenuVoyageComponent'
 
@@ -14,9 +13,6 @@ export default () => (
     <Stack key='root'>
       <Scene key='voyage' component={MenuVoyageComponent} title='Voyage' />
       <Scene key='login' component={AuthComponent} title='Login' />
-      <Scene key='home' component={Example} />
-      <Scene key='home' component={Example} />
-      <Scene key='formPartInit' component={Example} title='Créer un voyage' />
       <Scene key='formPartOne' component={CreationScreenOne} title='Créer un voyage - PARTIE 1' />
       <Scene key='formPartTwo' component={CreationScreenTwo} title='Créer un voyage - PARTIE 2' />
       <Scene

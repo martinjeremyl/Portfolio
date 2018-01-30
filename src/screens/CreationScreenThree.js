@@ -1,20 +1,24 @@
 import React, { Component } from 'react'
 import { View, TextInput, Button } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import { observer, inject } from 'mobx-react'
 
+@inject('travelCreation')
+@observer
 class CreationScreenThree extends Component {
   state = {
     emails: [{ text: '' }]
   }
 
   handleNavigation = () => {
+    this.props.travelCreation.addEmails(this.state.emails.map(email => email.text))
     Actions.formRecap()
   }
 
   handleEmailChange = (text, key) => {
     this.setState(prevState => {
       const { emails } = prevState
-      emails[key] = text
+      emails[key].text = text
 
       return {
         emails
@@ -23,9 +27,11 @@ class CreationScreenThree extends Component {
   }
 
   addEmail = () => {
-    this.setState(prevState => ({
-      emails: [...prevState.emails, { text: '' }]
-    }))
+    this.setState(prevState => {
+      return {
+        emails: [...prevState.emails, { text: '' }]
+      }
+    })
   }
 
   render () {
@@ -35,6 +41,7 @@ class CreationScreenThree extends Component {
       <View>
         {emails.map((email, key) => (
           <TextInput
+            key={key}
             style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
             onChangeText={text => this.handleEmailChange(text, key)}
             value={emails[key].text}

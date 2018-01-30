@@ -2,53 +2,79 @@ import React, { Component } from 'react'
 import { View, Button } from 'react-native'
 import CheckBox from 'react-native-checkbox'
 import { Actions } from 'react-native-router-flux'
+import { observer, inject } from 'mobx-react'
 
+import { LOGEMENTS, TRANSPORTS, DEPENSES, ACTIVITES, DOCUMENTS, LISTES } from '~/constants'
+
+@inject('travelCreation')
+@observer
 class CreationScreenTwo extends Component {
   state = {
-    checkboxs: {
-      1: false,
-      2: true
+    modules: {
+      [LOGEMENTS]: {
+        checked: false,
+        value: LOGEMENTS
+      },
+      [TRANSPORTS]: {
+        checked: false,
+        value: TRANSPORTS
+      },
+      [DEPENSES]: {
+        checked: false,
+        value: DEPENSES
+      },
+      [ACTIVITES]: {
+        checked: false,
+        value: ACTIVITES
+      },
+      [DOCUMENTS]: {
+        checked: false,
+        value: DOCUMENTS
+      },
+      [LISTES]: {
+        checked: false,
+        value: LISTES
+      }
     }
   }
 
   handleNavigation = () => {
+    const { modules } = this.state
+
+    this.props.travelCreation.addModules(Object.keys(modules).map(module => modules[module]))
+
     Actions.formPartThree()
   }
 
   handelCheck = checkboxId => {
     this.setState(prevState => {
-      const { checkboxs } = prevState
-      checkboxs[checkboxId] = !checkboxs[checkboxId]
+      const { modules } = prevState
+      modules[checkboxId].checked = !modules[checkboxId].checked
 
       return {
-        checkboxs
+        modules
       }
     })
   }
 
   render () {
-    const { checkboxs } = this.state
+    const { modules } = this.state
     return (
       <View>
-        <CheckBox
-          label='Label'
-          checked={checkboxs[1]}
-          onChange={() => {
-            this.handelCheck(1)
-          }}
-        />
-
-        <CheckBox
-          label='Label'
-          checked={checkboxs[2]}
-          onChange={() => {
-            this.handelCheck(2)
-          }}
-        />
+        {Object.keys(modules).map(checkbox => (
+          <CheckBox
+            key={checkbox}
+            label={modules[checkbox].value}
+            checked={modules[checkbox].checked}
+            onChange={() => {
+              this.handelCheck(checkbox)
+            }}
+          />
+        ))}
 
         <Button
           onPress={this.handleNavigation}
-          title='Learn More'
+          title='Etape suivante'
           color='#841584'
           accessibilityLabel='Learn more about this purple button'
         />

@@ -3,5 +3,9 @@
   "parser": "babel-eslint",
   "env": {
     "browser": true
+  },
+  "rules": {
+    "react/prop-types": false,
+    "object-curly-spacing": ["error", "always"]
   }
 }
