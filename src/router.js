@@ -1,12 +1,12 @@
 import React from 'react'
 import { Scene, Router, Stack } from 'react-native-router-flux'
 
-import CreationScreenOne from '~/screens/CreationScreenOne'
-import CreationScreenTwo from '~/screens/CreationScreenTwo'
-import CreationScreenThree from '~/screens/CreationScreenThree'
-import CreationScreenRecap from '~/screens/CreationScreenRecap'
-import AuthComponent from '~/components/AuthComponent'
-import MenuVoyageComponent from '~/components/MenuVoyageComponent'
+import CreationScreenOne from './screens/CreationScreenOne'
+import CreationScreenTwo from './screens/CreationScreenTwo'
+import CreationScreenThree from './screens/CreationScreenThree'
+import CreationScreenRecap from './screens/CreationScreenRecap'
+import AuthComponent from './components/AuthComponent'
+import MenuVoyageComponent from './components/MenuVoyageComponent'
 
 export default () => (
   <Router>

@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
-import storage from '~/storage'
-import { auth } from '~/config/firebase'
+import storage from '../storage'
+import { auth } from '../config/firebase'
 
 export default class AuthComponent extends Component {
   constructor (props) {

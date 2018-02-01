@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx'
-import { database } from '~/config/firebase'
+import { database } from '../config/firebase'
 
 class TravelCreation {
   @observable name = ''

@@ -1,4 +1,4 @@
-import { LOGEMENTS, TRANSPORTS, DEPENSES, ACTIVITES, DOCUMENTS, LISTES } from '~/constants'
+import { LOGEMENTS, TRANSPORTS, DEPENSES, ACTIVITES, DOCUMENTS, LISTES } from './constants'
 
 /**
  * Méthode renvoyant le libellé du module en fonction de son id

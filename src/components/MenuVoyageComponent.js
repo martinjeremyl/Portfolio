@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Button, View } from 'react-native'
-import { database } from '~/config/firebase'
-import { getModuleNameById } from '~/util'
+import { database } from '../config/firebase'
+import { getModuleNameById } from '../util'
 import { Actions } from 'react-native-router-flux'
-import { LOGEMENTS, TRANSPORTS, DEPENSES, ACTIVITES, DOCUMENTS, LISTES } from '~/constants'
+import { LOGEMENTS, TRANSPORTS, DEPENSES, ACTIVITES, DOCUMENTS, LISTES } from '../constants'
 
 class MenuVoyageComponent extends Component {
   constructor (props) {

@@ -1,4 +1,4 @@
-import TravelCreation from '~/stores/TravelCreation'
+import TravelCreation from './stores/TravelCreation'
 
 export default {
   travelCreation: TravelCreation
