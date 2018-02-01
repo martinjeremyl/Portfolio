@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Button, View } from 'react-native'
-import { database } from '../config/firebase'
 import { getModuleNameById } from '../util'
 import { Actions } from 'react-native-router-flux'
 import { LOGEMENTS, TRANSPORTS, DEPENSES, ACTIVITES, DOCUMENTS, LISTES } from '../constants'
@@ -8,7 +7,6 @@ import { LOGEMENTS, TRANSPORTS, DEPENSES, ACTIVITES, DOCUMENTS, LISTES } from '.
 class MenuVoyageComponent extends Component {
   constructor (props) {
     super(props)
-    this.moduleListeRef = database.ref('voyages/0/modules')
     this.state = {
       dataSource: []
     }
@@ -47,24 +45,25 @@ class MenuVoyageComponent extends Component {
   }
 
   componentWillMount () {
+    // Set travel name in title
+    const { setParams } = this.props.navigation
+    setParams({ title: this.props.selectedTravel.nom })
+
+    this.moduleListeRef = this.props.selectedTravel.modules
     this.listenForModules(this.moduleListeRef)
   }
 
-  // Récupération des modules
+  // get modules name to show
   listenForModules = (moduleListe) => {
-    moduleListe.on('value', (snap) => {
-      // get children as an array
-      var items = []
+    var items = []
 
-      // Pour chaque module, on récupère son libellé
-      snap.forEach((child) => {
-        items.push({
-          libelle: getModuleNameById(child.val()),
-          key: child.key
-        })
+    moduleListe.forEach((child) => {
+      items.push({
+        libelle: getModuleNameById(child),
+        key: child.toString()
       })
 
-      // Affichage du résultat
+      // binding results
       this.setState({
         dataSource: items
       })
@@ -80,7 +79,7 @@ class MenuVoyageComponent extends Component {
             onPress={() => { this.handleNavigation(mod.libelle) }}
             title={mod.libelle}
             color='#841584'
-            accessibilityLabel='Learn more about this purple button'
+            accessibilityLabel='Click to see the module the module'
           />)}
       </View>
     )

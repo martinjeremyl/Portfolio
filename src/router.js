@@ -7,12 +7,14 @@ import CreationScreenThree from './screens/CreationScreenThree'
 import CreationScreenRecap from './screens/CreationScreenRecap'
 import AuthComponent from './components/AuthComponent'
 import MenuVoyageComponent from './components/MenuVoyageComponent'
+import ListeVoyagesComponent from './components/ListeVoyagesComponent'
 
 export default () => (
   <Router>
     <Stack key='root'>
-      <Scene key='voyage' component={MenuVoyageComponent} title='Voyage' />
       <Scene key='login' component={AuthComponent} title='Login' />
+      <Scene key='listeVoyages' component={ListeVoyagesComponent} title='Mes voyages' />
+      <Scene key='voyage' component={MenuVoyageComponent} title='' />
       <Scene key='formPartOne' component={CreationScreenOne} title='Créer un voyage - PARTIE 1' />
       <Scene key='formPartTwo' component={CreationScreenTwo} title='Créer un voyage - PARTIE 2' />
       <Scene
