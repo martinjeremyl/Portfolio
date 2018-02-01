@@ -47,7 +47,23 @@ class TravelCreation {
     this.modules.forEach(module => {
       database.refFromURL(`${travelRef.toString()}/modules`).push(module)
     })
+    this.sendNewTravelMail()
   }
+
+  sendNewTravelMail () {
+    fetch('http://vps507792.ovh.net/travel/new', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      // firstparam=value&secondParam=value&thirdParam=value ...
+      body: `name=${this.name}&dateBegin=${this.dateBegin}&dateEnd=${this.dateEnd}&modules[]=${this.getEnabledModulesValues()}&emails[]=${this.emails}`
+    })
+  }
+
+getEnabledModulesValues = () => this.modules
+  .filter(module => module.checked)
+  .map(module => module.value)
 }
 
 export default new TravelCreation()
