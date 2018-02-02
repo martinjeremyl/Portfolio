@@ -3,6 +3,7 @@ import { View, TextInput, Button } from 'react-native'
 import DatePicker from 'react-native-datepicker'
 import { Actions } from 'react-native-router-flux'
 import { observer, inject } from 'mobx-react'
+import { format } from 'date-fns'
 
 @inject('travelCreation')
 @observer
@@ -41,8 +42,7 @@ class CreationScreenOne extends Component {
           mode='date'
           placeholder='select date'
           format='YYYY-MM-DD'
-          minDate='2016-05-01'
-          maxDate='2016-06-01'
+          minDate={format(Date.now(), 'YYYY-MM-DD')}
           confirmBtnText='Confirm'
           cancelBtnText='Cancel'
           customStyles={{
@@ -66,8 +66,7 @@ class CreationScreenOne extends Component {
           mode='date'
           placeholder='select date'
           format='YYYY-MM-DD'
-          minDate='2016-05-01'
-          maxDate='2016-06-01'
+          minDate={format(Date.now(), 'YYYY-MM-DD')}
           confirmBtnText='Confirm'
           cancelBtnText='Cancel'
           customStyles={{

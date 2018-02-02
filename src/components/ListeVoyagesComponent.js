@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, View } from 'react-native'
-import { database } from '~/config/firebase'
+import { database } from '../config/firebase'
 import { Actions } from 'react-native-router-flux'
 
 class ListeVoyagesComponent extends Component {
