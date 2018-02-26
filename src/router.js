@@ -7,6 +7,7 @@ import CreationScreenThree from './screens/CreationScreenThree'
 import CreationScreenRecap from './screens/CreationScreenRecap'
 import AuthComponent from './components/AuthComponent'
 import MenuVoyageComponent from './components/MenuVoyageComponent'
+import LogementsList from './components/LogementsList'
 import ListeVoyagesComponent from './components/ListeVoyagesComponent'
 
 export default () => (
@@ -23,6 +24,7 @@ export default () => (
         title='Créer un voyage - PARTIE 3'
       />
       <Scene key='formRecap' component={CreationScreenRecap} title='Créer un voyage - RECAP' />
+      <Scene key='logementsList' component={LogementsList} title='Liste des logements' />
     </Stack>
   </Router>
 )
