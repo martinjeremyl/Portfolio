@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { SectionList, StyleSheet, Text, View, Button } from 'react-native'
-import { database } from '~/config/firebase'
+import { database } from '../config/firebase'
 
 export default class HousingList extends Component {
   constructor (props) {
