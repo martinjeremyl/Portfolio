@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Button, View } from 'react-native'
-import { database } from '../config/firebase'
+import { database, auth } from '../config/firebase'
 import { Actions } from 'react-native-router-flux'
+
+import storage from '../storage'
 
 class ListeVoyagesComponent extends Component {
   constructor (props) {
@@ -42,6 +44,22 @@ class ListeVoyagesComponent extends Component {
     Actions.voyage({ 'selectedTravel': travel })
   }
 
+  logout = async () => {
+    try {
+      // Déconnexion de l'utilisateur
+      await auth.signOut()
+
+      // On oublie le token de l'utilisateur
+      await storage.remove('userToken')
+
+      // On redirige vers l'écran de Connexion
+      Actions.login()
+    } catch (error) {
+      // La déconnexion a échoué, on affiche le message d'erreur
+      this.setState({ error: true, txtError: error.message })
+    }
+  }
+
   render () {
     return (
       <View>
@@ -53,6 +71,11 @@ class ListeVoyagesComponent extends Component {
             color='#ee3333'
             accessibilityLabel='Learn more about this purple button'
           />)}
+        <Button
+          title='Se déconnecter'
+          onPress={() => { this.logout() }}
+          color='black'
+        />
       </View>
     )
   }

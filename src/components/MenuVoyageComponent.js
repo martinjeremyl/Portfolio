@@ -47,7 +47,7 @@ class MenuVoyageComponent extends Component {
   componentWillMount () {
     // Set travel name in title
     const { setParams } = this.props.navigation
-    setParams({ title: this.props.selectedTravel.nom })
+    setParams({ title: this.props.selectedTravel ? this.props.selectedTravel.nom : 'None' })
 
     this.moduleListeRef = this.props.selectedTravel.modules
     this.listenForModules(this.moduleListeRef)

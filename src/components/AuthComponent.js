@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
+import { Text, TextInput, View, Button, Image } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 import storage from '../storage'
 import { auth } from '../config/firebase'
+
+import { style, backgroundColorButton, placeholderTextColor } from './authentification/style'
 
 export default class AuthComponent extends Component {
   constructor (props) {
@@ -29,6 +31,8 @@ export default class AuthComponent extends Component {
       if (firebaseUser) {
         // L'utilisateur est bien connecté, on affiche ses infos
         console.log(firebaseUser.email + ' - ' + firebaseUser.uid)
+        // On redirige vers la liste des voyages
+        Actions.listeVoyages()
       } else {
         // L'utilisateur n'est pas connecté
         console.log('not logged in')
@@ -103,58 +107,42 @@ export default class AuthComponent extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
-        <View style={styles.field}>
-          <Text>Email :</Text>
+      <View style={style.container}>
+        <Image
+          style={style.logo}
+          source={require('../img/logo_2.png')}
+        />
+        <View style={{ justifyContent: 'space-around', flex: 1 }}>
           <TextInput
-            style={{ height: 60, width: 200 }}
-            placeholder='Votre email'
-            onChangeText={email => this.setState({ email: email })}
+            style={style.textInput}
+            placeholder='Mail'
+            placeholderTextColor={placeholderTextColor}
             keyboardType='email-address'
+            onChangeText={(email) => { this.setState({ email }) }}
           />
-        </View>
-        <View style={styles.field}>
-          <Text>Mot de passe :</Text>
           <TextInput
-            style={{ height: 60, width: 200 }}
+            style={style.textInput}
             secureTextEntry
-            placeholder='Votre mot de passe'
-            onChangeText={password => this.setState({ password: password })}
+            placeholder='Mot de passe'
+            placeholderTextColor={placeholderTextColor}
+            onChangeText={(password) => { this.setState({ password }) }}
           />
         </View>
-        {this.state.error && <Text style={styles.error}>{this.state.txtError}</Text>}
-        <View style={styles.field}>
-          <Button onPress={this.signup} title='Inscription' />
-          <Button onPress={this.login} title='Connexion' />
-          <Button onPress={this.logout} title='Déconnexion' />
-        </View>
-        <View style={styles.field}>
+        {
+          this.state.error && <Text style={style.error}>{this.state.txtError}</Text>
+        }
+        <View style={style.buttons}>
           <Button
-            title='Créer un voyage'
-            onPress={() => {
-              Actions.formPartOne()
-            }}
+            color={backgroundColorButton} style={style.button}
+            onPress={this.login} title='Connexion'
           />
+          <View style={style.field}>
+            <Text style={{ color: 'white', fontSize: 18 }} onPress={() => { Actions.register() }}>
+              Inscription
+            </Text>
+          </View>
         </View>
       </View>
     )
   }
 }
-
-// La feuille de style temporaire
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center'
-  },
-  field: {
-    margin: 5,
-    padding: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
-  error: {
-    color: '#f00'
-  }
-})
