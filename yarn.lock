@@ -204,6 +204,12 @@
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.2.6.tgz#a4b81ca8cdeb1acbc7923289a4a514f61b59db86"
 
+"@m5r/react-native-datepicker@1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@m5r/react-native-datepicker/-/react-native-datepicker-1.6.1.tgz#05f2905b9c44d6104ea7fabdf798947d0a050797"
+  dependencies:
+    moment "2.x.x"
+
 "@segment/loosely-validate-event@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@segment/loosely-validate-event/-/loosely-validate-event-1.1.2.tgz#d77840999e3f7e43e74b3b0d43391c1526f793b8"
@@ -5844,12 +5850,6 @@ react-native-checkbox@2.0.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-datepicker@1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-datepicker/-/react-native-datepicker-1.6.0.tgz#3a40dc9b112023c49d60ba2a0789d440b7e3d97c"
-  dependencies:
-    moment "2.x.x"
-
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
@@ -5926,6 +5926,12 @@ react-native-scripts@1.9.0:
     qrcode-terminal "^0.11.0"
     rimraf "^2.6.1"
     xdl "47.2.0"
+
+react-native-step-indicator@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-step-indicator/-/react-native-step-indicator-0.0.7.tgz#e9111b5f7f89bd00f1ec5d8af7beb868f4b5b706"
+  dependencies:
+    prop-types "^15.6.0"
 
 "react-native-svg@https://github.com/expo/react-native-svg/archive/5.5.1-exp.1.tar.gz":
   version "5.5.1"
