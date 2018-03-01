@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import PropTypes from 'prop-types'
-import DatePicker from 'react-native-datepicker'
+import DatePicker from '@m5r/react-native-datepicker'
 
 import { style } from './style'
 
