@@ -10,6 +10,8 @@ import MenuVoyageComponent from './components/MenuVoyageComponent'
 import SignUpComponent from './components/SignUpComponent'
 import LogementsList from './components/LogementsList'
 import ListeVoyagesComponent from './components/ListeVoyagesComponent'
+import DepensesList from './components/DepensesList'
+import CreationDepenseComponent from './components/CreationDepenseComponent'
 
 export default () => (
   <Router>
@@ -27,6 +29,8 @@ export default () => (
       />
       <Scene key='formRecap' component={CreationScreenRecap} title='Créer un voyage - RECAP' />
       <Scene key='logementsList' component={LogementsList} title='Liste des logements' />
+      <Scene key='createDepense' component={CreationDepenseComponent} title='Créer une dépense' />
+      <Scene key='depensesList' component={DepensesList} title='Liste des dépenses' />
     </Stack>
   </Router>
 )

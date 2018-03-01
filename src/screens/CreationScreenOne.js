@@ -37,7 +37,7 @@ class CreationScreenOne extends Component {
     const { dateBegin, dateEnd } = this.state
     const customStyles = {
       stepIndicatorSize: 25,
-      currentStepIndicatorSize:30,
+      currentStepIndicatorSize: 30,
       separatorStrokeWidth: 2,
       currentStepStrokeWidth: 3,
       stepStrokeCurrentColor: '#f63274',

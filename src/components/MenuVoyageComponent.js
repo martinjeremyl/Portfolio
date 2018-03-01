@@ -27,7 +27,7 @@ class MenuVoyageComponent extends Component {
         break
 
       case DEPENSES :
-        Actions.login()
+        Actions.depensesList({ 'travel': this.props.selectedTravel.nom })
         break
 
       case ACTIVITES :
