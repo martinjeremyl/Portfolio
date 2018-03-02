@@ -14,7 +14,12 @@ import DepensesList from './components/DepensesList'
 import CreationDepenseComponent from './components/CreationDepenseComponent'
 
 export default () => (
-  <Router>
+  <Router
+    navigationBarStyle={{ backgroundColor: '#8A3148' }}
+    titleStyle={{ color: '#fff' }}
+    backButtonTextStyle={{ tintColor: '#fff' }}
+    backButtonTintColor='#fff'
+  >
     <Stack key='root'>
       <Scene key='login' component={AuthComponent} title='Connexion' />
       <Scene key='listeVoyages' component={ListeVoyagesComponent} title='Mes voyages' />

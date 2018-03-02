@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { FlatList, StyleSheet, Text, View, Button, Picker } from 'react-native'
+import { FlatList, StyleSheet, Text, View, Image, Picker } from 'react-native'
 import { database, auth } from '../config/firebase'
 import { Actions } from 'react-native-router-flux'
+import { RoundButton } from './RoundButton'
 
 export default class DepenseList extends Component {
   constructor (props) {
@@ -59,14 +60,35 @@ export default class DepenseList extends Component {
       this.setState({ sections, prixTotal })
     })
   }
-  renderItem = ({ item }) => {
-    return (
-      <View>
-        <Text style={styles.item}>
-          {item.data[0].intitule} {item.data[0].montant} € </Text>
-      </View>
-    )
-  }
+  renderItem = ({ item }) => (
+    <View style={styles.item}>
+      <Text style={styles.itemLabel}>
+        {item.data[0].intitule}
+      </Text>
+      <Text style={styles.itemAmount}>
+        {this.formatCurrency(item.data[0].montant)}
+      </Text>
+      <Image
+        style={styles.itemBonus}
+        source={require('../img/default-avatar.png')}
+        resizeMode='contain'
+      />
+    </View>
+  )
+
+  renderSeparator = () => (
+    <View
+      style={{
+        height: 1,
+        width: '100%',
+        backgroundColor: '#334050'
+      }}
+    />
+  )
+
+  formatCurrency = amount => Number(amount).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })
+
+  handleButtonClick = () => Actions.createDepense()
 
   render () {
     const { sections } = this.state
@@ -87,13 +109,17 @@ export default class DepenseList extends Component {
         <FlatList
           data={sections}
           renderItem={this.renderItem}
+          ItemSeparatorComponent={this.renderSeparator}
         />
-        <Text style={styles.item}>Total : {prixTotal} €</Text>
-        <Button
-          onPress={() => {
-            Actions.createDepense()
-          }}
-          title='ajouter une dépense' />
+        <View style={styles.item}>
+          <Text style={styles.itemLabel}>Total</Text>
+          <Text style={styles.itemAmount}>{this.formatCurrency(prixTotal)}</Text>
+          <RoundButton onPress={this.handleButtonClick}>
+            <Text style={styles.plusButtonText}>
+              +
+            </Text>
+          </RoundButton>
+        </View>
       </View>
     )
   }
@@ -102,22 +128,39 @@ export default class DepenseList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 22
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)'
+    paddingTop: 22,
+    backgroundColor: '#fff',
+    paddingLeft: '5%',
+    paddingRight: '5%'
   },
   item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-    color: 'rgba(0,0,0,1.0)'
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    marginTop: 15,
+    marginBottom: 15
+  },
+  itemLabel: {
+    flex: 1,
+    fontSize: 16,
+    color: '#334050'
+  },
+  itemAmount: {
+    flex: 0,
+    flexBasis: 90,
+    fontSize: 16,
+    color: '#334050'
+  },
+  itemBonus: {
+    flexGrow: 0,
+    flexShrink: 1,
+    flexBasis: 20,
+    width: undefined,
+    height: undefined
+  },
+  plusButtonText: {
+    fontSize: 32,
+    fontWeight: '100',
+    color: '#fff'
   }
-
 })
