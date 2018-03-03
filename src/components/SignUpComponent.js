@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, Button, Image } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { auth, database } from '../config/firebase'
 import storage from '../storage'
@@ -191,7 +192,7 @@ export default class SignUpComponent extends Component {
 
   render () {
     return (
-      <View style={style.container}>
+      <KeyboardAwareScrollView style={style.container}>
         <TextInputComponent label='Nom' required error={this.state.errors.name} propMethodParent={this.setName} email={false} />
         <TextInputComponent label='Prénom' required error={this.state.errors.surname} propMethodParent={this.setSurname} email={false} />
         <TextInputComponent label='Mail' email required error={this.state.errors.email} propMethodParent={this.setMail} />
@@ -209,7 +210,7 @@ export default class SignUpComponent extends Component {
         <View style={style.button}>
           <Button color={backgroundColorButton} onPress={this.register} title='Inscription' />
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     )
   }
 }

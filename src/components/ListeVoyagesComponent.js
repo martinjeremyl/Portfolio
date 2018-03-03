@@ -41,7 +41,7 @@ class ListeVoyagesComponent extends Component {
   }
 
   handleNavigation = (travel) => {
-    Actions.voyage( {'selectedTravel': travel} )
+    Actions.voyage({ 'selectedTravel': travel })
   }
 
   logout = async () => {

@@ -8,7 +8,6 @@ export const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#303030',
-    alignItems: 'stretch',
     paddingHorizontal: 20
   },
   field: {
