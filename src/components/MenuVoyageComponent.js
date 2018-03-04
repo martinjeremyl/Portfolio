@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import { Button, View } from 'react-native'
 import { getModuleNameById } from '../util'
 import { Actions } from 'react-native-router-flux'
+import { observer, inject } from 'mobx-react'
 import { LOGEMENTS, TRANSPORTS, DEPENSES, ACTIVITES, DOCUMENTS, LISTES } from '../constants'
 
+@inject('housing')
+@observer
 class MenuVoyageComponent extends Component {
   constructor (props) {
     super(props)
@@ -15,30 +18,31 @@ class MenuVoyageComponent extends Component {
   /**
    * Redirige vers les modules
    */
-  handleNavigation = (libModule) => {
+  handleNavigation = libModule => {
     // TODO : Mettre le title de votre component selon le cas
     switch (libModule) {
-      case LOGEMENTS :
-        Actions.logementsList()
+      case LOGEMENTS:
+        this.props.housing.pushHousings(this.props.selectedTravel.logements)
+        Actions.housingsList()
         break
 
-      case TRANSPORTS :
+      case TRANSPORTS:
         Actions.login()
         break
 
-      case DEPENSES :
-        Actions.depensesList({ 'travel': this.props.selectedTravel.nom })
+      case DEPENSES:
+        Actions.depensesList({ travel: this.props.selectedTravel.nom })
         break
 
-      case ACTIVITES :
+      case ACTIVITES:
         Actions.login()
         break
 
-      case DOCUMENTS :
+      case DOCUMENTS:
         Actions.login()
         break
 
-      case LISTES :
+      case LISTES:
         Actions.login()
         break
     }
@@ -54,10 +58,10 @@ class MenuVoyageComponent extends Component {
   }
 
   // get modules name to show
-  listenForModules = (moduleListe) => {
+  listenForModules = moduleListe => {
     var items = []
 
-    moduleListe.forEach((child) => {
+    moduleListe.forEach(child => {
       items.push({
         libelle: getModuleNameById(child),
         key: child.toString()
@@ -71,16 +75,21 @@ class MenuVoyageComponent extends Component {
   }
 
   render () {
+    console.log(this.props, 'this.props')
+
     return (
       <View>
-        {this.state.dataSource.map(mod =>
+        {this.state.dataSource.map(mod => (
           <Button
             key={mod.key}
-            onPress={() => { this.handleNavigation(mod.libelle) }}
+            onPress={() => {
+              this.handleNavigation(mod.libelle)
+            }}
             title={mod.libelle}
             color='#841584'
             accessibilityLabel='Click to see the module the module'
-          />)}
+          />
+        ))}
       </View>
     )
   }

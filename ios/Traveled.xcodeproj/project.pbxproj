@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -40,6 +39,10 @@
 		8E7D4B171F8AFD9C00699FE4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E7D4B161F8AFD9B00699FE4 /* GoogleService-Info.plist */; };
 		A038CD85D39748E122AC50D7 /* libPods-Traveled.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 333056BA5B7ADABE709DF4A1 /* libPods-Traveled.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		3C29D8C232AC458593CDECA5 /* JuraBook.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F79128047DCA47CFAD1851A5 /* JuraBook.ttf */; };
+		EDC72B97B6074D92B6984FE8 /* JuraDemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 752182B66441464295EE944D /* JuraDemiBold.ttf */; };
+		53261893C94D4DE7BE959788 /* JuraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90FBC20DB066401D9E4313D1 /* JuraLight.ttf */; };
+		FDC013AFFEA64846B695A5F6 /* JuraMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72B9139F27D94A91B16BF904 /* JuraMedium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -343,6 +346,10 @@
 		ADF4CB3C3BF44D3EBA8B78C4 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		B7AFA8AA9A1CFD17320E9074 /* Pods-Traveled.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Traveled.release.xcconfig"; path = "Pods/Target Support Files/Pods-Traveled/Pods-Traveled.release.xcconfig"; sourceTree = "<group>"; };
 		FBC8C743C046423C960F2237 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
+		F79128047DCA47CFAD1851A5 /* JuraBook.ttf */ = {isa = PBXFileReference; name = "JuraBook.ttf"; path = "../assets/fonts/JuraBook.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		752182B66441464295EE944D /* JuraDemiBold.ttf */ = {isa = PBXFileReference; name = "JuraDemiBold.ttf"; path = "../assets/fonts/JuraDemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		90FBC20DB066401D9E4313D1 /* JuraLight.ttf */ = {isa = PBXFileReference; name = "JuraLight.ttf"; path = "../assets/fonts/JuraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		72B9139F27D94A91B16BF904 /* JuraMedium.ttf */ = {isa = PBXFileReference; name = "JuraMedium.ttf"; path = "../assets/fonts/JuraMedium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -582,6 +589,7 @@
 				6A84F842C723265FECF9ADFD /* Pods */,
 				927E270FF1706B5003F5613D /* Frameworks */,
 				8E7D4AFB1F8AFD6F00699FE4 /* Recovered References */,
+				AA43ACCB395149DAB41CF499 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -631,6 +639,18 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		AA43ACCB395149DAB41CF499 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				F79128047DCA47CFAD1851A5 /* JuraBook.ttf */,
+				752182B66441464295EE944D /* JuraDemiBold.ttf */,
+				90FBC20DB066401D9E4313D1 /* JuraLight.ttf */,
+				72B9139F27D94A91B16BF904 /* JuraMedium.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1080,6 +1100,10 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				8E7D4B171F8AFD9C00699FE4 /* GoogleService-Info.plist in Resources */,
+				3C29D8C232AC458593CDECA5 /* JuraBook.ttf in Resources */,
+				EDC72B97B6074D92B6984FE8 /* JuraDemiBold.ttf in Resources */,
+				53261893C94D4DE7BE959788 /* JuraLight.ttf in Resources */,
+				FDC013AFFEA64846B695A5F6 /* JuraMedium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

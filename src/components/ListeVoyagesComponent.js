@@ -19,13 +19,13 @@ class ListeVoyagesComponent extends Component {
   }
 
   // Recovering my travels
-  listenForVoyages = (voyageListe) => {
-    voyageListe.on('value', (voyage) => {
+  listenForVoyages = voyageListe => {
+    voyageListe.on('value', voyage => {
       // get children as an array
       var items = []
       // console.log('snap',)
       // formating data
-      voyage.forEach((child) => {
+      voyage.forEach(child => {
         items.push({
           libelle: child.val().nom,
           travel: child.val(),
@@ -40,8 +40,8 @@ class ListeVoyagesComponent extends Component {
     })
   }
 
-  handleNavigation = (travel) => {
-    Actions.voyage({ 'selectedTravel': travel })
+  handleNavigation = travel => {
+    Actions.voyage({ selectedTravel: travel })
   }
 
   logout = async () => {
@@ -63,20 +63,20 @@ class ListeVoyagesComponent extends Component {
   render () {
     return (
       <View style={styles.container}>
-
         <Text style={styles.title}>Mes voyages</Text>
 
-        {this.state.dataSource.map(data =>
+        {this.state.dataSource.map(data => (
           <TouchableOpacity
             key={data.key}
             onPress={() => {
               this.handleNavigation(data.travel)
             }}
             color='#ee3333'
-            accessibilityLabel='Learn more about this purple button'>
+            accessibilityLabel='Learn more about this purple button'
+          >
             <Text style={styles.travel}>{data.libelle}</Text>
           </TouchableOpacity>
-        )}
+        ))}
 
         <TouchableOpacity style={styles.float}>
           <Text style={styles.textFloat}>+</Text>
@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 25
   }
-
 })
 
 export default ListeVoyagesComponent

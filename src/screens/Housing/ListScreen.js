@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { SectionList, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
-import { database } from '../config/firebase'
+import { Actions } from 'react-native-router-flux'
+import { inject, observer } from 'mobx-react'
 
+@inject('housing')
+@observer
 export default class HousingList extends Component {
   constructor (props) {
     super(props)
@@ -11,50 +14,44 @@ export default class HousingList extends Component {
   }
 
   componentDidMount () {
-    database.ref('voyages/0/logements')
-      .orderByKey()
-      .once('value')
-      .then(logementsSnapshot => {
-        const logements = logementsSnapshot.val()
-        const dateDebut = logements.map(logement => logement.date_debut)
-        const sortedLogements = dateDebut.reduce((sortedLogements, dateDebut) => {
-          sortedLogements[dateDebut] = logements.filter(logement => logement.date_debut === dateDebut)
+    const { housings } = this.props.housing
 
-          return sortedLogements
-        }, {})
-        const sections = Object.keys(sortedLogements)
-          .map(dateDebut => ({
-            title: dateDebut,
-            data: sortedLogements[dateDebut].map(logement => logement.nom)
-          }))
-        this.setState({ sections })
-      })
+    const dateDebut = housings.map(logement => logement.date_debut)
+    const sortedLogements = dateDebut.reduce((sortedLogements, dateDebut) => {
+      sortedLogements[dateDebut] = housings.filter(logement => logement.date_debut === dateDebut)
+      return sortedLogements
+    }, {})
+    const sections = Object.keys(sortedLogements).map(dateDebut => ({
+      title: dateDebut,
+      data: sortedLogements[dateDebut].map(logement => logement.nom)
+    }))
+    this.setState({ sections })
   }
 
-  renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <View style={styles.infos}>
-        <Text style={styles.text}>{item}</Text>
-        <Text style={styles.text}>pictos</Text>
-      </View>
-      <View style={styles.btnRejoindre}>
-        <Button
-          color='#D42B64'
-          title='Rejoindre'
-        />
-      </View>
-    </View>
-  )
+  renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          Actions.housingDetails({ selectedTravel: item })
+        }}
+      >
+        <View style={styles.item}>
+          <View style={styles.infos}>
+            <Text style={styles.text}>{item}</Text>
+            <Text style={styles.text}>pictos</Text>
+          </View>
+          <View style={styles.btnRejoindre}>
+            <Button color='#D42B64' title='Rejoindre' onPress={() => {}} />
+          </View>
+        </View>
+      </TouchableOpacity>
+    )
+  }
 
-  renderSectionHeader = ({ section }) => (
-    <Text style={styles.sectionHeader}>
-      {section.title}
-    </Text>
-  )
+  renderSectionHeader = ({ section }) => <Text style={styles.sectionHeader}>{section.title}</Text>
 
   render () {
     const { sections } = this.state
-
     return (
       <View style={styles.container}>
         <SectionList
@@ -72,7 +69,6 @@ export default class HousingList extends Component {
 }
 
 const styles = StyleSheet.create({
-
   /* tout le contenu de la page */
   container: {
     backgroundColor: 'white',
@@ -107,7 +103,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold'
     /* fontSize: 18 */
-
   },
   infos: {
     flex: 1,
@@ -126,7 +121,6 @@ const styles = StyleSheet.create({
 
   /* texte du contenu du logement */
   item: {
-
     fontSize: 18,
     flex: 1,
     flexDirection: 'column',

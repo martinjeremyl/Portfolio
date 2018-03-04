@@ -2,6 +2,9 @@
   "name": "Traveled",
   "version": "0.1.0",
   "private": true,
+  "rnpm": {
+    "assets": ["./assets/fonts/"]
+  },
   "devDependencies": {
     "babel-eslint": "8.2.1",
     "babel-jest": "22.0.6",

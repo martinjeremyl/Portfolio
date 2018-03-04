@@ -5,10 +5,11 @@ import CreationScreenOne from './screens/CreationScreenOne'
 import CreationScreenTwo from './screens/CreationScreenTwo'
 import CreationScreenThree from './screens/CreationScreenThree'
 import CreationScreenRecap from './screens/CreationScreenRecap'
+import HousingDetails from './screens/Housing/DetailsScreen'
 import AuthComponent from './components/AuthComponent'
 import MenuVoyageComponent from './components/MenuVoyageComponent'
 import SignUpComponent from './components/SignUpComponent'
-import LogementsList from './components/LogementsList'
+import HousingList from './screens/Housing/ListScreen'
 import ListeVoyagesComponent from './components/ListeVoyagesComponent'
 import DepensesList from './components/DepensesList'
 import CreationDepenseComponent from './components/CreationDepenseComponent'
@@ -22,7 +23,6 @@ export default () => (
   >
     <Stack key='root'>
       <Scene key='login' component={AuthComponent} title='Connexion' />
-      <Scene key='logementsList' component={LogementsList} title='Logements' />
       <Scene key='listeVoyages' component={ListeVoyagesComponent} title='Mes voyages' />
       <Scene key='register' component={SignUpComponent} title='Inscription' />
       <Scene key='voyage' component={MenuVoyageComponent} title='Voyage' />
@@ -34,8 +34,10 @@ export default () => (
         title='Créer un voyage - PARTIE 3'
       />
       <Scene key='formRecap' component={CreationScreenRecap} title='Créer un voyage - RECAP' />
+      <Scene key='housingsList' component={HousingList} title='Liste des logements' />
       <Scene key='createDepense' component={CreationDepenseComponent} title='Créer une dépense' />
       <Scene key='depensesList' component={DepensesList} title='Liste des dépenses' />
+      <Scene key='housingDetails' component={HousingDetails} title='Détail de logement' />
     </Stack>
   </Router>
 )

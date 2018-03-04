@@ -108,36 +108,42 @@ export default class AuthComponent extends Component {
   render () {
     return (
       <View style={style.container}>
-        <Image
-          style={style.logo}
-          source={require('../img/logo_2.png')}
-        />
+        <Image style={style.logo} source={require('../img/logo_2.png')} />
         <View style={{ justifyContent: 'space-around', flex: 1 }}>
           <TextInput
             style={style.textInput}
             placeholder='Mail'
             placeholderTextColor={placeholderTextColor}
             keyboardType='email-address'
-            onChangeText={(email) => { this.setState({ email }) }}
+            onChangeText={email => {
+              this.setState({ email })
+            }}
           />
           <TextInput
             style={style.textInput}
             secureTextEntry
             placeholder='Mot de passe'
             placeholderTextColor={placeholderTextColor}
-            onChangeText={(password) => { this.setState({ password }) }}
+            onChangeText={password => {
+              this.setState({ password })
+            }}
           />
         </View>
-        {
-          this.state.error && <Text style={style.error}>{this.state.txtError}</Text>
-        }
+        {this.state.error && <Text style={style.error}>{this.state.txtError}</Text>}
         <View style={style.buttons}>
           <Button
-            color={backgroundColorButton} style={style.button}
-            onPress={this.login} title='Connexion'
+            color={backgroundColorButton}
+            style={style.button}
+            onPress={this.login}
+            title='Connexion'
           />
           <View style={style.field}>
-            <Text style={{ color: 'white', fontSize: 18 }} onPress={() => { Actions.register() }}>
+            <Text
+              style={{ color: 'white', fontSize: 18 }}
+              onPress={() => {
+                Actions.register()
+              }}
+            >
               Inscription
             </Text>
           </View>

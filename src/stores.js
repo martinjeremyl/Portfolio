@@ -1,5 +1,7 @@
-import TravelCreation from './stores/TravelCreation'
+import TravelCreationStore from './stores/TravelCreation'
+import HousingStore from './stores/Housing'
 
 export default {
-  travelCreation: TravelCreation
+  travelCreation: TravelCreationStore,
+  housing: HousingStore
 }
