@@ -22,6 +22,7 @@ export default () => (
   >
     <Stack key='root'>
       <Scene key='login' component={AuthComponent} title='Connexion' />
+      <Scene key='logementsList' component={LogementsList} title='Logements' />
       <Scene key='listeVoyages' component={ListeVoyagesComponent} title='Mes voyages' />
       <Scene key='register' component={SignUpComponent} title='Inscription' />
       <Scene key='voyage' component={MenuVoyageComponent} title='Voyage' />
@@ -33,7 +34,6 @@ export default () => (
         title='Créer un voyage - PARTIE 3'
       />
       <Scene key='formRecap' component={CreationScreenRecap} title='Créer un voyage - RECAP' />
-      <Scene key='logementsList' component={LogementsList} title='Liste des logements' />
       <Scene key='createDepense' component={CreationDepenseComponent} title='Créer une dépense' />
       <Scene key='depensesList' component={DepensesList} title='Liste des dépenses' />
     </Stack>

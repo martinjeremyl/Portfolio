@@ -19,7 +19,7 @@ class MenuVoyageComponent extends Component {
     // TODO : Mettre le title de votre component selon le cas
     switch (libModule) {
       case LOGEMENTS :
-        Actions.login()
+        Actions.logementsList()
         break
 
       case TRANSPORTS :
