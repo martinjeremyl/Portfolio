@@ -152,9 +152,6 @@ dependencies {
     compile(project(':react-native-firebase')) {
         transitive = false
     }
-    compile(project(':react-native-firebase')) {
-        transitive = false
-    }
 
     // RNFirebase required dependencies
     compile "com.google.firebase:firebase-core:11.8.0"
