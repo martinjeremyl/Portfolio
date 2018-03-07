@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, StyleSheet, Text, View, Image, Picker } from 'react-native'
+import { FlatList, StyleSheet, Text, View, Image, Picker, TouchableHighlight } from 'react-native'
 import { database, auth } from '../config/firebase'
 import { Actions } from 'react-native-router-flux'
 import { RoundButton } from './RoundButton'
@@ -32,7 +32,6 @@ export default class DepenseList extends Component {
   // }
 
   updateDepenses () {
-    console.log(this.props.travel)
     const sections = []
     let prixTotal = 0
     let depensesRef
@@ -46,7 +45,9 @@ export default class DepenseList extends Component {
     // .on value permet de mettre à jour la liste quand une dépense est ajoutée
     depensesRef.on('value', (depensesSnapshot) => {
       depensesSnapshot.forEach((child) => {
+        let key = child.key
         child = child.val()
+        console.log('le child ---------------', child)
         // On récupère les informations du payeur
         let payeur = database.ref('utilisateurs/' + child.payeur).once('value').then(payeurSnapshot => {
           return payeurSnapshot.val()
@@ -54,26 +55,33 @@ export default class DepenseList extends Component {
         // On met à jour le prix total
         prixTotal += parseFloat(child.montant)
         sections.push({
-          data: [child, payeur]
+          data: [child, payeur, key]
         })
       })
       this.setState({ sections, prixTotal })
     })
   }
+
+  editDepense (depenseKey) {
+    Actions.editDepense({ depenseKey: depenseKey, travel: this.props.travel })
+  }
+
   renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <Text style={styles.itemLabel}>
-        {item.data[0].intitule}
-      </Text>
-      <Text style={styles.itemAmount}>
-        {this.formatCurrency(item.data[0].montant)}
-      </Text>
-      <Image
-        style={styles.itemBonus}
-        source={require('../img/default-avatar.png')}
-        resizeMode='contain'
-      />
-    </View>
+    <TouchableHighlight onPress={() => this.editDepense(item.data[2])} style={styles.item}>
+      <View>
+        <Text style={styles.itemLabel}>
+          {item.data[0].intitule}
+        </Text>
+        <Text style={styles.itemAmount}>
+          {this.formatCurrency(item.data[0].montant)}
+        </Text>
+        <Image
+          style={styles.itemBonus}
+          source={require('../img/default-avatar.png')}
+          resizeMode='contain'
+        />
+      </View>
+    </TouchableHighlight>
   )
 
   renderSeparator = () => (
@@ -88,7 +96,7 @@ export default class DepenseList extends Component {
 
   formatCurrency = amount => Number(amount).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })
 
-  handleButtonClick = () => Actions.createDepense()
+  handleButtonClick = () => Actions.createDepense({ travel: this.props.travel })
 
   render () {
     const { sections } = this.state

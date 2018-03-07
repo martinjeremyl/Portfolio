@@ -23,7 +23,6 @@ import io.invertase.firebase.messaging.RNFirebaseMessagingPackage; // Firebase C
 import io.invertase.firebase.perf.RNFirebasePerformancePackage; // Firebase Performance
 import io.invertase.firebase.storage.RNFirebaseStoragePackage; // Firebase Storage
 import io.invertase.firebase.fabric.crashlytics.RNFirebaseCrashlyticsPackage; // Crashlytics
-
 import java.util.Arrays;
 import java.util.List;
 

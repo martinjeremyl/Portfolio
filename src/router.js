@@ -36,6 +36,7 @@ export default () => (
       <Scene key='formRecap' component={CreationScreenRecap} title='Créer un voyage - RECAP' />
       <Scene key='housingsList' component={HousingList} title='Liste des logements' />
       <Scene key='createDepense' component={CreationDepenseComponent} title='Créer une dépense' />
+      <Scene key='editDepense' component={CreationDepenseComponent} title='Modifier une dépense' />
       <Scene key='depensesList' component={DepensesList} title='Liste des dépenses' />
       <Scene key='housingDetails' component={HousingDetails} title='Détail de logement' />
     </Stack>
