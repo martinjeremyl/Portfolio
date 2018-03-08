@@ -31,7 +31,7 @@ class MenuVoyageComponent extends Component {
         break
 
       case DEPENSES :
-        Actions.depensesList({ 'travel': this.props.selectedTravel.nom })
+        Actions.depensesList({ 'travel': this.props.selectedTravel.travelKey })
         break
 
       case ACTIVITES:

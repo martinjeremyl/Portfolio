@@ -34,6 +34,7 @@ export default class CreationDepense extends Component {
 
   // Si on est en édition on remplit les champs
   componentWillMount () {
+    console.log('la travelkey----------------', this.props.travel)
     this.props.depenseKey !== undefined ? this.hydrateInputsFromDepense(this.props.depenseKey) : this.loadTravelUsers()
   }
   // Fonction de validation de saisi sur l'input montant ( à optimiser avec du regex dans un second temps )
@@ -52,7 +53,7 @@ export default class CreationDepense extends Component {
 
   async loadTravelUsers () {
     // On récupère tous les membres du voyages
-    let travelUsersRef = database.ref('voyages/0/membres')
+    let travelUsersRef = database.ref('voyages/' + this.props.travel + '/membres')
     let users = []
     let membres = []
     travelUsersRef.on('value', async (travelUsersSnapshot) => {
@@ -73,7 +74,7 @@ export default class CreationDepense extends Component {
   }
   // Fonction qui remplit les champs si on est en mode édition
   hydrateInputsFromDepense (id) {
-    database.ref(`voyages/0/depenses/${id}`).once('value').then((depenseSnapshot) => {
+    database.ref(`voyages/${this.props.travel}/depenses/${id}`).once('value').then((depenseSnapshot) => {
       let snapShotVal = depenseSnapshot.val()
       let montant = snapShotVal.montant
       let titre = snapShotVal.intitule
@@ -87,7 +88,7 @@ export default class CreationDepense extends Component {
   }
 
   async createOrUpdateDepense () {
-    let depenseRef = this.props.depenseKey !== undefined ? database.ref(`voyages/0/depenses/${this.props.depenseKey}`) : database.ref('voyages/0/depenses')
+    let depenseRef = this.props.depenseKey !== undefined ? database.ref(`voyages/${this.props.travel}/depenses/${this.props.depenseKey}`) : database.ref('voyages/' + this.props.travel + '/depenses')
     const depense = {
       date: this.state.date,
       intitule: this.state.titre,
@@ -111,7 +112,7 @@ export default class CreationDepense extends Component {
 
   onDeletionConfirm = async () => {
     this.closeModal()
-    await database.ref(`voyages/0/depenses/${this.props.depenseKey}`)
+    await database.ref(`voyages/${this.props.travel}/depenses/${this.props.depenseKey}`)
       .remove()
     Actions.depensesList({ travel: this.props.travel })
   }
