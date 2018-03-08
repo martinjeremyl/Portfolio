@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Image, TextInput, View, Text, StyleSheet, Button } from 'react-native'
-import { database } from '../config/firebase'
+import { database, auth } from '../config/firebase'
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
 import { format } from 'date-fns'
 import SelectMultiple from 'react-native-select-multiple'
@@ -93,7 +93,8 @@ export default class CreationDepense extends Component {
       intitule: this.state.titre,
       montant: this.state.montant,
       payeur: this.state.payeur,
-      membres: this.state.concernedMembers
+      membres: this.state.concernedMembers,
+      createur: auth.currentUser.uid
     }
     await Promise.all(this.props.depenseKey !== undefined ? depenseRef.set(depense) : depenseRef.push(depense)).then(() => {
       Actions.depensesList({ travel: this.props.travel })

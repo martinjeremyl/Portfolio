@@ -39,7 +39,7 @@ export default class DepenseList extends Component {
     // Si isPersonalDepense === true c'est qu'on souhaite afficher uniquement les dépenses de l'utilisateurs
     if (this.state.isPersonalDepense === 'myDepense') {
       // On sélectionne les dépenses du voyage puis on filtre celles qui ont un payeur = à l'utilisateur connecté
-      depensesRef = database.ref('voyages/0/depenses').orderByChild('payeur').equalTo(auth.currentUser.uid)
+      depensesRef = database.ref('voyages/0/depenses').orderByChild('createur').equalTo(auth.currentUser.uid)
     } else {
       depensesRef = database.ref('voyages/0/depenses')
     }
