@@ -296,9 +296,9 @@ agent-base@^4.1.0, agent-base@^4.2.0:
   dependencies:
     es6-promisify "^5.0.0"
 
-ajv-keywords@^2.1.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-2.1.1.tgz#617997fc5f60576894c435f940d819e135b80762"
+ajv-keywords@^3.0.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.1.0.tgz#ac2b27939c543e95d2c06e7f7f5c27be4aa543be"
 
 ajv@^4.9.1:
   version "4.11.8"
@@ -307,11 +307,19 @@ ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
-ajv@^5.1.0, ajv@^5.2.2, ajv@^5.2.3, ajv@^5.3.0:
+ajv@^5.1.0, ajv@^5.2.2, ajv@^5.3.0:
   version "5.5.2"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
   dependencies:
     co "^4.6.0"
+    fast-deep-equal "^1.0.0"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.3.0"
+
+ajv@^6.0.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.2.1.tgz#28a6abc493a2abe0fb4c8507acaedb43fa550671"
+  dependencies:
     fast-deep-equal "^1.0.0"
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
@@ -341,6 +349,10 @@ analytics-node@^2.1.0:
     remove-trailing-slash "^0.1.0"
     superagent "^3.5.0"
     superagent-retry "^0.6.0"
+
+andlog@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/andlog/-/andlog-1.0.1.tgz#afc6512b6e809f5bba63c6646d8685ccead19f11"
 
 ansi-escapes@^1.1.0:
   version "1.4.0"
@@ -1240,7 +1252,7 @@ babel-preset-jest@^22.0.6, babel-preset-jest@^22.4.1:
     babel-plugin-jest-hoist "^22.4.1"
     babel-plugin-syntax-object-rest-spread "^6.13.0"
 
-babel-preset-react-native-stage-0@^1.0.1:
+babel-preset-react-native-stage-0@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/babel-preset-react-native-stage-0/-/babel-preset-react-native-stage-0-1.0.1.tgz#d5f5f685575471ef756a49f191b193269f74306e"
   dependencies:
@@ -1505,6 +1517,12 @@ boom@5.x.x:
   resolved "https://registry.yarnpkg.com/boom/-/boom-5.2.0.tgz#5dd9da6ee3a5f302077436290cb717d3f4a54e02"
   dependencies:
     hoek "4.x.x"
+
+bows@^1.6.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/bows/-/bows-1.7.0.tgz#a3598ed9cef61a7a0cab1a7240f291654865ec76"
+  dependencies:
+    andlog "^1.0.0"
 
 bplist-creator@0.0.7:
   version "0.0.7"
@@ -2062,7 +2080,7 @@ data-uri-to-buffer@1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-1.2.0.tgz#77163ea9c20d8641b4707e8f18abdf9a78f34835"
 
-date-fns@^1.29.0:
+date-fns@1.29.0:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
 
@@ -2447,9 +2465,9 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@^4.16.0:
-  version "4.18.2"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.18.2.tgz#0f81267ad1012e7d2051e186a9004cc2267b8d45"
+eslint@4.16.0:
+  version "4.16.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.16.0.tgz#934ada9e98715e1d7bbfd6f6f0519ed2fab35cc1"
   dependencies:
     ajv "^5.3.0"
     babel-code-frame "^6.22.0"
@@ -2486,7 +2504,7 @@ eslint@^4.16.0:
     semver "^5.3.0"
     strip-ansi "^4.0.0"
     strip-json-comments "~2.0.1"
-    table "4.0.2"
+    table "^4.0.1"
     text-table "~0.2.0"
 
 espree@^3.5.2:
@@ -2764,7 +2782,7 @@ fbjs-scripts@^0.8.1:
     semver "^5.1.0"
     through2 "^2.0.0"
 
-fbjs@^0.8.14, fbjs@^0.8.16, fbjs@^0.8.4, fbjs@^0.8.9:
+fbjs@0.8.16, fbjs@^0.8.14, fbjs@^0.8.16, fbjs@^0.8.4, fbjs@^0.8.9:
   version "0.8.16"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.16.tgz#5e67432f550dc41b572bf55847b8aca64e5337db"
   dependencies:
@@ -2945,6 +2963,14 @@ fresh@0.3.0:
 fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
+
+fs-extra@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-4.0.2.tgz#f91704c53d1b461f893452b0c307d9997647ab6b"
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
 
 fs-extra@^1.0.0:
   version "1.0.0"
@@ -5708,7 +5734,7 @@ prop-types@15.6.0:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
@@ -5894,15 +5920,16 @@ react-native-drawer-layout@1.3.2:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
-react-native-firebase@^3.2.2:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/react-native-firebase/-/react-native-firebase-3.3.0.tgz#1f4db9b2e335b73a515cc9f61b63be031acc1f92"
+react-native-firebase@3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-firebase/-/react-native-firebase-3.2.2.tgz#768d0384de489ffcee106f53c9fbb41cee7eebb0"
   dependencies:
+    bows "^1.6.0"
     opencollective "^1.0.3"
     postinstall-build "^5.0.1"
-    prop-types "^15.6.1"
+    prop-types "^15.6.0"
 
-react-native-flexi-radio-button@^0.2.2:
+react-native-flexi-radio-button@0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/react-native-flexi-radio-button/-/react-native-flexi-radio-button-0.2.2.tgz#a0180393c531ba3477722c6e42a31ceb1c11623b"
 
@@ -5912,7 +5939,7 @@ react-native-gesture-handler@1.0.0-alpha.30:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-image-picker@^0.26.7:
+react-native-image-picker@0.26.7:
   version "0.26.7"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-0.26.7.tgz#ad2ee957f7f6cc01396893ea03d84cb2adb2e376"
 
@@ -5920,7 +5947,7 @@ react-native-iphone-x-helper@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.0.2.tgz#7dbca530930f7c1ce8633cc8fd13ba94102992e1"
 
-react-native-keyboard-aware-scroll-view@^0.4.4:
+react-native-keyboard-aware-scroll-view@0.4.4:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/react-native-keyboard-aware-scroll-view/-/react-native-keyboard-aware-scroll-view-0.4.4.tgz#116d08975a84482e4ee64dd0b526a8f04138b0a7"
   dependencies:
@@ -5931,7 +5958,7 @@ react-native-maps@0.17.1:
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.17.1.tgz#ab2236341fd984dac8864202ae55331bc262f60c"
 
-react-native-modal@^5.2.0:
+react-native-modal@5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-5.2.0.tgz#96e69c0c56d9eb9e5a3ac0cb85b835e0897c2feb"
   dependencies:
@@ -5976,13 +6003,13 @@ react-native-scripts@1.9.0:
     rimraf "^2.6.1"
     xdl "47.2.0"
 
-react-native-select-multiple@^1.2.0:
+react-native-select-multiple@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-native-select-multiple/-/react-native-select-multiple-1.2.0.tgz#1f4662c085fc2b76101986d0a45b09e5343359e5"
   dependencies:
     prop-types "^15.6.0"
 
-react-native-step-indicator@^0.0.7:
+react-native-step-indicator@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/react-native-step-indicator/-/react-native-step-indicator-0.0.7.tgz#e9111b5f7f89bd00f1ec5d8af7beb868f4b5b706"
   dependencies:
@@ -6009,9 +6036,9 @@ react-native-vector-icons@4.5.0:
     prop-types "^15.5.10"
     yargs "^8.0.2"
 
-react-native@^0.52.0:
-  version "0.52.3"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.52.3.tgz#e11698e19bbc8f98135f82d40ac82ccb046641fd"
+react-native@0.52.0:
+  version "0.52.0"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.52.0.tgz#9784663a2aa40b30c87d4c9c06ef26cf8d419d91"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
@@ -6124,7 +6151,7 @@ react-transform-hmr@^1.0.4:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
-react@^16.0.0, react@^16.2.0:
+react@16.2.0, react@^16.0.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
   dependencies:
@@ -6282,13 +6309,13 @@ replace-ext@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/replace-ext/-/replace-ext-0.0.1.tgz#29bbd92078a739f0bcce2b4ee41e837953522924"
 
-replace-in-file@^3.0.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/replace-in-file/-/replace-in-file-3.2.0.tgz#c28836ca936af2d56193f671a6c4f6c51fdb6eb1"
+replace-in-file@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/replace-in-file/-/replace-in-file-3.0.0.tgz#6dca4429a9086cc2b5d96440923bd78006b0a58a"
   dependencies:
     chalk "^2.3.0"
     glob "^7.1.2"
-    yargs "^11.0.0"
+    yargs "^10.0.3"
 
 replace-string@^1.1.0:
   version "1.1.0"
@@ -6980,12 +7007,12 @@ symbol-tree@^3.2.1, symbol-tree@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
 
-table@4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/table/-/table-4.0.2.tgz#a33447375391e766ad34d3486e6e2aedc84d2e36"
+table@^4.0.1:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/table/-/table-4.0.3.tgz#00b5e2b602f1794b9acaf9ca908a76386a7813bc"
   dependencies:
-    ajv "^5.2.3"
-    ajv-keywords "^2.1.0"
+    ajv "^6.0.1"
+    ajv-keywords "^3.0.0"
     chalk "^2.1.0"
     lodash "^4.17.4"
     slice-ansi "1.0.0"
@@ -7702,12 +7729,6 @@ yargs-parser@^8.1.0:
   dependencies:
     camelcase "^4.1.0"
 
-yargs-parser@^9.0.2:
-  version "9.0.2"
-  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-9.0.2.tgz#9ccf6a43460fe4ed40a9bb68f48d43b8a68cc077"
-  dependencies:
-    camelcase "^4.1.0"
-
 yargs@^10.0.3:
   version "10.1.2"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-10.1.2.tgz#454d074c2b16a51a43e2fb7807e4f9de69ccb5c5"
@@ -7724,23 +7745,6 @@ yargs@^10.0.3:
     which-module "^2.0.0"
     y18n "^3.2.1"
     yargs-parser "^8.1.0"
-
-yargs@^11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/yargs/-/yargs-11.0.0.tgz#c052931006c5eee74610e5fc0354bedfd08a201b"
-  dependencies:
-    cliui "^4.0.0"
-    decamelize "^1.1.1"
-    find-up "^2.1.0"
-    get-caller-file "^1.0.1"
-    os-locale "^2.0.0"
-    require-directory "^2.1.1"
-    require-main-filename "^1.0.1"
-    set-blocking "^2.0.0"
-    string-width "^2.0.0"
-    which-module "^2.0.0"
-    y18n "^3.2.1"
-    yargs-parser "^9.0.2"
 
 yargs@^3.10.0:
   version "3.32.0"
