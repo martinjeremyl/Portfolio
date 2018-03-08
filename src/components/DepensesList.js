@@ -153,9 +153,11 @@ const styles = StyleSheet.create({
   },
   itemAmount: {
     flex: 0,
-    flexBasis: 90,
+    flexBasis: 110,
     fontSize: 16,
-    color: '#334050'
+    color: '#334050',
+    textAlign: 'right',
+    marginRight: 15
   },
   itemBonus: {
     flexGrow: 0,
