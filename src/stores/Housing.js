@@ -5,6 +5,24 @@ class Housing {
   @observable housings = []
 
   @action
+  async removeHousing (voyageId, housingName) {
+    const nextHousings = this.housings.filter(housing => housing.nom !== housingName)
+    this.housings.replace(nextHousings)
+
+    const logementsSnapshot = await database
+      .ref(`voyages/${voyageId}/logements`)
+      .orderByChild('nom')
+      .equalTo(housingName)
+      .once('value')
+
+    logementsSnapshot.forEach(async logementSnapshot => {
+      await database
+        .ref(`voyages/${voyageId}/logements/${logementSnapshot.key}`)
+        .remove()
+    })
+  }
+
+  @action
   pushHousings (housings) {
     housings.filter(Boolean).forEach(housing => {
       housing.membres.forEach((member, key) => {
@@ -15,7 +33,6 @@ class Housing {
             housing.membres[key] = userSnapshot.val()
           })
       })
-      console.log(housing)
       this.housings.push(housing)
     })
   }
@@ -23,7 +40,7 @@ class Housing {
   @action
   fetchHousings () {
     database
-      .ref(`voyages`)
+      .ref('voyages')
       .once('value')
       .then(snapshot => {
         snapshot.forEach(item => {

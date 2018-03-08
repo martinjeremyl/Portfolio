@@ -68,9 +68,7 @@ class ListeVoyagesComponent extends Component {
         {this.state.dataSource.map(data => (
           <TouchableOpacity
             key={data.key}
-            onPress={() => {
-              this.handleNavigation(data.travel)
-            }}
+            onPress={() => this.handleNavigation({ ...data.travel, travelKey: data.key })}
             color='#ee3333'
             accessibilityLabel='Learn more about this purple button'
           >

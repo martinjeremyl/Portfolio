@@ -6,11 +6,8 @@ import { inject, observer } from 'mobx-react'
 @inject('housing')
 @observer
 export default class HousingList extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      sections: []
-    }
+  state = {
+    sections: []
   }
 
   componentDidMount () {
@@ -31,9 +28,7 @@ export default class HousingList extends Component {
   renderItem = ({ item }) => {
     return (
       <TouchableOpacity
-        onPress={() => {
-          Actions.housingDetails({ selectedTravel: item })
-        }}
+        onPress={() => Actions.housingDetails({ selectedTravelKey: this.props.selectedTravelKey, selectedHousingName: item })}
       >
         <View style={styles.item}>
           <View style={styles.infos}>
@@ -41,7 +36,8 @@ export default class HousingList extends Component {
             <Text style={styles.text}>pictos</Text>
           </View>
           <View style={styles.btnRejoindre}>
-            <Button color='#D42B64' title='Rejoindre' onPress={() => {}} />
+            <Button color='#D42B64' title='Rejoindre' onPress={() => {
+            }} />
           </View>
         </View>
       </TouchableOpacity>
@@ -121,11 +117,9 @@ const styles = StyleSheet.create({
 
   /* texte du contenu du logement */
   item: {
-    fontSize: 18,
     flex: 1,
     flexDirection: 'column',
     marginHorizontal: 10,
-    textAlign: 'left',
     paddingVertical: 10,
     alignItems: 'stretch',
     justifyContent: 'space-between'

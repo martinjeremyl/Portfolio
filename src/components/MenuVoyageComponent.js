@@ -23,7 +23,7 @@ class MenuVoyageComponent extends Component {
     switch (libModule) {
       case LOGEMENTS:
         this.props.housing.pushHousings(this.props.selectedTravel.logements)
-        Actions.housingsList()
+        Actions.housingsList({ selectedTravelKey: this.props.selectedTravel.travelKey })
         break
 
       case TRANSPORTS:
