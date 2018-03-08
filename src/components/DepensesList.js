@@ -47,7 +47,6 @@ export default class DepenseList extends Component {
       depensesSnapshot.forEach((child) => {
         let key = child.key
         child = child.val()
-        console.log('le child ---------------', child)
         // On récupère les informations du payeur
         let payeur = database.ref('utilisateurs/' + child.payeur).once('value').then(payeurSnapshot => {
           return payeurSnapshot.val()
@@ -67,8 +66,8 @@ export default class DepenseList extends Component {
   }
 
   renderItem = ({ item }) => (
-    <TouchableHighlight onPress={() => this.editDepense(item.data[2])} style={styles.item}>
-      <View>
+    <TouchableHighlight onPress={() => this.editDepense(item.data[2])}>
+      <View style={styles.item}>
         <Text style={styles.itemLabel}>
           {item.data[0].intitule}
         </Text>
