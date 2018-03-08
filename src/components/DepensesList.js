@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, Text, View, Image, Picker, TouchableHighlight } f
 import { database, auth } from '../config/firebase'
 import { Actions } from 'react-native-router-flux'
 import { RoundButton } from './RoundButton'
+import { formatCurrency } from '../util'
 
 export default class DepenseList extends Component {
   constructor (props) {
@@ -72,7 +73,7 @@ export default class DepenseList extends Component {
           {item.data[0].intitule}
         </Text>
         <Text style={styles.itemAmount}>
-          {this.formatCurrency(item.data[0].montant)}
+          {formatCurrency(item.data[0].montant)}
         </Text>
         <Image
           style={styles.itemBonus}
@@ -92,8 +93,6 @@ export default class DepenseList extends Component {
       }}
     />
   )
-
-  formatCurrency = amount => Number(amount).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })
 
   handleButtonClick = () => Actions.createDepense({ travel: this.props.travel })
 
@@ -120,7 +119,7 @@ export default class DepenseList extends Component {
         />
         <View style={styles.item}>
           <Text style={styles.itemLabel}>Total</Text>
-          <Text style={styles.itemAmount}>{this.formatCurrency(prixTotal)}</Text>
+          <Text style={styles.itemAmount}>{formatCurrency(prixTotal)}</Text>
           <RoundButton onPress={this.handleButtonClick}>
             <Text style={styles.plusButtonText}>
               +

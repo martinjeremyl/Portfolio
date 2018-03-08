@@ -61,7 +61,7 @@ export default class HousingList extends Component {
         >
           <Image
             style={{ width: 20, height: 20 }}
-            source={require('../../../Graphismes/icones/Plus.png')}
+            source={require('../../img/icons/Plus.png')}
           />
         </TouchableOpacity>
       </View>

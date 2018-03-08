@@ -40,3 +40,5 @@ export function snapshotToArray (snapshot) {
 
   return returnArr
 }
+
+export const formatCurrency = amount => Number(amount).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })

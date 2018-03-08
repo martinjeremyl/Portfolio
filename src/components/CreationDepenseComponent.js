@@ -1,31 +1,31 @@
 import React, { Component } from 'react'
-import { TextInput, View, Text, StyleSheet, Button } from 'react-native'
+import { Image, TextInput, View, Text, StyleSheet, Button } from 'react-native'
 import { database } from '../config/firebase'
 import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
 import { format } from 'date-fns'
 import SelectMultiple from 'react-native-select-multiple'
 import { Actions } from 'react-native-router-flux'
-import { snapshotToArray } from '../util'
+import { formatCurrency, snapshotToArray } from '../util'
+import { RoundButton } from './RoundButton'
+import { ModalComponent } from './ModalComponent'
 
 export default class CreationDepense extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      // Le titre de la dépense
-      titre: 'Votre titre',
-      // Le montant de la dépense
-      montant: '0',
-      // La liste des membres du voyage
-      users: [],
-      // Le membre qui paye la dépense
-      payeur: {},
-      // Tableau semblable a users sous la forme : label: nom prenom value: key
-      membres: [],
-      // Les personnes qui sont concernées par la dépense
-      concernedMembers: [],
-      // La date de la dépense, par défaut la date d'aujourd'hui
-      date: format(Date.now(), 'YYYY-MM-DD')
-    }
+  state = {
+    // Le titre de la dépense
+    titre: 'Votre titre',
+    // Le montant de la dépense
+    montant: '0',
+    // La liste des membres du voyage
+    users: [],
+    // Le membre qui paye la dépense
+    payeur: {},
+    // Tableau semblable a users sous la forme : label: nom prenom value: key
+    membres: [],
+    // Les personnes qui sont concernées par la dépense
+    concernedMembers: [],
+    // La date de la dépense, par défaut la date d'aujourd'hui
+    date: format(Date.now(), 'YYYY-MM-DD'),
+    isModalVisible: false
   }
 
   onSelectionsChange = (concernedMembers) => {
@@ -45,8 +45,6 @@ export default class CreationDepense extends Component {
       this.setState({ montant: 0 })
     }
   }
-
-  formatCurrency = amount => Number(amount).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })
 
   onSelect (payeur) {
     this.setState({ payeur })
@@ -98,7 +96,7 @@ export default class CreationDepense extends Component {
       membres: this.state.concernedMembers
     }
     await Promise.all(this.props.depenseKey !== undefined ? depenseRef.set(depense) : depenseRef.push(depense)).then(() => {
-      Actions.depensesList({ 'travel': this.props.travel })
+      Actions.depensesList({ travel: this.props.travel })
     })
   }
 
@@ -108,22 +106,40 @@ export default class CreationDepense extends Component {
     })
   }
 
+  closeModal = () => this.setState({ isModalVisible: false })
+
+  onDeletionConfirm = async () => {
+    this.closeModal()
+    await database.ref(`voyages/0/depenses/${this.props.depenseKey}`)
+      .remove()
+    Actions.depensesList({ travel: this.props.travel })
+  }
+
   render () {
-    const prixParPersonne = this.state.concernedMembers.length !== 0 ? this.state.montant / this.state.concernedMembers.length : 0
+    const { concernedMembers, isModalVisible, membres, montant, titre, users } = this.state
+    const prixParPersonne = concernedMembers.length !== 0 ? montant / concernedMembers.length : 0
     return (
       <View style={styles.container}>
+        <ModalComponent
+          isModalVisible={isModalVisible}
+          message='Voulez-vous supprimer définitivement cet élément ?'
+          confirmLabel='Supprimer'
+          closeModal={this.closeModal}
+          onConfirm={this.onDeletionConfirm}
+          onCancel={this.closeModal}
+        />
         <TextInput
           style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
           onChangeText={titre => {
             this.setState({ titre })
           }}
-          value={this.state.titre}
+          value={titre}
         />
         <TextInput
           style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
           keyboardType='numeric'
           onChangeText={(montant) => this.checkNumber(montant)}
-          value={this.state.montant}
+          value={montant}
         />
         <Text style={styles.item}>Payé par</Text>
         <RadioGroup
@@ -131,7 +147,7 @@ export default class CreationDepense extends Component {
           selectedIndex={
             this.findPayeurIndex()
           }>
-          {this.state.users.map(user =>
+          {users.map(user =>
             <RadioButton value={user.key}>
               <Text>{user.surname} {user.name}</Text>
             </RadioButton>
@@ -139,11 +155,24 @@ export default class CreationDepense extends Component {
         </RadioGroup>
         <Text style={styles.item}>Personnes concernées</Text>
         <SelectMultiple
-          items={this.state.membres}
-          selectedItems={this.state.concernedMembers}
+          items={membres}
+          selectedItems={concernedMembers}
           onSelectionsChange={this.onSelectionsChange} />
         {/* Vu que le montant du remboursement est le même pour tous on peut le spécifié dans un seul champ   */}
-        <Text style={styles.item}>Prix par personne concernée : {this.formatCurrency(prixParPersonne)}</Text>
+        <Text style={styles.item}>Prix par personne concernée : {formatCurrency(prixParPersonne)}</Text>
+        {
+          this.props.depenseKey !== undefined && (
+            <RoundButton
+              onPress={() => this.setState({ isModalVisible: true })}
+            >
+              <Image
+                style={styles.buttonImage}
+                source={require('../img/icons/Bin.png')}
+                resizeMode='contain'
+              />
+            </RoundButton>
+          )
+        }
 
         <Button
           title='Valider ma dépense'
@@ -174,6 +203,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
     color: 'rgba(0,0,0,1.0)'
+  },
+  buttonImage: {
+    flex: 1
   }
-
 })

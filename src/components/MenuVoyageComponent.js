@@ -73,12 +73,12 @@ class MenuVoyageComponent extends Component {
 
   render () {
     let moduleIcon = {
-      'ACTIVITES': require('../../Graphismes/icones/Activite.png'),
-      'TRANSPORTS': require('../../Graphismes/icones/vehicule2.png'),
-      'DEPENSES': require('../../Graphismes/icones/Money.png'),
-      'DOCUMENTS': require('../../Graphismes/icones/Fichier.png'),
-      'LISTES': require('../../Graphismes/icones/Liste.png'),
-      'LOGEMENTS': require('../../Graphismes/icones/Logement.png')
+      'ACTIVITES': require('../img/icons/Activite.png'),
+      'TRANSPORTS': require('../img/icons/vehicule2.png'),
+      'DEPENSES': require('../img/icons/Money.png'),
+      'DOCUMENTS': require('../img/icons/Fichier.png'),
+      'LISTES': require('../img/icons/Liste.png'),
+      'LOGEMENTS': require('../img/icons/Logement.png')
     }
     return (
       <View style={styles.container}>

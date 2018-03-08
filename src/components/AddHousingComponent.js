@@ -101,7 +101,7 @@ export default class AddHousingComponent extends Component {
         <TouchableOpacity style={styles.btn}>
           <Image
             style={{ width: 20, height: 20 }}
-            source={require('../../Graphismes/icones/Bin.png')}
+            source={require('../img/icons/Bin.png')}
           />
         </TouchableOpacity>
         <KeyboardAwareScrollView style={styles.container}>
