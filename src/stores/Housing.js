@@ -4,6 +4,34 @@ import { database } from '../config/firebase'
 class Housing {
   @observable housings = []
 
+  @observable name = ''
+  @observable address = ''
+  @observable dateBegin = ''
+  @observable dateEnd = ''
+  @observable contact = ''
+  @observable notes = ''
+
+  @action
+  setName (name) { this.name = name }
+
+  @action
+  setAddress (address) { this.address = address }
+
+  @action
+  setDateBegin (dateBegin) { this.dateBegin = dateBegin }
+
+  @action
+  setDateEnd (dateEnd) { this.dateEnd = dateEnd }
+
+  @action
+  setMembers (members) { this.members = members }
+
+  @action
+  setContact (contact) { this.contact = contact }
+
+  @action
+  setNotes (notes) { this.notes = notes }
+
   @action
   async removeHousing (voyageId, housingName) {
     const nextHousings = this.housings.filter(housing => housing.nom !== housingName)

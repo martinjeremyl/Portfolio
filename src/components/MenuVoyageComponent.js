@@ -60,17 +60,14 @@ class MenuVoyageComponent extends Component {
   // get modules name to show
   listenForModules = moduleListe => {
     var items = []
-
     moduleListe.forEach(child => {
       items.push({
         libelle: getModuleNameById(child),
         key: child.toString()
       })
-
-      // binding results
-      this.setState({
-        dataSource: items
-      })
+    })
+    this.setState({
+      dataSource: items
     })
   }
 
