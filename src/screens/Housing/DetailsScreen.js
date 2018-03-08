@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Actions } from 'react-native-router-flux'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import { observer, inject } from 'mobx-react'
 import { RoundButton } from '../../components/RoundButton'
 import { ModalComponent } from '../../components/ModalComponent'
+import { Actions } from 'react-native-router-flux'
 
 @inject('housing')
 @observer
@@ -36,11 +36,11 @@ class HousingDetails extends Component {
       date_fin: dateFin,
       membres,
       nom,
-      note
+      notes
     } = selectedHousing
 
     return (
-      <View>
+      <View style={styles.container}>
         <ModalComponent
           isModalVisible={isModalVisible}
           message='Voulez-vous supprimer définitivement cet élément ?'
@@ -49,13 +49,46 @@ class HousingDetails extends Component {
           onConfirm={this.onDeletionConfirm}
           onCancel={this.closeModal}
         />
-        <Text>{adresse}</Text>
-        <Text>{contact}</Text>
-        <Text>{dateDebut}</Text>
-        <Text>{dateFin}</Text>
-        <Text>{membres}</Text>
-        <Text>{nom}</Text>
-        <Text>{note}</Text>
+        <View style={styles.rowInfos}>
+          <Text style={styles.champs}>Nom</Text>
+          <Text style={styles.infos}>{nom}</Text>
+        </View>
+        <View style={styles.rowInfos}>
+          <Text style={styles.champs}>Adresse</Text>
+          <Text style={styles.infos}>{adresse}</Text>
+        </View>
+        <View style={styles.rowInfos}>
+          <Text style={styles.champs}>Contact</Text>
+          <Text style={styles.infos}>{contact}</Text>
+        </View>
+
+        <View style={styles.rowInfos}>
+          <Text style={styles.champs}>Dates</Text>
+        </View>
+        <View style={styles.rowDates}>
+          <Text style={styles.infosDate}>{dateDebut}</Text>
+          <View style={styles.infosDate}>
+            <Image
+              style={styles.arrowDate}
+              transform={([{ rotateZ: '180deg' }])}
+              source={require('../../img/icons/Arrow_rose.png')}
+            />
+          </View>
+
+          <Text style={styles.infosDate}>{dateFin}</Text>
+        </View>
+
+        <View style={styles.rowNotes}>
+          <Text style={styles.champs}>Notes</Text>
+          <Text style={styles.infosNotes}>{notes}</Text>
+        </View>
+        <View style={styles.participants}>
+          <Text style={styles.champs}>Liste des participants</Text>
+          <Image
+            source={'uri:{membres.avatar}'}
+          />
+          <Text style={styles.infosNotes}>{membres}</Text>
+        </View>
         <RoundButton onPress={() => this.setState({ isModalVisible: true })}>
           <Text>
             Delete
@@ -65,5 +98,65 @@ class HousingDetails extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#ffffff',
+    flex: 1,
+    padding: '10%'
+  },
+  champs: {
+    color: '#646464',
+    fontFamily: 'Jura',
+    fontSize: 17
+  },
+  infos: {
+    width: '70%',
+    color: '#2C3E50',
+    fontFamily: 'Jura',
+    fontSize: 17
+  },
+  infosDate: {
+    color: '#2C3E50',
+    fontFamily: 'Jura',
+    fontSize: 17
+  },
+  containerDate: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
+  rowDates: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: '10%'
+  },
+  arrowDate: {
+    height: 30,
+    width: 30,
+    marginTop: -9
+  },
+  rowInfos: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: '10%'
+  },
+  rowNotes: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginBottom: '10%'
+  },
+  infosNotes: {
+    marginTop: '10%',
+    color: '#2C3E50',
+    fontFamily: 'Jura',
+    fontSize: 17
+  },
+  participants: {
+    flex: 1,
+    flexDirection: 'column'
+  }
+
+})
 
 export default HousingDetails
