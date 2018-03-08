@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, View } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import { getModuleNameById } from '../util'
 import { Actions } from 'react-native-router-flux'
 import { observer, inject } from 'mobx-react'
@@ -50,8 +50,8 @@ class MenuVoyageComponent extends Component {
 
   componentWillMount () {
     // Set travel name in title
-    const { setParams } = this.props.navigation
-    setParams({ title: this.props.selectedTravel ? this.props.selectedTravel.nom : 'None' })
+    // const {setParams} = this.props.navigation
+    // setParams({title: this.props.selectedTravel ? this.props.selectedTravel.nom : 'None'})
 
     this.moduleListeRef = this.props.selectedTravel.modules
     this.listenForModules(this.moduleListeRef)
@@ -75,24 +75,99 @@ class MenuVoyageComponent extends Component {
   }
 
   render () {
-    console.log(this.props, 'this.props')
-
+    let moduleIcon = {
+      'ACTIVITES': require('../../Graphismes/icones/Activite.png'),
+      'TRANSPORTS': require('../../Graphismes/icones/vehicule2.png'),
+      'DEPENSES': require('../../Graphismes/icones/Money.png'),
+      'DOCUMENTS': require('../../Graphismes/icones/Fichier.png'),
+      'LISTES': require('../../Graphismes/icones/Liste.png'),
+      'LOGEMENTS': require('../../Graphismes/icones/Logement.png')
+    }
     return (
-      <View>
-        {this.state.dataSource.map(mod => (
-          <Button
-            key={mod.key}
-            onPress={() => {
-              this.handleNavigation(mod.libelle)
-            }}
-            title={mod.libelle}
-            color='#841584'
-            accessibilityLabel='Click to see the module the module'
-          />
-        ))}
+      <View style={styles.container}>
+
+        <View style={styles.info}>
+          <Text style={styles.travelName}>{this.props.selectedTravel.nom}</Text>
+          <Text style={styles.travelDate}>{this.props.selectedTravel.dateBegin} - {this.props.selectedTravel.DateEnd}</Text>
+        </View>
+
+        <View style={styles.containerModules}>
+          {this.state.dataSource.map(mod =>
+            <View style={styles.modules}>
+              <TouchableOpacity
+                key={mod.key}
+                onPress={() => {
+                  this.handleNavigation(mod.libelle)
+                }}
+                accessibilityLabel='Click to see the module'
+              >
+                <View style={styles.moduleClickable}>
+                  <Image
+                    style={styles.moduleIcon}
+                    source={moduleIcon[mod.libelle]}
+                  />
+                  <Text style={styles.titleModules}>{mod.libelle}</Text>
+                </View>
+              </TouchableOpacity>
+            </View>)}
+        </View>
       </View>
     )
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff'
+  },
+
+  info: {
+    backgroundColor: '#2C3E50',
+    height: '45%',
+    width: '100%'
+  },
+  travelName: {
+    color: '#ffffff',
+    fontSize: 30,
+    textAlign: 'center',
+    marginTop: '15%'
+  },
+  travelDate: {
+    color: '#ffffff',
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: '20%'
+  },
+  containerModules: {
+    flex: 1,
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+
+  modules: {
+    height: '40%',
+    width: '30%',
+    marginBottom: '10%'
+  },
+  moduleClickable: {
+    height: '100%',
+    width: '100%',
+    alignItems: 'center'
+  },
+  titleModules: {
+    color: '#2C3E50',
+    textAlign: 'center',
+    width: '100%'
+
+  },
+  moduleIcon: {
+    height: 100,
+    width: 100,
+    marginBottom: '5%'
+  }
+
+})
 export default MenuVoyageComponent
