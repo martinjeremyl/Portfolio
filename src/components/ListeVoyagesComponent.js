@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { database, auth } from '../config/firebase'
 import { Actions } from 'react-native-router-flux'
 
@@ -45,6 +45,7 @@ class ListeVoyagesComponent extends Component {
   }
 
   logout = async () => {
+    console.log('Déconnexion')
     try {
       // Déconnexion de l'utilisateur
       await auth.signOut()
@@ -52,8 +53,8 @@ class ListeVoyagesComponent extends Component {
       // On oublie le token de l'utilisateur
       await storage.remove('userToken')
 
-      // On redirige vers l'écran de Connexion
-      Actions.login()
+      // On retourne à l'écran de Connexion
+      Actions.pop()
     } catch (error) {
       // La déconnexion a échoué, on affiche le message d'erreur
       this.setState({ error: true, txtError: error.message })
@@ -76,8 +77,15 @@ class ListeVoyagesComponent extends Component {
           </TouchableOpacity>
         ))}
 
-        <TouchableOpacity style={styles.float}>
-          <Text style={styles.textFloat}>+</Text>
+        <TouchableOpacity style={{ position: 'absolute', bottom: 20, left: 20 }} color='#ee3333' onPress={() => this.logout()}>
+          <Text style={styles.logout}>Se déconnecter</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => Actions.formPartOne()} style={styles.float}>
+          <Image
+            style={{ width: 20, height: 20 }}
+            source={require('../img/icons/Plus.png')}
+          />
         </TouchableOpacity>
       </View>
     )
@@ -104,7 +112,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: '8%'
   },
-
+  logout: {
+    color: 'black',
+    fontSize: 15
+  },
   float: {
     position: 'absolute',
     width: 60,
@@ -116,7 +127,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-
   textFloat: {
     color: '#ffffff',
     fontSize: 25

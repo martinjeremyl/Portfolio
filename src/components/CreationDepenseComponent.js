@@ -98,7 +98,7 @@ export default class CreationDepense extends Component {
       createur: auth.currentUser.uid
     }
     await Promise.all(this.props.depenseKey !== undefined ? depenseRef.set(depense) : depenseRef.push(depense)).then(() => {
-      Actions.depensesList({ travel: this.props.travel })
+      Actions.pop()
     })
   }
 

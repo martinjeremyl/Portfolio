@@ -71,7 +71,7 @@ export default class AddHousingComponent extends Component {
       // TODO passer le selectedTravel plutôt que l'id en dur
       this.createHousing('-L3mP01U5xPgHxONVDpC')
       // On redirige vers la liste des logements
-      Actions.housingsList({ selectedTravel: this.props.selectedTravel })
+      Actions.pop()
     } else {
       this.setState({ error: 'Veuillez saisir le nom du logement' })
     }
