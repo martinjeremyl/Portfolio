@@ -1,3 +1,5 @@
+import 'intl'
+import 'intl/locale-data/jsonp/fr-FR'
 import { LOGEMENTS, TRANSPORTS, DEPENSES, ACTIVITES, DOCUMENTS, LISTES } from './constants'
 
 /**
@@ -41,4 +43,10 @@ export function snapshotToArray (snapshot) {
   return returnArr
 }
 
-export const formatCurrency = amount => Number(amount).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })
+const formatter = Intl.NumberFormat('fr-FR', {
+  style: 'currency',
+  currency: 'EUR',
+  minimumFractionDigits: 2
+})
+
+export const formatCurrency = amount => formatter.format(amount)
