@@ -1,6 +1,10 @@
 language: node_js
 node_js: "9"
 
+branches:
+  only:
+    - master
+
 cache:
   directories:
     - "node_modules"
@@ -11,9 +15,8 @@ script:
   - yarn build --log-level 2
 
 deploy:
-  provider: firebase
-  token:
-    secure: "$FIREBASE_TOKEN"
+  - yarn global add firebase-tools
+  - firebase deploy --token "$FIREBASE_TOKEN"
   on:
       branch: master
 
