@@ -1,0 +1,21 @@
+language: node_js
+node_js: "9"
+
+cache:
+  directories:
+    - "node_modules"
+  yarn: true
+
+script:
+  - yarn lint
+  - yarn build --log-level 2
+
+deploy:
+  provider: firebase
+  token:
+    secure: "$FIREBASE_TOKEN"
+  on:
+      branch: master
+
+notifications:
+  email: false

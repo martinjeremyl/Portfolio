@@ -6,7 +6,6 @@ import Travel from './pages/Travel/TravelPage'
 
 import Navbar from './components/Navbar'
 import Loader from './components/Loader'
-import ImageUpload from './components/ImageUpload'
 
 import Router from './modules/router/Router'
 
