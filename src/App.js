@@ -28,6 +28,7 @@ class App extends Component {
   render () {
     return (
       <div className='container'>
+        <h1>Hello</h1>
         <Router history={this.props.appStore.history} path={this.props.appStore.currentPath}>
           {this.props.appStore.isConnected
             ? this.renderAppForAuthenticatedUser()
