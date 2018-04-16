@@ -2,12 +2,12 @@ import firebase from 'firebase'
 require('firebase/firestore')
 
 const config = {
-  apiKey: 'AIzaSyAHsxMs7yPWdBGtRqNfwMDBhpkHF-40tpo',
-  authDomain: 'travel-11111.firebaseapp.com',
-  databaseURL: 'https://travel-11111.firebaseio.com',
-  projectId: 'travel-11111',
-  storageBucket: 'travel-11111.appspot.com',
-  messagingSenderId: '87555264108'
+  apiKey: 'AIzaSyDc9dPoVsErzdcPsjTNyax6A5CsohZehSo',
+  authDomain: 'traveled-81d5c.firebaseapp.com',
+  databaseURL: 'https://traveled-81d5c.firebaseio.com',
+  projectId: 'traveled-81d5c',
+  storageBucket: 'traveled-81d5c.appspot.com',
+  messagingSenderId: '272676831426'
 }
 firebase.initializeApp(config)
 
