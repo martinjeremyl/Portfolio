@@ -1,11 +1,10 @@
 {
- "extends": ["standard", "standard-react"],
- "parser": "babel-eslint",
- "env": {
-   "browser": true
- },
- "rules": {
-   "react/prop-types": false,
-   "object-curly-spacing": ["error", "always"]
- }
+  "extends": ["standard", "standard-react"],
+  "parser": "babel-eslint",
+  "rules": {
+    "react/prop-types": 0
+  },
+  "env": {
+    "browser": true
+  }
 }

@@ -9,10 +9,10 @@ const config = {
   storageBucket: 'travel-11111.appspot.com',
   messagingSenderId: '87555264108'
 }
-
 firebase.initializeApp(config)
 
-export const auth = firebase.auth()
 export const db = firebase.firestore()
-export const database = firebase.database()
+export const auth = firebase.auth()
 export const storage = firebase.storage()
+
+export default firebase
