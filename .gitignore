@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .cache/
+.idea/
 yarn-error.log
 yarn.lock
 package-lock.json
