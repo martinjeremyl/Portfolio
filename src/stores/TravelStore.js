@@ -8,11 +8,16 @@ class Travel {
   travels$ = observable.array([])
   @observable
   travelCreation = {
+    id: '',
     name: '',
-    dateBegin: '',
-    dateEnd: '',
-    participants: [],
-    modules: []
+    startDate: '',
+    endDate: '',
+    icon: '',
+    members: [],
+    modules: [],
+    housings: [],
+    transports: [],
+    spendings: []
   }
   @observable travelCreationStep = 1
 
