@@ -31,10 +31,16 @@ class Authentication extends Component {
         </div>
 
         <TabNavigation>
-          <li>
+          <li
+            style={{
+              listStyleType: 'none'
+            }}>
             <Link to='/login'>Connexion</Link>
           </li>
-          <li>
+          <li
+            style={{
+              listStyleType: 'none'
+            }}>
             <Link to='/register'>Inscription</Link>
           </li>
         </TabNavigation>

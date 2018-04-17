@@ -10,7 +10,13 @@ class Link extends Component {
   }
 
   render () {
-    return <a onClick={this.navigate}>{this.props.children}</a>
+    return <a
+      style={{
+        backgroundColor: 'transparent',
+        color: '#000'
+      }}
+      className='badge badge-light'
+      onClick={this.navigate}>{this.props.children}</a>
   }
 }
 
