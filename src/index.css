@@ -30,6 +30,14 @@ body {
   animation-delay: -1s;
 }
 
+.react-datepicker__time-box {
+  width: 6vw !important;
+  margin: 0 !important;
+}
+.react-datepicker__time-container {
+  width: 9vw !important;
+}
+
 @-webkit-keyframes sk-bounce {
   0%,
   100% {
