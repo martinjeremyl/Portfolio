@@ -1,5 +1,8 @@
 import { observable, action, computed, toJS, autorun } from 'mobx'
 import TravelApi from '../api/TravelApi'
+import HousingApi from '../api/HousingApi'
+import TransportApi from '../api/TransportApi'
+import SpendingApi from '../api/SpendingApi'
 import userStore from './UserStore'
 import appStore from './AppStore'
 
@@ -23,7 +26,9 @@ class Travel {
 
   constructor () {
     this.api = new TravelApi()
-
+    this.housingApi = new HousingApi()
+    this.transportApi = new TransportApi()
+    this.spendingApi = new SpendingApi()
     autorun(() => {
       if (appStore.isConnected) {
         this.fetchTravels()
@@ -38,7 +43,7 @@ class Travel {
 
   @computed
   get travel () {
-    return toJS(this.travels$.filter(travel => travel.id === this.currentTravelId.get())[0])
+    return toJS(this.travels$.find(travel => travel.id === this.currentTravelId.get())[0])
   }
 
   @action
@@ -47,19 +52,11 @@ class Travel {
   }
 
   @action
-  setUserId (userId) {
-    this.userId = userId
-  }
-
-  @action
   async fetchTravels () {
-    const response = await this.api.list({
-      field: 'userId',
-      operator: '==',
-      value: userStore.user.uid
-    })
-
-    this.travels$.replace(response)
+    // On récupère tous les voyages et on les filtre car firebase ne sait pas faire de fonction sql IN il faut le faire en javascript
+    const response = await this.api.list()
+    const filteredTravels = response.filter(travel => travel.members.includes(userStore.user.uid))
+    this.travels$.replace(filteredTravels)
   }
 
   @action
@@ -74,11 +71,7 @@ class Travel {
 
   @action
   async create (data) {
-    const newTravel = await this.api.create({
-      ...data,
-      userId: userStore.user.uid
-    })
-
+    const newTravel = await this.api.create(data)
     this.travels$.push(newTravel)
   }
 
