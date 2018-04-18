@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { inject, observer } from 'mobx-react'
-import { Button } from 'react-bootstrap'
+import Button from '../../components/Button'
 
 import Input from '../../components/Input'
 import ImageUpload from '../../components/ImageUpload'
@@ -40,7 +40,7 @@ class Registration extends Component {
             userStore.setUserCreation('avatar', image)
           }}
         />
-        <Button bsStyle='primary' onClick={() => { userStore.register(authenticatingUser) }}>
+        <Button onClick={() => { userStore.register(authenticatingUser) }}>
           {"S'inscrire"}
         </Button>
       </Fragment>

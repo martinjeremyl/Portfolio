@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'mobx-react'
 
 import './index.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-
-import 'jquery'
-import 'popper.js'
 
 import App from './App'
 import store from './stores/RootStore'

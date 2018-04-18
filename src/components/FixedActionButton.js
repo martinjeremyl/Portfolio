@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Button } from 'react-bootstrap'
+import Button from './Button'
 
 class FixedActionButton extends Component {
   render () {
     return (
       <Button
-        bsStyle='danger'
         style={{
           position: 'fixed',
           borderRadius: '50%',

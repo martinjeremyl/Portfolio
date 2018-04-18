@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { Button } from 'react-bootstrap'
+import Button from '../../components/Button'
 import Input from '../../components/Input'
 
 @inject('userStore')
@@ -26,7 +26,7 @@ class Login extends Component {
           value={password}
           onChange={updateField}
         />
-        <Button bsStyle='primary' onClick={() => { userStore.login({ email, password }) }}>
+        <Button onClick={() => { userStore.login({ email, password }) }}>
           Se connecter
         </Button>
       </Fragment>

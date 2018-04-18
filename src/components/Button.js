@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import MaterialButton from 'material-ui/Button'
 
 class Button extends Component {
   render () {
     const { modifiers, value } = this.props
     return (
-      <button className={`button ${modifiers}`} {...this.props}>
+      <MaterialButton className={`button ${modifiers}`} {...this.props}>
         {value}
-      </button>
+      </MaterialButton>
     )
   }
 }
