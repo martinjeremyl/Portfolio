@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 
 const dateFormatter = new Intl.DateTimeFormat('fr', {
   hour12: false,

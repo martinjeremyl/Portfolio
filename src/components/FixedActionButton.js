@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+import { Button } from 'react-bootstrap'
 
 class FixedActionButton extends Component {
   render () {
     return (
-      <button
+      <Button
+        bsStyle='danger'
         style={{
           position: 'fixed',
-          borderRadius: '100%',
+          borderRadius: '50%',
           width: '50px',
           height: '50px',
           bottom: '30px',
@@ -15,7 +17,7 @@ class FixedActionButton extends Component {
         {...this.props}
       >
         {this.props.children}
-      </button>
+      </Button>
     )
   }
 }
