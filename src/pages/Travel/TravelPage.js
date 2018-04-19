@@ -18,7 +18,7 @@ class TravelPage extends Component {
 
     return (
       <div>
-        <Route path='/travels' render={() => (
+        {
           travelStore.travels.map(({ id, name }, iteration) => (
             <ListItem
               key={id}
@@ -43,7 +43,7 @@ class TravelPage extends Component {
               </Link>
             </ListItem>
           ))
-        )} />
+        }
         <Route path='/travels/detail' component={TravelDetail} />
         <Modal isOpen={appStore.isModalOpen}>
           <TravelCreationPage />

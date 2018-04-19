@@ -55,7 +55,7 @@ class Travel {
   async fetchTravels () {
     // On récupère tous les voyages et on les filtre car firebase ne sait pas faire de fonction sql IN il faut le faire en javascript
     const response = await this.api.list()
-    const filteredTravels = response.filter(travel => travel.members.includes(userStore.user.uid))
+    const filteredTravels = response.filter(travel => travel.members && travel.members.includes(userStore.user.uid))
     this.travels$.replace(filteredTravels)
   }
 

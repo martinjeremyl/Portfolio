@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
-import { Route } from 'react-router-dom'
+import { Redirect, Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 import Login from './Login'
@@ -9,7 +9,7 @@ import Registration from './Registration'
 import TabNavigation from '../../components/TabNavigation'
 import Link from '../../components/Link'
 
-@inject('userStore')
+@inject('appStore', 'userStore')
 @observer
 class Authentication extends Component {
   updateField = ({ target: { name, value } }) => {
@@ -17,6 +17,10 @@ class Authentication extends Component {
   }
 
   render () {
+    if (this.props.appStore.isConnected) {
+      return <Redirect to='/travels' />
+    }
+
     return (
       <div>
         <div className='columns is-vcentered'>

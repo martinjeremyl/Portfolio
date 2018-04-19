@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react'
-import { Router } from 'react-router-dom'
+import { Route, Router, Switch } from 'react-router-dom'
 
 import Authentication from './pages/Authentication/Authentication'
 import Travel from './pages/Travel/TravelPage'
@@ -8,6 +8,7 @@ import Travel from './pages/Travel/TravelPage'
 import Navbar from './components/Navbar'
 import Loader from './components/Loader'
 import { Header } from './components/Header'
+import { PrivateRoute } from './components/PrivateRoute'
 
 @inject('appStore', 'routingStore')
 @observer
@@ -21,19 +22,24 @@ class App extends Component {
     )
   }
 
-  renderAuthenticationOrLoading = () => {
-    return this.props.appStore.isLoading ? <Loader /> : <Authentication />
-  }
-
   render () {
+    const { appStore, routingStore } = this.props
+
     return (
       <Fragment>
         <Header />
         <div className='container'>
-          <Router history={this.props.routingStore.history}>
-            {this.props.appStore.isConnected
-              ? this.renderAppForAuthenticatedUser()
-              : this.renderAuthenticationOrLoading()}
+          <Router history={routingStore.history}>
+            {
+              appStore.isLoading
+                ? <Loader />
+                : (
+                  <Switch>
+                    <PrivateRoute path='/travels' isConnected={appStore.isConnected} component={this.renderAppForAuthenticatedUser} />
+                    <Route path='/' component={Authentication} />
+                  </Switch>
+                )
+            }
           </Router>
         </div>
       </Fragment>

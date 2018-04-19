@@ -2,7 +2,6 @@ import { observable, action, computed } from 'mobx'
 
 import { auth } from '../config/firebase'
 import userStore from './UserStore'
-import routingStore from './RoutingStore'
 
 class AppStore {
   connectionStatus = observable.box(false)
@@ -14,7 +13,6 @@ class AppStore {
       if (user && !this.isConnected) {
         userStore.setUser(user.toJSON())
         this.switchConnectionStatus()
-        routingStore.push('/travels')
       }
     })
 
