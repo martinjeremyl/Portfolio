@@ -1,6 +1,14 @@
 body {
   overflow-x: hidden;
 }
+h1 {
+  font-size: 2em;
+  color: #757f82;
+}
+h2 {
+  font-size: 1,7em;
+  color: #e7796c;
+}
 
 .spinner {
   width: 70px;
