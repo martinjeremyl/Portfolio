@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { inject, observer } from 'mobx-react'
-import Button from '../../components/Button'
+import { withRouter } from 'react-router'
 
 import Input from '../../components/Input'
+import Button from '../../components/Button'
 import ImageUpload from '../../components/ImageUpload'
 
 @inject('userStore')
@@ -41,11 +42,11 @@ class Registration extends Component {
           }}
         />
         <Button onClick={() => { userStore.register(authenticatingUser) }}>
-          {"S'inscrire"}
+          S'inscrire
         </Button>
       </Fragment>
     )
   }
 }
 
-export default Registration
+export default withRouter(Registration)

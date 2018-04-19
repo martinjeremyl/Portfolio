@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
+import { Link as RRLink } from 'react-router-dom'
 
 @inject('appStore')
 @observer
 class Link extends Component {
-  navigate = () => {
-    const { appStore, to } = this.props
-    appStore.pushToHistory(to)
-  }
-
   render () {
-    return <a
-      style={{
-        backgroundColor: 'transparent',
-        color: '#000'
-      }}
-      className='badge badge-light'
-      onClick={this.navigate}>{this.props.children}</a>
+    return (
+      <RRLink
+        style={{
+          backgroundColor: 'transparent',
+          color: '#000'
+        }}
+        to={this.props.to}
+      >
+        {this.props.children}
+      </RRLink>
+    )
   }
 }
 

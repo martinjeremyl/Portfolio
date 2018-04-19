@@ -1,15 +1,15 @@
 import React, { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react'
+import { Router } from 'react-router-dom'
 
 import Authentication from './pages/Authentication/Authentication'
 import Travel from './pages/Travel/TravelPage'
 
 import Navbar from './components/Navbar'
 import Loader from './components/Loader'
+import { Header } from './components/Header'
 
-import Router from './modules/router/Router'
-
-@inject('appStore')
+@inject('appStore', 'routingStore')
 @observer
 class App extends Component {
   renderAppForAuthenticatedUser = () => {
@@ -27,14 +27,16 @@ class App extends Component {
 
   render () {
     return (
-      <div className='container'>
-        <h1>Traveled</h1>
-        <Router history={this.props.appStore.history} path={this.props.appStore.currentPath}>
-          {this.props.appStore.isConnected
-            ? this.renderAppForAuthenticatedUser()
-            : this.renderAuthenticationOrLoading()}
-        </Router>
-      </div>
+      <Fragment>
+        <Header />
+        <div className='container'>
+          <Router history={this.props.routingStore.history}>
+            {this.props.appStore.isConnected
+              ? this.renderAppForAuthenticatedUser()
+              : this.renderAuthenticationOrLoading()}
+          </Router>
+        </div>
+      </Fragment>
     )
   }
 }

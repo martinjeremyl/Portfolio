@@ -1,12 +1,10 @@
 import { observable, action, computed } from 'mobx'
-import createHistory from 'history/createBrowserHistory'
 
 import { auth } from '../config/firebase'
 import userStore from './UserStore'
+import routingStore from './RoutingStore'
 
 class AppStore {
-  history = observable(createHistory())
-  path = observable.box('')
   connectionStatus = observable.box(false)
   loadingStatus = observable.box(true)
   modalStatus = observable.box(false)
@@ -16,7 +14,7 @@ class AppStore {
       if (user && !this.isConnected) {
         userStore.setUser(user.toJSON())
         this.switchConnectionStatus()
-        this.pushToHistory('/travels')
+        routingStore.push('/travels')
       }
     })
 
@@ -38,17 +36,6 @@ class AppStore {
   @computed
   get isConnected () {
     return this.connectionStatus.get()
-  }
-
-  @computed
-  get currentPath () {
-    return this.path.get()
-  }
-
-  @action
-  pushToHistory (path) {
-    this.history.push(path)
-    this.path.set(path)
   }
 
   @action

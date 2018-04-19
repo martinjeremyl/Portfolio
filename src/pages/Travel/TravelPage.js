@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
+import { Route } from 'react-router-dom'
 
 import ListItem from '../../components/ListItem'
 import Modal from '../../components/Modal'
 import FixedActionButton from '../../components/FixedActionButton'
 import Link from '../../components/Link'
 import TravelCreationPage from './TravelCreationPage'
-
-import Route from '../../modules/router/Route'
 
 import TravelDetail from './TravelDetailPage'
 
@@ -19,8 +18,8 @@ class TravelPage extends Component {
 
     return (
       <div>
-        <Route path='/travels'>
-          {travelStore.travels.map(({ id, name }, iteration) => (
+        <Route path='/travels' render={() => (
+          travelStore.travels.map(({ id, name }, iteration) => (
             <ListItem
               key={id}
               iteration={iteration}
@@ -43,11 +42,9 @@ class TravelPage extends Component {
                 </div>
               </Link>
             </ListItem>
-          ))}
-        </Route>
-        <Route path='/travels/detail'>
-          <TravelDetail />
-        </Route>
+          ))
+        )} />
+        <Route path='/travels/detail' component={TravelDetail} />
         <Modal isOpen={appStore.isModalOpen}>
           <TravelCreationPage />
         </Modal>

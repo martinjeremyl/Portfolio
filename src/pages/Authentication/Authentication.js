@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
+import { Route } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 import Login from './Login'
 import Registration from './Registration'
 
-import Route from '../../modules/router/Route'
 import TabNavigation from '../../components/TabNavigation'
 import Link from '../../components/Link'
 
@@ -18,14 +19,10 @@ class Authentication extends Component {
   render () {
     return (
       <div>
-        <div className='columns is-vcentered '>
+        <div className='columns is-vcentered'>
           <div className='section'>
-            <Route path='/login'>
-              <Login updateField={this.updateField} />
-            </Route>
-            <Route path='/register'>
-              <Registration updateField={this.updateField} />
-            </Route>
+            <Route path='/login' render={() => <Login updateField={this.updateField} />} />
+            <Route path='/register' render={() => <Registration updateField={this.updateField} />} />
           </div>
         </div>
 
@@ -48,4 +45,4 @@ class Authentication extends Component {
   }
 }
 
-export default Authentication
+export default withRouter(Authentication)

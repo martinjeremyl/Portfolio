@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { inject, observer } from 'mobx-react'
+import { withRouter } from 'react-router'
+
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 
@@ -33,4 +35,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default withRouter(Login)
