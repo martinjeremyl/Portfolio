@@ -1,32 +1,39 @@
 import React from 'react'
-import ReactDatePicker from 'react-datepicker'
+import { DatePicker } from 'material-ui-pickers'
 import moment from 'moment'
-
-import 'react-datepicker/dist/react-datepicker.css'
-import 'react-datepicker/dist/react-datepicker-cssmodules.css'
-
-class DatePicker extends React.Component {
+import MomentUtils from 'material-ui-pickers/utils/moment-utils'
+import 'moment/locale/fr'
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
+class MaterialDatePicker extends React.Component {
   constructor (props) {
+    moment.locale('fr')
     super(props)
     this.state = {
-      startDate: moment()
+      selectedDate: moment()
     }
-    this.handleChange = this.handleChange.bind(this)
+    this.handleDateChange = this.handleDateChange.bind(this)
   }
 
-  handleChange (date) {
-    this.setState({
-      startDate: date
-    })
+  handleDateChange = (date) => {
+    this.setState({ selectedDate: date })
   }
 
   render () {
-    return <ReactDatePicker
-      selected={this.state.startDate}
-      locale='fr'
-      onChange={this.handleChange}
-      placeholder={this.props.placeholder}
-    />
+    const { selectedDate } = this.state
+    return (
+      <MuiPickersUtilsProvider
+        utils={MomentUtils}
+        moment={moment}
+        locale='fr'
+      >
+        <div className='pickers'>
+          <DatePicker
+            value={selectedDate}
+            onChange={this.handleDateChange}
+          />
+        </div>
+      </MuiPickersUtilsProvider>
+    )
   }
 }
-export default DatePicker
+export default MaterialDatePicker

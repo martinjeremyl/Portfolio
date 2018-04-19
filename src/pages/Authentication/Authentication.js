@@ -5,7 +5,6 @@ import Login from './Login'
 import Registration from './Registration'
 
 import Route from '../../modules/router/Route'
-
 import TabNavigation from '../../components/TabNavigation'
 import Link from '../../components/Link'
 
