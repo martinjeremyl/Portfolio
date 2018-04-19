@@ -1,17 +1,39 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import TextField from 'material-ui/TextField'
 
-class Input extends Component {
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200
+  },
+  menu: {
+    width: 200
+  }
+})
+
+class Input extends React.Component {
+  state = {
+    name: '',
+    age: '',
+    multiline: '',
+    currency: 'EUR'
+  }
   render () {
     return (
-      <div className='field'>
-        <div className='control'>
-          <input className='input' {...this.props} />
-        </div>
-      </div>
+      <TextField {...this.props} />
     )
   }
 }
 
-Input.defaultProps = { placeholder: '', type: 'text', value: '' }
+TextField.propTypes = {
+  classes: PropTypes.object.isRequired
+}
 
-export default Input
+export default withStyles(styles)(Input)

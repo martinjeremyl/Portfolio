@@ -28,7 +28,6 @@ class Login extends Component {
         <Button onClick={() => { userStore.login({ email, password }) }}>
           Se connecter
         </Button>
-        <BottomBar />
       </Fragment>
     )
   }
