@@ -6,7 +6,6 @@ import './index.css'
 
 import App from './App'
 import store from './stores/RootStore'
-
 // Pour le HMR
 window.stores = window.stores || store
 
