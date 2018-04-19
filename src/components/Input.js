@@ -18,8 +18,13 @@ class Input extends React.Component {
     currency: 'EUR'
   }
   render () {
+    const { classes, ...props } = this.props
+
     return (
-      <TextField className={this.props.classes.textField} />
+      <TextField
+        className={classes.textField}
+        {...props}
+      />
     )
   }
 }
