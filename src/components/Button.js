@@ -3,10 +3,10 @@ import MaterialButton from 'material-ui/Button'
 
 class Button extends Component {
   render () {
-    const { modifiers, value } = this.props
+    const { modifiers, children, color } = this.props
     return (
-      <MaterialButton className={`button ${modifiers}`} {...this.props}>
-        {value}
+      <MaterialButton variant='raised' color={color} className={`button ${modifiers}`} {...this.props}>
+        {children}
       </MaterialButton>
     )
   }

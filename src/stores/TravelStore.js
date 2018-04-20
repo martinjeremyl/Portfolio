@@ -43,7 +43,7 @@ class Travel {
 
   @computed
   get travel () {
-    return toJS(this.travels$.find(travel => travel.id === this.currentTravelId.get())[0])
+    return toJS(this.travels$.find(travel => travel.id === this.currentTravelId.get()))
   }
 
   @action

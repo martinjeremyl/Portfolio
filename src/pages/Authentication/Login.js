@@ -27,7 +27,7 @@ class Login extends Component {
           value={password}
           onChange={updateField}
         />
-        <Button onClick={() => { userStore.login({ email, password }) }}>
+        <Button onClick={() => { userStore.login({ email, password }) }} color='primary'>
           Se connecter
         </Button>
       </Fragment>

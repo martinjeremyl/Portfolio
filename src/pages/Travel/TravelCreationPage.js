@@ -34,10 +34,12 @@ class TravelCreationPage extends Component {
         />
         <Input name='dateEnd' onChange={this.updateField} value={dateEnd} />
         */}
-        <Button
-          value='Ajouter'
-          onClick={() => this.props.travelStore.create(this.state)}
-        />
+        <Button color='primary' onClick={() => {
+          this.props.travelStore.create(this.state)
+          this.props.parent.handleClose()
+        }}>
+          Ajouter
+        </Button>
       </div>
     )
   }

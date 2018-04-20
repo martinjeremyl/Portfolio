@@ -7,6 +7,8 @@ class AppStore {
   connectionStatus = observable.box(false)
   loadingStatus = observable.box(true)
   modalStatus = observable.box(false)
+  confirmDeleteDialogStatus = observable.box(false) // Indique si la fenêtre de dialogue est ouverte ou non
+  idObjectToDelete = observable.box('') // l'Id de l'objet séléctionné pour la suppression
 
   constructor () {
     auth.onAuthStateChanged(user => {
@@ -39,6 +41,18 @@ class AppStore {
   @action
   switchModalStatus () {
     this.modalStatus.set(!this.modalStatus.get())
+  }
+
+  @action
+  openConfirmDeleteDialog (idObject) {
+    // Ouvre la fenêtre de confirmation et stocke l'id de l'objet à supprimer dans le store
+    this.idObjectToDelete.set(idObject)
+    this.confirmDeleteDialogStatus.set(true)
+  }
+
+  @action
+  closeConfirmDeleteDialog () {
+    this.confirmDeleteDialogStatus.set(false)
   }
 
   @action

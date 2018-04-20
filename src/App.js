@@ -4,6 +4,7 @@ import { Route, Router, Switch } from 'react-router-dom'
 
 import Authentication from './pages/Authentication/Authentication'
 import Travel from './pages/Travel/TravelPage'
+import TravelDetail from './pages/Travel/TravelDetailPage'
 
 import Navbar from './components/Navbar'
 import Loader from './components/Loader'
@@ -22,6 +23,15 @@ class App extends Component {
     )
   }
 
+  renderTravelForAuthenticatedUser = () => {
+    return (
+      <Fragment>
+        <Navbar />
+        <TravelDetail />
+      </Fragment>
+    )
+  }
+
   render () {
     const { appStore, routingStore } = this.props
 
@@ -36,6 +46,7 @@ class App extends Component {
                 : (
                   <Switch>
                     <PrivateRoute path='/travels' isConnected={appStore.isConnected} component={this.renderAppForAuthenticatedUser} />
+                    <PrivateRoute path='/travel/' isConnected={appStore.isConnected} component={this.renderTravelForAuthenticatedUser} />
                     <Route path='/' component={Authentication} />
                   </Switch>
                 )

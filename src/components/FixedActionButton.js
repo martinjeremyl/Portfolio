@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
-import Button from './Button'
+import Button from 'material-ui/Button'
+import AddIcon from '@material-ui/icons/Add'
 
 class FixedActionButton extends Component {
   render () {
     return (
       <Button
+        variant='fab'
+        color={this.props.color}
+        aria-label='add'
         style={{
           position: 'fixed',
-          borderRadius: '50%',
-          width: '50px',
-          height: '50px',
           bottom: '30px',
           right: '30px'
         }}
-        {...this.props}
-      >
-        {this.props.children}
+        {...this.props}>
+        <AddIcon />
       </Button>
     )
   }
