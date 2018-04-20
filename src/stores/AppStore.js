@@ -1,16 +1,23 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action, computed, toJS } from 'mobx'
 
 import { auth } from '../config/firebase'
 import userStore from './UserStore'
 
+import ModuleApi from '../api/ModuleApi'
+
 class AppStore {
   connectionStatus = observable.box(false)
   loadingStatus = observable.box(true)
+  allModules$ = observable.array([])
   modalStatus = observable.box(false)
   confirmDeleteDialogStatus = observable.box(false) // Indique si la fenêtre de dialogue est ouverte ou non
   idObjectToDelete = observable.box('') // l'Id de l'objet séléctionné pour la suppression
 
   constructor () {
+    // Récupération de la liste de tous les modules
+    this.moduleApi = new ModuleApi()
+    this.fetchAllModules()
+
     auth.onAuthStateChanged(user => {
       if (user && !this.isConnected) {
         userStore.setUser(user.toJSON())
@@ -21,6 +28,11 @@ class AppStore {
     setTimeout(() => {
       this.switchLoadingStatus()
     }, 2000)
+  }
+
+  @computed
+  get allModules () {
+    return toJS(this.allModules$)
   }
 
   @computed
@@ -36,6 +48,13 @@ class AppStore {
   @computed
   get isConnected () {
     return this.connectionStatus.get()
+  }
+
+  @action
+  async fetchAllModules () {
+    // On récupère la liste des modules grâce à l'API
+    const response = await this.moduleApi.list()
+    this.allModules$.replace(response)
   }
 
   @action
