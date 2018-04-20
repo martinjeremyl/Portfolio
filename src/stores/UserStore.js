@@ -21,10 +21,14 @@ class User {
   }
 
   @action
-  async login (credentials) {
-    const user = await login(credentials)
-
-    this.setUser(user)
+  async login ({ email, password, onSuccess }) {
+    try {
+      const user = await login({ email, password })
+      this.setUser(user)
+      onSuccess()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   @action

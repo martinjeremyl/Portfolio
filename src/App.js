@@ -1,59 +1,69 @@
 import React, { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react'
 import { Route, Router, Switch } from 'react-router-dom'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
+import red from 'material-ui/colors/red'
 
 import Authentication from './pages/Authentication/Authentication'
+import Login from './pages/Authentication/Login'
+import Registration from './pages/Authentication/Registration'
 import Travel from './pages/Travel/TravelPage'
 import TravelDetail from './pages/Travel/TravelDetailPage'
 
-import Navbar from './components/Navbar'
 import Loader from './components/Loader'
-import { Header } from './components/Header'
 import { PrivateRoute } from './components/PrivateRoute'
+
+const appColorPalette = {
+  light: '#ffb09c',
+  main: '#d8806e',
+  dark: '#a35243',
+  contrastText: '#fff'
+}
+
+const theme = createMuiTheme({
+  palette: {
+    primary: appColorPalette,
+    secondary: appColorPalette,
+    error: red,
+    // Used by `getContrastText()` to maximize the contrast between the background and
+    // the text.
+    contrastThreshold: 3,
+    // Used to shift a color's luminance by approximately
+    // two indexes within its tonal palette.
+    // E.g., shift from Red 500 to Red 300 or Red 700.
+    tonalOffset: 0.2
+  }
+})
 
 @inject('appStore', 'routingStore')
 @observer
 class App extends Component {
-  renderAppForAuthenticatedUser = () => {
-    return (
-      <Fragment>
-        <Navbar />
-        <Travel />
-      </Fragment>
-    )
-  }
-
-  renderTravelForAuthenticatedUser = () => {
-    return (
-      <Fragment>
-        <Navbar />
-        <TravelDetail />
-      </Fragment>
-    )
-  }
-
   render () {
     const { appStore, routingStore } = this.props
 
     return (
-      <Fragment>
-        <Header />
-        <div className='container'>
-          <Router history={routingStore.history}>
-            {
-              appStore.isLoading
-                ? <Loader />
-                : (
+      <MuiThemeProvider theme={theme}>
+        <Router history={routingStore.history}>
+          {
+            appStore.isLoading
+              ? <Loader />
+              : (
+                <Fragment>
                   <Switch>
-                    <PrivateRoute path='/travels' isConnected={appStore.isConnected} component={this.renderAppForAuthenticatedUser} />
-                    <PrivateRoute path='/travel/' isConnected={appStore.isConnected} component={this.renderTravelForAuthenticatedUser} />
-                    <Route path='/' component={Authentication} />
+                    <Route exact path='/' component={Authentication} />
+                    <Route exact path='/login' component={Login} />
+                    <Route exact path='/register' component={Registration} />
+                    <PrivateRoute exact path='/travels' isConnected={appStore.isConnected} component={Travel} />
+                    <PrivateRoute exact path='/travel/' isConnected={appStore.isConnected} component={TravelDetail} />
+
+                    {/* fallback route to redirect the user */}
+                    <Route path='*' component={Authentication} />
                   </Switch>
-                )
-            }
-          </Router>
-        </div>
-      </Fragment>
+                </Fragment>
+              )
+          }
+        </Router>
+      </MuiThemeProvider>
     )
   }
 }

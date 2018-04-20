@@ -10,13 +10,9 @@ export const register = async ({ email, password, name, phone }) => {
 }
 
 export const login = async ({ email, password }) => {
-  try {
-    const user = await auth.signInWithEmailAndPassword(email, password)
-    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    return user.toJSON()
-  } catch (error) {
-    console.error(error)
-  }
+  const user = await auth.signInWithEmailAndPassword(email, password)
+  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  return user.toJSON()
 }
 
 export const logout = async () => {
