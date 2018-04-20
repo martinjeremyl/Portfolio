@@ -5,7 +5,7 @@ const routesTitle = {
   '/login': 'Connexion',
   '/register': 'Inscription',
   '/travels': 'Mes voyages',
-  '/travels/details': 'Détails du voyage'
+  '/travel/': 'Détails du voyage'
 }
 const routesTitleProxy = new Proxy(routesTitle, {
   get (target, property) { return target[property] !== undefined ? target[property] : 'Traveled' }

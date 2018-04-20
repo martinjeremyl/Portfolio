@@ -10,6 +10,11 @@ h2 {
   color: #e7796c;
 }
 
+.module-icon {
+  color: white;
+  font-size: 60px !important;
+}
+
 .spinner {
   width: 70px;
   height: 70px;
