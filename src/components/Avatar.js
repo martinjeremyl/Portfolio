@@ -10,7 +10,7 @@ class AvatarProfile extends Component {
 
   render () {
     return (
-      <Avatar className={`${this.props.classes.avatar} ${this.props.classes.row}`}>{this.getInitial(this.props.name)}</Avatar>
+      <Avatar className={`${this.props.classes.avatar} ${this.props.classes.row}`} {...this.props}>{this.getInitial(this.props.name)}</Avatar>
     )
   }
 }
