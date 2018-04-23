@@ -1,8 +1,8 @@
 node_modules/
-dist/
+dist/*
+!dist/_redirects
 .cache/
 .idea/
 yarn-error.log
-yarn.lock
 package-lock.json
 .vscode
