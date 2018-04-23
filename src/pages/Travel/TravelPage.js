@@ -47,7 +47,7 @@ class TravelPage extends Component {
             >
               <div>
                 <div>
-                  <Link to='/travel/'>
+                  <Link to={`/travel/${id}`}>
                     <div>{name}</div>
                   </Link>
                   <div

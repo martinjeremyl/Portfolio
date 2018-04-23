@@ -19,6 +19,12 @@ class TravelDetailPage extends Component {
     })
   }
 
+  async componentDidMount () {
+    const { travelStore, match } = this.props
+    await travelStore.fetchTravels()
+    travelStore.setCurrentTravelId(match.params.id)
+  }
+
   render () {
     return (
       <div>

@@ -11,6 +11,7 @@ import Travel from './pages/Travel/TravelPage'
 import TravelDetail from './pages/Travel/TravelDetailPage'
 
 import Loader from './components/Loader'
+import Header from './components/Header'
 import { PrivateRoute } from './components/PrivateRoute'
 
 const appColorPalette = {
@@ -54,7 +55,7 @@ class App extends Component {
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/register' component={Registration} />
                     <PrivateRoute exact path='/travels' isConnected={appStore.isConnected} component={Travel} />
-                    <PrivateRoute exact path='/travel/' isConnected={appStore.isConnected} component={TravelDetail} />
+                    <PrivateRoute exact path='/travel/:id' isConnected={appStore.isConnected} component={TravelDetail} />
 
                     {/* fallback route to redirect the user */}
                     <Route path='*' component={Authentication} />
