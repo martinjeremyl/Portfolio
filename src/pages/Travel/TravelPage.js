@@ -7,6 +7,9 @@ import OneDepense from '../../components/OneDepense'
 import FixedActionButton from '../../components/FixedActionButton'
 import Link from '../../components/Link'
 import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog'
+import Navbar from '../../components/Navbar'
+import Header from '../../components/Header'
+
 import TravelCreationPage from './TravelCreationPage'
 
 @inject('appStore', 'travelStore')
@@ -40,6 +43,8 @@ class TravelPage extends Component {
 
     return (
       <div>
+        <Header />
+        <Navbar />
         {
           travelStore.travels.map(({ id, name }, iteration) => (
             <ListItem
@@ -49,7 +54,7 @@ class TravelPage extends Component {
             >
               <div>
                 <div>
-                  <Link to='/travel/'>
+                  <Link to={`/travel/${id}`}>
                     <div>{name}</div>
                   </Link>
                   <div

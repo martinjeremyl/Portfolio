@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
+import { withStyles } from 'material-ui/styles'
+import AppBar from 'material-ui/AppBar'
+import Toolbar from 'material-ui/Toolbar'
+import Typography from 'material-ui/Typography'
+
+import BackButton from './BackButton'
 
 const routesTitle = {
   '/login': 'Connexion',
@@ -8,27 +14,50 @@ const routesTitle = {
   '/travel/': 'Détails du voyage'
 }
 const routesTitleProxy = new Proxy(routesTitle, {
-  get (target, property) { return target[property] !== undefined ? target[property] : 'Traveled' }
+  get (target, property) {
+    return target[property] !== undefined ? target[property] : 'Traveled'
+  }
 })
+
+const styles = {
+  root: {
+    flexGrow: 1
+  },
+  flex: {
+    flex: 1
+  }
+}
 
 @inject('routingStore')
 @observer
-export class Header extends Component {
+class Header extends Component {
   render () {
+    const { classes, renderLeftButton, renderRightButton, routingStore, title } = this.props
+
     return (
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-        <div
-          style={{ margin: '0 .5rem', cursor: 'pointer' }}
-          onClick={this.props.routingStore.goBack}
-        >
-          <svg width={24} height={24}>
-            <path d='M20.016 11.016v1.969H7.828l5.578 5.625L12 20.016 3.984 12 12 3.984l1.406 1.406-5.578 5.625h12.188z' />
-          </svg>
-        </div>
-        <h3 style={{ margin: 0, padding: 0 }}>
-          {routesTitleProxy[this.props.routingStore.location.pathname]}
-        </h3>
+      <div className={classes.root}>
+        <AppBar position='static'>
+          <Toolbar disableGutters>
+            {
+              renderLeftButton
+                ? renderLeftButton()
+                : <BackButton onClick={routingStore.goBack} />
+            }
+            <Typography variant='title' color='inherit' className={classes.flex}>
+              {
+                title !== undefined
+                  ? title
+                  : routesTitleProxy[this.props.routingStore.location.pathname]
+              }
+            </Typography>
+            {
+              renderRightButton && renderRightButton()
+            }
+          </Toolbar>
+        </AppBar>
       </div>
     )
   }
 }
+
+export default withStyles(styles)(Header)

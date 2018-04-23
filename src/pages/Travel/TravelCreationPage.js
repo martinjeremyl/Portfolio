@@ -3,15 +3,16 @@ import React, { Component } from 'react'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 import { observer, inject } from 'mobx-react'
+import userStore from '../../stores/UserStore'
 
-@inject('travelStore')
+@inject('travelStore', 'userStore')
 @observer
 class TravelCreationPage extends Component {
   state = {
     name: '',
     dateBegin: Date.now(),
     dateEnd: Date.now(),
-    participants: [],
+    participants: [this.props.userStore.user.uid],
     modules: []
   }
 

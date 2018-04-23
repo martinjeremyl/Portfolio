@@ -43,6 +43,9 @@ class Travel {
 
   @computed
   get travel () {
+    console.log('this.travels$', toJS(this.travels$))
+    console.log('this.currentTravelId.get()', this.currentTravelId.get())
+    console.log('toJS(this.travels$.find(travel => travel.id === this.currentTravelId.get()))', toJS(this.travels$.find(travel => travel.id === this.currentTravelId.get())))
     return toJS(this.travels$.find(travel => travel.id === this.currentTravelId.get()))
   }
 
@@ -55,7 +58,7 @@ class Travel {
   async fetchTravels () {
     // On récupère tous les voyages et on les filtre car firebase ne sait pas faire de fonction sql IN il faut le faire en javascript
     const response = await this.api.list()
-    const filteredTravels = response.filter(travel => travel.members && travel.members.includes(userStore.user.uid))
+    const filteredTravels = response.filter(travel => travel.participants && travel.participants.includes(userStore.user.uid))
     this.travels$.replace(filteredTravels)
   }
 

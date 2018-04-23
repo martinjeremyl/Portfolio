@@ -3,6 +3,8 @@ import { inject, observer } from 'mobx-react'
 import Button from 'material-ui/Button'
 
 import TravelMenuDrawer from '../../components/TravelMenuDrawer'
+import Navbar from '../../components/Navbar'
+import Header from '../../components/Header'
 
 @inject('travelStore')
 @observer
@@ -17,9 +19,17 @@ class TravelDetailPage extends Component {
     })
   }
 
+  async componentDidMount () {
+    const { travelStore, match } = this.props
+    await travelStore.fetchTravels()
+    travelStore.setCurrentTravelId(match.params.id)
+  }
+
   render () {
     return (
       <div>
+        <Header />
+        <Navbar />
         {/*
           <div>
             {JSON.stringify(this.props.travelStore.travel)}
