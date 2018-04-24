@@ -1,46 +1,76 @@
 import React, { Component } from 'react'
-
-import Input from '../../components/Input'
-import Button from '../../components/Button'
 import { observer, inject } from 'mobx-react'
-import userStore from '../../stores/UserStore'
+import Stepper, { Step, StepButton } from 'material-ui/Stepper'
 
-@inject('travelStore', 'userStore')
+import TravelCreationPageOne from './TravelCreationPageOne'
+import TravelCreationPageTwo from './TravelCreationPageTwo'
+import TravelCreationPageThree from './TravelCreationPageThree'
+
+import Header from '../../components/Header'
+import Navbar from '../../components/Navbar'
+
+@inject('userStore', 'travelStore')
 @observer
 class TravelCreationPage extends Component {
   state = {
-    name: '',
-    dateBegin: Date.now(),
-    dateEnd: Date.now(),
     participants: [this.props.userStore.user.uid],
-    modules: []
+    activeStep: 0,
+    completed: new Set(),
+    skipped: new Set()
   }
 
-  updateField = ({ target: { name, value } }) => {
+  handleInputsChange = ({ target: { name, value } }) => {
+    this.props.travelStore.updateTravelCreation(name, value)
+  }
+
+  handleStep = step => {
     this.setState({
-      [name]: value
+      activeStep: step
     })
   }
 
-  render () {
-    const { name } = this.state
+  isStepComplete (step) {
+    return this.state.completed.has(step)
+  }
 
+  renderSwitch = () => {
+    switch (this.state.activeStep) {
+      case 0:
+        return <TravelCreationPageOne handleInputsChange={this.handleInputsChange} />
+
+      case 1:
+        return <TravelCreationPageTwo handleInputsChange={this.handleInputsChange} />
+
+      case 2:
+        return <TravelCreationPageThree handleInputsChange={this.handleInputsChange} />
+
+      default:
+    }
+  }
+
+  render () {
     return (
-      <div className='container is-fluid'>
-        <Input name='name' onChange={this.updateField} value={name} />
-        {/* <Input
-          name='dateBegin'
-          onChange={this.updateField}
-          value={dateBegin}
-        />
-        <Input name='dateEnd' onChange={this.updateField} value={dateEnd} />
-        */}
-        <Button color='primary' onClick={() => {
-          this.props.travelStore.create(this.state)
-          this.props.parent.handleClose()
-        }}>
-          Ajouter
-        </Button>
+      <div>
+        <Header />
+        <Navbar />
+        {this.renderSwitch()}
+
+        <Stepper alternativeLabel nonLinear activeStep={this.state.activeStep}>
+          {['Select campaign settings', 'Create an ad group', 'Create an ad'].map(
+            (label, index) => {
+              return (
+                <Step key={label}>
+                  <StepButton
+                    onClick={() => {
+                      this.handleStep(index)
+                    }}
+                    completed={this.isStepComplete(index)}
+                  />
+                </Step>
+              )
+            }
+          )}
+        </Stepper>
       </div>
     )
   }
