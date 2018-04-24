@@ -37,6 +37,11 @@ class Travel {
   }
 
   @computed
+  get participants () {
+    return toJS(this.travelCreation.participants.value)
+  }
+
+  @computed
   get travel () {
     return toJS(this.travels.find(travel => travel.id === this.currentTravelId.get()))
   }
@@ -79,6 +84,8 @@ class Travel {
         field.value = value
         break
       case 'object':
+        field.value.replace(value)
+
         // this.travelCreation[key].value.push(value)
         break
 
