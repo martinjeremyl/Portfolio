@@ -11,9 +11,7 @@ import store from './stores/RootStore'
 // Pour le HMR
 window.stores = window.stores || store
 
-const usedIcons = [
-  faCoffee
-]
+const usedIcons = [faCoffee]
 
 library.add(...usedIcons)
 

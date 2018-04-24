@@ -44,24 +44,32 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <Router history={routingStore.history}>
-          {
-            appStore.isLoading
-              ? <Loader />
-              : (
-                <Fragment>
-                  <Switch>
-                    <Route exact path='/' component={Authentication} />
-                    <Route exact path='/login' component={Login} />
-                    <Route exact path='/register' component={Registration} />
-                    <PrivateRoute exact path='/travels' isConnected={appStore.isConnected} component={Travel} />
-                    <PrivateRoute exact path='/travel/:id' isConnected={appStore.isConnected} component={TravelDetail} />
+          {appStore.isLoading ? (
+            <Loader />
+          ) : (
+            <Fragment>
+              <Switch>
+                <Route exact path='/' component={Authentication} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/register' component={Registration} />
+                <PrivateRoute
+                  exact
+                  path='/travels'
+                  isConnected={appStore.isConnected}
+                  component={Travel}
+                />
+                <PrivateRoute
+                  exact
+                  path='/travel/:id'
+                  isConnected={appStore.isConnected}
+                  component={TravelDetail}
+                />
 
-                    {/* fallback route to redirect the user */}
-                    <Route path='*' component={Authentication} />
-                  </Switch>
-                </Fragment>
-              )
-          }
+                {/* fallback route to redirect the user */}
+                <Route path='*' component={Authentication} />
+              </Switch>
+            </Fragment>
+          )}
         </Router>
       </MuiThemeProvider>
     )

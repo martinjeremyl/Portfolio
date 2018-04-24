@@ -9,8 +9,9 @@ class Link extends Component {
     return (
       <RRLink
         style={{
-          backgroundColor: 'transparent',
-          color: '#000'
+          color: 'white',
+          textDecoration: 'none',
+          fontSize: '20px'
         }}
         to={this.props.to}
       >

@@ -3,13 +3,16 @@ import { withStyles } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
 
 const styles = theme => ({
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
+  whiteInput: {
+    color: '#fff',
+    '&::before': {
+      backgroundColor: '#fff'
+    },
+    '&::after': {
+      backgroundColor: '#fff'
+    }
   }
 })
-
 class Input extends React.Component {
   state = {
     name: '',
@@ -18,12 +21,14 @@ class Input extends React.Component {
     currency: 'EUR'
   }
   render () {
-    const { classes, ...props } = this.props
+    const { classes, whiteInput, ...props } = this.props
 
     return (
       <TextField
-        className={classes.textField}
         {...props}
+        InputProps={{
+          className: whiteInput ? classes.whiteInput : null
+        }}
       />
     )
   }

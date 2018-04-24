@@ -5,9 +5,13 @@ class TabNavigation extends Component {
     return (
       <div
         className='tabs is-fullwidth'
-        style={{ position: 'fixed', bottom: 0, width: '100%' }}
+        style={{
+          marginTop: '50px',
+          width: '100%',
+          padding: '0'
+        }}
       >
-        <ul>{this.props.children}</ul>
+        <div>{this.props.children}</div>
       </div>
     )
   }
