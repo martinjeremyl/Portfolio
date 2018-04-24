@@ -13,7 +13,7 @@ import Header from '../../components/Header'
 class TravelCreationPage extends Component {
   state = {
     participants: [this.props.userStore.user.uid],
-    activeStep: 0,
+    activeStep: 2,
     completed: new Set(),
     skipped: new Set()
   }
