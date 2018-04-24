@@ -11,7 +11,6 @@ import Travel from './pages/Travel/TravelPage'
 import TravelDetail from './pages/Travel/TravelDetailPage'
 
 import Loader from './components/Loader'
-import Header from './components/Header'
 import { PrivateRoute } from './components/PrivateRoute'
 
 const appColorPalette = {
