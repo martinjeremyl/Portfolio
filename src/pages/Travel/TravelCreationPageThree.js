@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 
 import Input from '../../components/Input'
+
+const MAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 @inject('travelStore', 'userStore')
 @observer
 class TravelCreationPage extends Component {
@@ -31,11 +33,11 @@ class TravelCreationPage extends Component {
         {travelStore.participants.map(
           (participant, key) =>
             key === 0 ? (
-              <div>
+              <div key={key}>
                 <Input value={participant} disabled />
               </div>
             ) : (
-              <div>
+              <div key={key}>
                 <Input value={participant} />
               </div>
             )
@@ -43,13 +45,16 @@ class TravelCreationPage extends Component {
         <Input onChange={this.handleNewEmail} value={newEmail} />
         <button
           onClick={() => {
-            travelStore.updateTravelCreation('participants', [
-              ...travelStore.participants,
-              newEmail
-            ])
-            this.setState({
-              newEmail: ''
-            })
+            if (MAIL_REGEX.test(newEmail)) {
+              travelStore.updateTravelCreation('participants', [
+                ...travelStore.participants,
+                newEmail
+              ])
+
+              this.setState({
+                newEmail: ''
+              })
+            }
           }}
         >
           Ajouter
