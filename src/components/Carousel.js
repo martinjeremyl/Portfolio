@@ -1,19 +1,22 @@
 import React, { Fragment } from 'react'
 import Carousel from 'nuka-carousel'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class carouselComponent extends React.Component {
   state = {
-    selectedPictureIndex: null
+    selectedPictureIndex: 0,
+    slideIndex: 0
   }
 
   render () {
     const slides = [
-      'https://www.farmersmuseum.org/files/images/exhibitions/tfm-exhibitpage-carousel.jpg',
-      'http://placehold.it/1000x400/ffffff/c0392b/&text=slide2',
-      'http://placehold.it/1000x400/ffffff/c0392b/&text=slide3',
-      'http://placehold.it/1000x400/ffffff/c0392b/&text=slide4',
-      'http://placehold.it/1000x400/ffffff/c0392b/&text=slide5',
-      'http://placehold.it/1000x400/ffffff/c0392b/&text=slide6'
+      require('../img/imgVoyages/Aurore.jpg'),
+      require('../img/imgVoyages/Champ.jpg'),
+      require('../img/imgVoyages/Foret.jpg'),
+      require('../img/imgVoyages/Montain.jpg'),
+      require('../img/imgVoyages/Neige.jpg'),
+      require('../img/imgVoyages/Plage.jpg'),
+      require('../img/imgVoyages/Ville.jpg')
     ]
 
     return (
@@ -29,6 +32,7 @@ class carouselComponent extends React.Component {
           renderBottomCenterControls={() => null}
           renderCenterLeftControls={() => null}
           renderCenterRightControls={() => null}
+          afterSlide={slideIndex => this.setState({ slideIndex })}
         >
           {
             slides.map((slide, index) => (
@@ -44,10 +48,10 @@ class carouselComponent extends React.Component {
                     <div style={{
                       height: 'auto',
                       position: 'absolute',
-                      bottom: 0,
-                      right: 0
+                      bottom: 5,
+                      right: 5
                     }}>
-                      toto
+                      <FontAwesomeIcon style={{color: '#FFF', fontSize: 25}} icon={['fal', 'check-circle']} />
                     </div>
                   )
                 }
