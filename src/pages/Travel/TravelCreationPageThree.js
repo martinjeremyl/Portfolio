@@ -28,8 +28,6 @@ class TravelCreationPage extends Component {
     console.log(travelStore.participants)
     return (
       <div>
-        <div>Step 3</div>
-
         {travelStore.participants.map(
           (participant, key) =>
             key === 0 ? (
