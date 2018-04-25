@@ -11,10 +11,17 @@ class TravelCreationPage extends Component {
     const { name, startDate, endDate, note, handleInputsChange, travelStore } = this.props
 
     return (
-      <div>
-        <Input name='name' onChange={handleInputsChange} value={name} />
+      <div style={{ textAlign: 'center' }}>
+        <Input
+          name='name'
+          onChange={handleInputsChange}
+          value={name}
+          label='Nom'
+          style={{ width: '70%', marginTop: '20px' }}
+        />
         <DatePicker
           name='startDate'
+          label={`Date d'arrivée`}
           getdate={date => {
             travelStore.updateTravelCreation('startDate', date)
           }}
@@ -22,12 +29,31 @@ class TravelCreationPage extends Component {
         />
         <DatePicker
           name='endDate'
+          value={endDate}
+          label={`Date de départ`}
           getdate={date => {
             travelStore.updateTravelCreation('endDate', date)
           }}
-          value={endDate}
         />
-        <Input name='note' onChange={handleInputsChange} value={note} multiline />
+
+        <div
+          style={{
+            width: '70%',
+            margin: 'auto',
+            padding: '15px 10px',
+            marginTop: '30px',
+            backgroundColor: '#F6F6F6',
+            borderRadius: '10px'
+          }}
+        >
+          <Input
+            name='note'
+            onChange={handleInputsChange}
+            value={note}
+            label='Note'
+            style={{ width: '100%' }}
+          />
+        </div>
       </div>
     )
   }

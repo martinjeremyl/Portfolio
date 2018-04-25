@@ -8,8 +8,14 @@ import { InputAdornment } from 'material-ui/Input'
 import EventIcon from '@material-ui/icons/Event'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui'
 
-const materialTheme = createMuiTheme({
+const materialWhiteTheme = createMuiTheme({
   overrides: {
+    MuiFormControl: {
+      root: {
+        width: '70%',
+        marginTop: '20px'
+      }
+    },
     MuiInput: {
       underline: {
         '&::before': {
@@ -65,6 +71,68 @@ const materialTheme = createMuiTheme({
   }
 })
 
+const materialDefaultTheme = createMuiTheme({
+  overrides: {
+    MuiFormControl: {
+      root: {
+        width: '70%',
+        marginTop: '20px'
+      }
+    },
+    MuiInput: {
+      underline: {
+        '&::before': {
+          backgroundColor: '#313C47'
+        },
+        '&::after': {
+          backgroundColor: '#313C47'
+        }
+      },
+      root: {
+        color: '#313C47'
+      }
+    },
+    MuiPickersToolbar: {
+      toolbar: {
+        background: 'linear-gradient(to left, #F2BF95, #E45C55)'
+      }
+    },
+    MuiPickersDay: {
+      day: {
+        color: '#E45C55'
+      },
+      selected: {
+        background: 'linear-gradient(to left, #F2BF95, #E45C55)'
+      },
+      current: {
+        color: 'black'
+      }
+    },
+    MuiPickersModal: {
+      dialogAction: {
+        '& > button': {
+          color: '#E45C55'
+        }
+      }
+    },
+    MuiButton: {
+      flatPrimary: {
+        color: '#E45C55'
+      }
+    },
+    MuiInputAdornment: {
+      positionStart: {
+        marginBottom: '5px'
+      }
+    },
+    MuiFormLabel: {
+      focused: {
+        color: '#313C47 !important'
+      }
+    }
+  }
+})
+
 class MaterialDatePicker extends PureComponent {
   constructor (props) {
     moment.locale('fr')
@@ -89,6 +157,7 @@ class MaterialDatePicker extends PureComponent {
     const { selectedDate } = this.state
     const newProps = { ...this.props }
     delete newProps['getdate']
+    const { whiteInput } = this.props
 
     return (
       <MuiPickersUtilsProvider
@@ -98,7 +167,7 @@ class MaterialDatePicker extends PureComponent {
         locale='fr'
         formatDate={date => moment(date).format('DD-MM-YYYY')}
       >
-        <MuiThemeProvider theme={materialTheme}>
+        <MuiThemeProvider theme={whiteInput ? materialWhiteTheme : materialDefaultTheme}>
           <div className='pickers'>
             <DatePicker
               value={selectedDate}

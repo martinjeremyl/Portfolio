@@ -7,7 +7,6 @@ import TravelCreationPageTwo from './TravelCreationPageTwo'
 import TravelCreationPageThree from './TravelCreationPageThree'
 
 import Header from '../../components/Header'
-import Navbar from '../../components/Navbar'
 
 @inject('userStore', 'travelStore')
 @observer
@@ -50,12 +49,16 @@ class TravelCreationPage extends Component {
 
   render () {
     return (
-      <div>
+      <div style={{ width: '100%' }}>
         <Header />
-        <Navbar />
         {this.renderSwitch()}
 
-        <Stepper alternativeLabel nonLinear activeStep={this.state.activeStep}>
+        <Stepper
+          alternativeLabel
+          nonLinear
+          activeStep={this.state.activeStep}
+          style={{ position: 'fixed', bottom: '10px', width: '100%', padding: '0' }}
+        >
           {['Select campaign settings', 'Create an ad group', 'Create an ad'].map(
             (label, index) => {
               return (
