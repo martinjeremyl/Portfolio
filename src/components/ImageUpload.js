@@ -51,7 +51,8 @@ class ImageUpload extends Component {
 
         <img
           style={{
-            opacity: imagePreviewUrl ? 1 : 0,
+            opcaity: imagePreviewUrl ? 1 : 0,
+            pointerEvents: 'none',
             width: '100%',
             height: '100%',
             borderRadius: '50%',

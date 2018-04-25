@@ -11,12 +11,13 @@ import ImageUpload from '../../components/ImageUpload'
 class Registration extends Component {
   updateField = ({ target: { name, value } }) => this.props.userStore.setUserCreation(name, value)
 
+  updateBirthdayField = (value) => this.props.userStore.setUserCreation('birthday', value.format())
+
   render () {
     const {
-      userStore: { authenticatingUser },
       userStore
     } = this.props
-    const { email, password, name, firstname, passwordConfirmation, birthday } = authenticatingUser
+    const { email, password, name, surname, passwordConfirmation, birthday } = userStore.authenticatingUser
     const styles = {
       input: {
         width: '70%',
@@ -65,10 +66,10 @@ class Registration extends Component {
             onChange={this.updateField}
           />
           <Input
-            name='firstname'
+            name='surname'
             style={styles.input}
             placeholder='Prénom'
-            value={firstname}
+            value={surname}
             whiteInput
             onChange={this.updateField}
           />
@@ -86,7 +87,7 @@ class Registration extends Component {
             style={styles.input}
             value={birthday}
             whiteInput
-            onChange={this.updateField}
+            onChange={this.updateBirthdayField}
           />
           <Input
             name='password'
@@ -114,11 +115,11 @@ class Registration extends Component {
           <Button
             style={styles.button}
             onClick={() => {
-              userStore.register(authenticatingUser)
+              userStore.register(userStore.authenticatingUser)
+              this.props.history.push('/travels')
             }}
-          >
-            S'inscrire
-          </Button>
+            value="S'inscrire"
+          />
           <Link
             to='/login'
             style={{

@@ -3,6 +3,7 @@ import TravelApi from '../api/TravelApi'
 import HousingApi from '../api/HousingApi'
 import TransportApi from '../api/TransportApi'
 import SpendingApi from '../api/SpendingApi'
+import UserApi from '../api/UserApi'
 import userStore from './UserStore'
 import appStore from './AppStore'
 
@@ -26,6 +27,7 @@ class Travel {
     this.api = new TravelApi()
     this.housingApi = new HousingApi()
     this.transportApi = new TransportApi()
+    this.userApi = new UserApi()
     this.spendingApi = new SpendingApi()
     autorun(() => {
       if (appStore.isConnected) {
@@ -48,10 +50,21 @@ class Travel {
   async fetchTravels () {
     // On récupère tous les voyages et on les filtre car firebase ne sait pas faire de fonction sql IN il faut le faire en javascript
     const response = await this.api.list()
-    const filteredTravels = response.filter(
-      travel => travel.participants && travel.participants.includes(userStore.user.uid)
-    )
-    this.travels.replace(filteredTravels)
+    const filteredTravels = response.filter(travel => travel.participants && travel.participants.includes(userStore.user.uid))
+    const finalTravels = await Promise.all(filteredTravels.map(
+      async travel => ({
+        ...travel,
+        members: await Promise.all(
+          travel.participants.map(participant => this.userApi.findBy({ field: 'userId', operator: '==', value: participant }))
+        )
+      })
+    ))
+    this.travels$.replace(finalTravels)
+  }
+
+  @action
+  changeTravelCreationStep (step) {
+    this.travelCreationStep = step
   }
 
   @action

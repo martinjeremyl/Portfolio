@@ -73,18 +73,18 @@ class Login extends Component {
             onClick={() => {
               userStore.login({
                 email,
-                password
+                password,
+                onSuccess: this.onLoginSuccessful
               })
             }}
+            value='Connexion'
             style={{
               background: 'linear-gradient(to left, #F2BF95, #E45C55)',
               color: 'white',
               width: '70%',
               marginTop: '150px'
             }}
-          >
-            Connexion
-          </Button>
+          />
 
           <Link
             to='/register'
