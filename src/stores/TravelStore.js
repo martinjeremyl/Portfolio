@@ -59,7 +59,7 @@ class Travel {
         )
       })
     ))
-    this.travels$.replace(finalTravels)
+    this.travels.replace(finalTravels)
   }
 
   @action
