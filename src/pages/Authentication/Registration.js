@@ -79,6 +79,8 @@ class Registration extends Component {
             placeholder='Email'
             type='email'
             value={email}
+            error={userStore.error && userStore.error.email !== undefined}
+            label={userStore.error && userStore.error.email !== undefined ? userStore.error.email : ''}
             whiteInput
             onChange={this.updateField}
           />
@@ -86,6 +88,8 @@ class Registration extends Component {
             name='birthday'
             style={styles.input}
             value={birthday}
+            error={userStore.error && userStore.error.birthday !== undefined}
+            label={userStore.error && userStore.error.birthday !== undefined ? userStore.error.birthday : ''}
             whiteInput
             onChange={this.updateBirthdayField}
           />
@@ -95,6 +99,8 @@ class Registration extends Component {
             type='password'
             placeholder='Mot de passe'
             value={password}
+            error={userStore.error && userStore.error.password !== undefined}
+            label={userStore.error && userStore.error.password !== undefined ? userStore.error.password : ''}
             whiteInput
             onChange={this.updateField}
           />
@@ -116,7 +122,11 @@ class Registration extends Component {
             style={styles.button}
             onClick={() => {
               userStore.register(userStore.authenticatingUser)
-              this.props.history.push('/travels')
+              if (Object.keys(userStore.error).length === 0) {
+                this.props.history.push('/travels')
+              } else {
+                this.setState({})
+              }
             }}
             value="S'inscrire"
           />

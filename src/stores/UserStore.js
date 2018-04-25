@@ -1,9 +1,9 @@
-import { observable, action, extendObservable } from 'mobx'
-
+import { observable, action } from 'mobx'
 import { login, logout, register } from '../api/AuthenticationApi'
 import { uploadFile } from '../api/StorageApi'
 import appStore from './AppStore'
 import UserApi from '../api/UserApi'
+import moment from 'moment'
 
 class User {
   constructor () {
@@ -31,7 +31,7 @@ class User {
 
   @action
   setError (key, value) {
-    extendObservable(this.error, {[key]: value})
+    this.error[key] = value
   }
 
   @action
@@ -41,6 +41,7 @@ class User {
       this.setUser(user)
       onSuccess()
     } catch (error) {
+      this.error = {}
       let errorCode = error.code
       let errorMessage = error.message
       // Par défaut on met l'erreur sur le champ email
@@ -65,18 +66,55 @@ class User {
 
   @action
   async register (registrationInformations) {
-    const user = await register(registrationInformations)
-    uploadFile(`avatars/${user.uid}`, this.authenticatingUser.avatar)
-    this.authenticatingUser.avatar = `avatars/${user.uid}`
-    this.authenticatingUser.userId = user.uid
-    const { name, surname, email, userId, avatar } = this.authenticatingUser
-    this.api.create({ name, surname, email, userId, avatar })
-    this.setUser(user)
+    this.error = {}
+    this.validateInputs(this.authenticatingUser)
+    if (Object.keys(this.error).length === 0) {
+      const user = await register(registrationInformations)
+      if (this.authenticatingUser.avatar !== undefined) {
+        uploadFile(`avatars/${user.uid}`, this.authenticatingUser.avatar)
+        this.authenticatingUser.avatar = `avatars/${user.uid}`
+      }
+      this.authenticatingUser.userId = user.uid
+      const { name, surname, email, userId, avatar, birthday } = this.authenticatingUser
+      this.api.create({ name, surname, email, userId, avatar, birthday })
+      this.setUser(user)
+    }
   }
 
   @action
   setUserCreation (key, value) {
     this.authenticatingUser[key] = value
+  }
+
+  validateEmail (email) {
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return re.test(String(email).toLowerCase())
+  }
+  validateInputs (inputs) {
+    Object.keys(inputs).map(
+      (item) => {
+        switch (item) {
+          case 'email':
+            if (!this.validateEmail(inputs[item])) {
+              this.setError(item, "Cette adresse email n'est pas valide")
+            }
+            break
+          case 'password':
+            if (inputs[item] !== inputs['passwordConfirmation']) {
+              this.setError(item, 'Les deux mots de passe ne sont pas identiques')
+            }
+            break
+          case 'birthday':
+            let date = moment(inputs[item])
+            if (!date.isValid()) {
+              this.setError(item, 'Le format de date est invalide')
+            }
+            break
+          default:
+            break
+        }
+      }
+    )
   }
 }
 
