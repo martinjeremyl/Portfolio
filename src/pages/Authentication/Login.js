@@ -8,7 +8,9 @@ import Input from '../../components/Input'
 @observer
 class Login extends Component {
   updateField = ({ target: { name, value } }) => this.props.userStore.setUserCreation(name, value)
-  onLoginSuccessful = () => this.props.history.push('/travels')
+  onLoginSuccessful = () => {
+    this.props.history.push('/travels')
+  }
 
   render () {
     const {
@@ -17,7 +19,6 @@ class Login extends Component {
       },
       userStore
     } = this.props
-
     const logo = require('../../img/Logo_Traveled_V4.png')
     const backgroundImage = require('../../img/Fond_Inscription-connexion_Menu_V2.png')
     return (
@@ -53,6 +54,8 @@ class Login extends Component {
             placeholder='Email'
             type='email'
             value={email}
+            error={userStore.error && userStore.error.email !== undefined}
+            label={userStore.error && userStore.error.email !== undefined ? userStore.error.email : ''}
             whiteInput
             onChange={this.updateField}
           />
@@ -66,6 +69,8 @@ class Login extends Component {
             type='password'
             placeholder='Mot de passe'
             value={password}
+            error={userStore.error && userStore.error.password !== undefined}
+            label={userStore.error && userStore.error.password !== undefined ? userStore.error.password : ''}
             whiteInput
             onChange={this.updateField}
           />
@@ -74,7 +79,8 @@ class Login extends Component {
               userStore.login({
                 email,
                 password,
-                onSuccess: this.onLoginSuccessful
+                onSuccess: this.onLoginSuccessful,
+                onError: () => this.setState({})
               })
             }}
             value='Connexion'

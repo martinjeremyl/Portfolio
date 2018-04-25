@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+import { observable, action, extendObservable } from 'mobx'
 
 import { login, logout, register } from '../api/AuthenticationApi'
 import { uploadFile } from '../api/StorageApi'
@@ -10,6 +10,7 @@ class User {
     this.api = new UserApi()
   }
   user = observable.object({})
+  error = observable.object({})
   authenticatingUser = observable.object({
     name: '',
     surname: '',
@@ -29,7 +30,12 @@ class User {
   }
 
   @action
-  async login ({ email, password, onSuccess }) {
+  setError (key, value) {
+    extendObservable(this.error, {[key]: value})
+  }
+
+  @action
+  async login ({ email, password, onSuccess, onError }) {
     try {
       const user = await login({ email, password })
       this.setUser(user)
@@ -39,13 +45,14 @@ class User {
       let errorMessage = error.message
       // Par défaut on met l'erreur sur le champ email
       let input = 'email'
-      if (errorCode === 'auth/invalid-email' || 'auth/user-not-found' || 'auth/user-disabled') {
+      if (errorCode === 'auth/invalid-email' || errorCode === 'auth/user-not-found' || errorCode === 'auth/user-disabled') {
         input = 'email'
       }
       if (errorCode === 'auth/wrong-password') {
         input = 'password'
       }
-      this.authenticatingUser.error.push({ input: input, message: errorMessage })
+      this.setError(input, errorMessage)
+      onError()
     }
   }
 
