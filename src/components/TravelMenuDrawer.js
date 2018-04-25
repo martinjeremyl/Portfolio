@@ -28,11 +28,11 @@ class TravelMenuDrawer extends Component {
 
     const sideList = (
       <div className={classes.list}>
-        <List>
+        <List style={{color: 'white'}}>
           {
             this.props.appStore.allModules.map(({ id, name, icon }, iteration) => (
               <ListItem button key={id}>
-                <ModuleIcon icon={icon} />
+                <ModuleIcon icon={icon} size='60px' color='white' />
                 <div className={classes.moduleText}>
                   {name}
                 </div>
