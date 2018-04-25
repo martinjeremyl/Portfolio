@@ -4,7 +4,9 @@ import { observer, inject } from 'mobx-react'
 import Avatar from '../../components/Avatar'
 import Input from '../../components/Input'
 
-const MAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const MAIL_REGEX =
+  // eslint-disable-next-line no-useless-escape
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 @inject('travelStore', 'userStore')
 @observer
 class TravelCreationPage extends Component {
@@ -14,7 +16,12 @@ class TravelCreationPage extends Component {
 
   componentDidMount () {
     const { userStore, travelStore } = this.props
-    travelStore.updateTravelCreation('participants', [userStore.user.email])
+    travelStore.updateTravelCreation(
+      'participants',
+      travelStore.travelCreation.participants.value.length === 0
+        ? [userStore.user.email]
+        : travelStore.travelCreation.participants.value
+    )
   }
 
   handleNewEmail = ({ target: { value } }) => {
@@ -26,20 +33,30 @@ class TravelCreationPage extends Component {
   render () {
     const { travelStore } = this.props
     const { newEmail } = this.state
-    console.log(travelStore.participants)
+
     return (
       <div>
         {travelStore.participants.map(
           (participant, key) =>
             key === 0 ? (
               <div key={key}>
-                <Avatar />
+                <Avatar style={{ display: 'inline-block' }} />
                 <Input value={participant} disabled />
               </div>
             ) : (
               <div key={key}>
-                <Avatar />
+                <Avatar style={{ display: 'inline-block' }} />
                 <Input value={participant} />
+                <button
+                  onClick={() => {
+                    travelStore.updateTravelCreation(
+                      'participants',
+                      travelStore.participants.filter((_, particpantKey) => particpantKey !== key)
+                    )
+                  }}
+                >
+                  Effacer
+                </button>
               </div>
             )
         )}
