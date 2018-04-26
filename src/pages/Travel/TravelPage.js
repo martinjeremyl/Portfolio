@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import FixedActionButton from '../../components/FixedActionButton'
 import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog'
 import Header from '../../components/Header'
+import Navbar from '../../components/Navbar'
 import ListItemVoyage from '../../components/ListItemVoyage'
 
 @inject('appStore', 'travelStore')
