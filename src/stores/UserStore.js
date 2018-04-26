@@ -71,14 +71,16 @@ class User {
     this.validateInputs(this.authenticatingUser)
     if (Object.keys(this.error).length === 0) {
       const user = await register(registrationInformations)
-      if (this.authenticatingUser.avatar !== undefined) {
-        uploadFile(`avatars/${user.uid}`, this.authenticatingUser.avatar)
-        this.authenticatingUser.avatar = `avatars/${user.uid}`
+      if (user.uid !== undefined) {
+        if (this.authenticatingUser.avatar !== undefined) {
+          uploadFile(`avatars/${user.uid}`, this.authenticatingUser.avatar)
+          this.authenticatingUser.avatar = `avatars/${user.uid}`
+        }
+        this.authenticatingUser.userId = user.uid
+        const { name, surname, email, userId, avatar, birthday } = this.authenticatingUser
+        this.api.create({ name, surname, email, userId, avatar, birthday })
+        this.setUser(user)
       }
-      this.authenticatingUser.userId = user.uid
-      const { name, surname, email, userId, avatar, birthday } = this.authenticatingUser
-      this.api.create({ name, surname, email, userId, avatar, birthday })
-      this.setUser(user)
     }
   }
 

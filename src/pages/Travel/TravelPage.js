@@ -3,7 +3,6 @@ import { observer, inject } from 'mobx-react'
 import { Link } from 'react-router-dom'
 import FixedActionButton from '../../components/FixedActionButton'
 import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog'
-import Navbar from '../../components/Navbar'
 import Header from '../../components/Header'
 import ListItemVoyage from '../../components/ListItemVoyage'
 
@@ -32,13 +31,15 @@ class TravelPage extends Component {
     return (
       <div>
         <Header />
+        <div style={{ width: '100%', marginTop: '20px', textAlign: 'center' }}>
+          {travelStore.travels.map(item => <ListItemVoyage key={item.id} travel={item} />)}
+        </div>
         <Navbar />
         {travelStore.travels.map(item => <ListItemVoyage key={item.id} travel={item} />)}
         <ConfirmDeleteDialog
           isOpen={appStore.confirmDeleteDialogStatus.get()}
           deleteFunction={this.deleteTravel}
         />
-
         <Link to='travels/create'>
           <FixedActionButton color='secondary' />
         </Link>

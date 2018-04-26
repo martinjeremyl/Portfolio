@@ -4,6 +4,7 @@ import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui'
 
 const routesTitle = {
   '/login': 'Connexion',
@@ -27,6 +28,17 @@ const styles = {
   }
 }
 
+const materialTheme = createMuiTheme({
+  overrides: {
+    MuiPaper: {
+      root: {
+        background: 'linear-gradient(to left, #F2BF95, #E45C55)',
+        textAlign: 'center'
+      }
+    }
+  }
+})
+
 @inject('routingStore')
 @observer
 class Header extends Component {
@@ -35,20 +47,18 @@ class Header extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position='static'>
-          <Toolbar disableGutters>
-            <Typography variant='title' color='inherit' className={classes.flex}>
-              {
-                title !== undefined
+        <MuiThemeProvider theme={materialTheme}>
+          <AppBar position='static'>
+            <Toolbar disableGutters>
+              <Typography variant='title' color='inherit' className={classes.flex}>
+                {title !== undefined
                   ? title
-                  : routesTitleProxy[this.props.routingStore.location.pathname]
-              }
-            </Typography>
-            {
-              renderRightButton && renderRightButton()
-            }
-          </Toolbar>
-        </AppBar>
+                  : routesTitleProxy[this.props.routingStore.location.pathname]}
+              </Typography>
+              {renderRightButton && renderRightButton()}
+            </Toolbar>
+          </AppBar>
+        </MuiThemeProvider>
       </div>
     )
   }

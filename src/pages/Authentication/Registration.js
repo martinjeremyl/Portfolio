@@ -13,6 +13,10 @@ class Registration extends Component {
 
   updateBirthdayField = (value) => this.props.userStore.setUserCreation('birthday', value.format())
 
+  onLoginSuccessful = () => {
+    this.props.history.push('/travels')
+  }
+
   render () {
     const {
       userStore
@@ -132,7 +136,13 @@ class Registration extends Component {
             onClick={() => {
               userStore.register(userStore.authenticatingUser)
               if (Object.keys(userStore.error).length === 0) {
-                this.props.history.push('/travels')
+                this.setState({})
+                userStore.login({
+                  email,
+                  password,
+                  onSuccess: this.onLoginSuccessful,
+                  onError: () => this.setState({})
+                })
               } else {
                 this.setState({})
               }
