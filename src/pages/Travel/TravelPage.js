@@ -32,11 +32,10 @@ class TravelPage extends Component {
     return (
       <div>
         <Header />
+        <Navbar />
         <div style={{ width: '100%', marginTop: '20px', textAlign: 'center' }}>
           {travelStore.travels.map(item => <ListItemVoyage key={item.id} travel={item} />)}
         </div>
-        <Navbar />
-        {travelStore.travels.map(item => <ListItemVoyage key={item.id} travel={item} />)}
         <ConfirmDeleteDialog
           isOpen={appStore.confirmDeleteDialogStatus.get()}
           deleteFunction={this.deleteTravel}

@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import Avatar from './Avatar'
 import Card, { CardContent, CardMedia } from 'material-ui/Card'
 import { withStyles } from 'material-ui/styles'
+import Link from './Link'
 
 const styles = {
   card: {
@@ -27,7 +28,7 @@ const styles = {
     color: 'black'
   }
 }
-@inject('appStore', 'userStore')
+@inject('appStore', 'userStore', 'travelStore')
 @observer
 class ListItemVoyage extends Component {
   render () {
@@ -69,41 +70,48 @@ class ListItemVoyage extends Component {
         image = imageChamp
     }
     return (
-      <Card style={styles.card}>
-        <CardMedia
-          style={{
-            width: '100%',
-            height: '200px',
-            position: 'relative',
-            backgroundImage: `url(${image})`,
-            backgroundSize: 'cover'
-          }}
-        >
-          <div
+      <Card style={styles.card} key={travel.id}>
+        <Link to={'/travels/' + travel.id} onClick={() => this.props.travelStore.setCurrentTravelId(travel.id)}>
+          <CardMedia
             style={{
-              position: 'absolute',
-              bottom: '5px',
-              left: '5px'
+              width: '100%',
+              height: '200px',
+              position: 'relative',
+              backgroundSize: 'cover'
             }}
+            image={image}
           >
-            {travel.participants &&
-              travel.participants.map(item => {
-                return (
-                  <Avatar
-                    key={item.id}
-                    src={item.avatar}
-                    style={{
-                      width: '25px',
-                      height: '25px',
-                      fontSize: '25px'
-                    }}
-                  />
-                )
-              })}
-          </div>
-        </CardMedia>
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '5px',
+                left: '5px',
+                display: 'flex'
+              }}
+            >
+              {travel.participants &&
+                travel.participants.map(item => {
+                  return (
+                    <Avatar
+                      key={item.id}
+                      src={item.avatar}
+                      style={{
+                        width: '25px',
+                        height: '25px',
+                        fontSize: '25px'
+                      }}
+                    />
+                  )
+                })}
+            </div>
+          </CardMedia>
+        </Link>
         <CardContent style={styles.cardContent}>
-          <h1 style={styles.cardTitle}>{travel.name}</h1>
+          <h1 style={styles.cardTitle}>
+            <Link to={'/travels/' + travel.id} onClick={() => this.props.travelStore.setCurrentTravelId(travel.id)}>
+              {travel.name}
+            </Link>
+          </h1>
           <h2 style={styles.cardSubTitle}>
             {travel.startDate} - {travel.endDate}
           </h2>
