@@ -63,6 +63,9 @@ class Registration extends Component {
             placeholder='Nom'
             value={name}
             whiteInput
+            required
+            error={userStore.error && userStore.error.name !== undefined}
+            label={userStore.error && userStore.error.name !== undefined ? userStore.error.name : ''}
             onChange={this.updateField}
           />
           <Input
@@ -71,6 +74,9 @@ class Registration extends Component {
             placeholder='Prénom'
             value={surname}
             whiteInput
+            required
+            error={userStore.error && userStore.error.surname !== undefined}
+            label={userStore.error && userStore.error.surname !== undefined ? userStore.error.surname : ''}
             onChange={this.updateField}
           />
           <Input
@@ -79,6 +85,7 @@ class Registration extends Component {
             placeholder='Email'
             type='email'
             value={email}
+            required
             error={userStore.error && userStore.error.email !== undefined}
             label={userStore.error && userStore.error.email !== undefined ? userStore.error.email : ''}
             whiteInput
@@ -110,6 +117,8 @@ class Registration extends Component {
             type='password'
             placeholder='Confirmation du mot de passe'
             value={passwordConfirmation}
+            error={userStore.error.passwordConfirmation !== undefined}
+            label={userStore.error.passwordConfirmation !== undefined ? userStore.error.passwordConfirmation : ''}
             whiteInput
             onChange={this.updateField}
           />

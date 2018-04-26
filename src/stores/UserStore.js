@@ -32,6 +32,7 @@ class User {
   @action
   setError (key, value) {
     this.error[key] = value
+    console.log(key)
   }
 
   @action
@@ -84,6 +85,16 @@ class User {
   @action
   setUserCreation (key, value) {
     this.authenticatingUser[key] = value
+    if (key === 'password' && this.authenticatingUser.passwordConfirmation.length > 0 && this.authenticatingUser.passwordConfirmation !== value) {
+      this.setError(key, 'Les deux mots de passe sont différents')
+    } else {
+      this.error.password = undefined // Retire l'erreur quand c'est juste
+    }
+    if (key === 'passwordConfirmation' && this.authenticatingUser.password !== value) {
+      this.setError(key, 'Les deux mots de passe sont différents')
+    } else {
+      this.error.passwordConfirmation = undefined // Retire l'erreur quand c'est juste
+    }
   }
 
   validateEmail (email) {
@@ -94,14 +105,26 @@ class User {
     Object.keys(inputs).map(
       (item) => {
         switch (item) {
+          case 'name':
+            if (inputs[item] === '') {
+              this.setError(item, 'Veuillez saisir votre nom')
+            }
+            break
+          case 'surname':
+            if (inputs[item] === '') {
+              this.setError(item, 'Veuillez saisir votre prénom')
+            }
+            break
           case 'email':
             if (!this.validateEmail(inputs[item])) {
               this.setError(item, "Cette adresse email n'est pas valide")
             }
             break
           case 'password':
-            if (inputs[item] !== inputs['passwordConfirmation']) {
-              this.setError(item, 'Les deux mots de passe ne sont pas identiques')
+            if (inputs[item].length < 8) {
+              this.setError(item, 'Le mot de passe doit faire au moins 8 caractères')
+            } else if (inputs[item] !== inputs['passwordConfirmation']) {
+              this.setError(item, 'Les deux mots de passe sont différents')
             }
             break
           case 'birthday':
