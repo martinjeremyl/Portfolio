@@ -25,11 +25,9 @@ class TravelCreationPage extends Component {
           getdate={date => {
             travelStore.updateTravelCreation('startDate', date)
           }}
-          value={startDate}
         />
         <DatePicker
           name='endDate'
-          value={endDate}
           label={`Date de départ`}
           getdate={date => {
             travelStore.updateTravelCreation('endDate', date)

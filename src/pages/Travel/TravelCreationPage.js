@@ -44,6 +44,7 @@ class TravelCreationPage extends Component {
         return <TravelCreationPageThree handleInputsChange={this.handleInputsChange} />
 
       default:
+        return null
     }
   }
 
@@ -59,20 +60,18 @@ class TravelCreationPage extends Component {
           activeStep={this.state.activeStep}
           style={{ position: 'fixed', bottom: '10px', width: '100%', padding: '0' }}
         >
-          {['Select campaign settings', 'Create an ad group', 'Create an ad'].map(
-            (label, index) => {
-              return (
-                <Step key={label}>
-                  <StepButton
-                    onClick={() => {
-                      this.handleStep(index)
-                    }}
-                    completed={this.isStepComplete(index)}
-                  />
-                </Step>
-              )
-            }
-          )}
+          {[1, 2, 3, 4].map((label, index) => {
+            return (
+              <Step key={label}>
+                <StepButton
+                  onClick={() => {
+                    this.handleStep(index)
+                  }}
+                  completed={this.isStepComplete(index)}
+                />
+              </Step>
+            )
+          })}
         </Stepper>
       </div>
     )
