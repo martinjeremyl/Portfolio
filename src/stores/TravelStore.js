@@ -50,15 +50,19 @@ class Travel {
   async fetchTravels () {
     // On récupère tous les voyages et on les filtre car firebase ne sait pas faire de fonction sql IN il faut le faire en javascript
     const response = await this.api.list()
-    const filteredTravels = response.filter(travel => travel.participants && travel.participants.includes(userStore.user.uid))
-    const finalTravels = await Promise.all(filteredTravels.map(
-      async travel => ({
+    const filteredTravels = response.filter(
+      travel => travel.participants && travel.participants.includes(userStore.user.uid)
+    )
+    const finalTravels = await Promise.all(
+      filteredTravels.map(async travel => ({
         ...travel,
         members: await Promise.all(
-          travel.participants.map(participant => this.userApi.findBy({ field: 'userId', operator: '==', value: participant }))
+          travel.participants.map(participant =>
+            this.userApi.findBy({ field: 'userId', operator: '==', value: participant })
+          )
         )
-      })
-    ))
+      }))
+    )
     this.travels.replace(finalTravels)
   }
 
@@ -70,14 +74,11 @@ class Travel {
   @action
   updateTravelCreation (key, value) {
     const field = this.travelCreation[key]
-    console.log('after >>', this.travelCreation[key].value)
     switch (typeof field.value) {
       case 'string':
         field.value = value
-        console.log('after >>', this.travelCreation[key].value)
         break
       case 'object':
-        console.log(value)
         // this.travelCreation[key].value.push(value)
         break
 
