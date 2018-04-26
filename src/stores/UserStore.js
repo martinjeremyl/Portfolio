@@ -32,7 +32,6 @@ class User {
   @action
   setError (key, value) {
     this.error[key] = value
-    console.log(key)
   }
 
   @action
@@ -78,7 +77,9 @@ class User {
       this.authenticatingUser.userId = user.uid
       const { name, surname, email, userId, avatar, birthday } = this.authenticatingUser
       this.api.create({ name, surname, email, userId, avatar, birthday })
-      this.setUser(user)
+      let password = this.authenticatingUser.password
+      const connectedUser = await login({ email, password })
+      this.setUser(connectedUser)
     }
   }
 
