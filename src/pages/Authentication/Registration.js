@@ -10,7 +10,6 @@ import ImageUpload from '../../components/ImageUpload'
 @observer
 class Registration extends Component {
   updateField = ({ target: { name, value } }) => this.props.userStore.setUserCreation(name, value)
-
   updateBirthdayField = (value) => this.props.userStore.setUserCreation('birthday', value.format())
 
   onLoginSuccessful = () => {
