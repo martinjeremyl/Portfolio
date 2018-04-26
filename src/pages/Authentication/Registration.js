@@ -43,7 +43,7 @@ class Registration extends Component {
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',
             width: '100%',
-            height: '100%',
+            backgroundAttachment: 'fixed',
             margin: '0',
             padding: '0',
             textAlign: 'center'
