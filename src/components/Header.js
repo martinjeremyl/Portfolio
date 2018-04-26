@@ -5,8 +5,6 @@ import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 
-import BackButton from './BackButton'
-
 const routesTitle = {
   '/login': 'Connexion',
   '/register': 'Inscription',
@@ -24,7 +22,8 @@ const styles = {
     flexGrow: 1
   },
   flex: {
-    flex: 1
+    flex: 1,
+    textAlign: 'center'
   }
 }
 
@@ -32,17 +31,12 @@ const styles = {
 @observer
 class Header extends Component {
   render () {
-    const { classes, renderLeftButton, renderRightButton, routingStore, title } = this.props
+    const { classes, renderRightButton, title } = this.props
 
     return (
       <div className={classes.root}>
         <AppBar position='static'>
           <Toolbar disableGutters>
-            {
-              renderLeftButton
-                ? renderLeftButton()
-                : <BackButton onClick={routingStore.goBack} />
-            }
             <Typography variant='title' color='inherit' className={classes.flex}>
               {
                 title !== undefined
