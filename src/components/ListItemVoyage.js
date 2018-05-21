@@ -109,7 +109,7 @@ class ListItemVoyage extends Component {
         <CardContent style={styles.cardContent}>
           <h1 style={styles.cardTitle}>
             <Link to={'/travels/' + travel.id} onClick={() => this.props.travelStore.setCurrentTravelId(travel.id)}>
-              {travel.name}
+              {travel.name.toUpperCase()}
             </Link>
           </h1>
           <h2 style={styles.cardSubTitle}>
