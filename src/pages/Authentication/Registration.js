@@ -27,7 +27,6 @@ class Registration extends Component {
         marginTop: '30px'
       },
       button: {
-        background: 'linear-gradient(to left, #F2BF95, #E45C55)',
         color: 'white',
         width: '70%',
         marginTop: '40px'
@@ -132,6 +131,7 @@ class Registration extends Component {
           />
           <Button
             style={styles.button}
+            className='mainBackgroundColor'
             onClick={() => {
               userStore.register(userStore.authenticatingUser)
               if (Object.keys(userStore.error).length === 0) {

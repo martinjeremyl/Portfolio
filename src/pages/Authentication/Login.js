@@ -81,8 +81,8 @@ class Login extends Component {
             })
           }}
           value='Connexion'
+          className='mainBackgroundColor'
           style={{
-            background: 'linear-gradient(to left, #F2BF95, #E45C55)',
             color: 'white',
             width: '70%',
             marginTop: '50%'
