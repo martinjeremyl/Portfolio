@@ -35,6 +35,10 @@ class User {
   }
 
   @action
+  removeErrors () {
+    this.error = []
+  }
+  @action
   async login ({ email, password, onSuccess, onError }) {
     try {
       const user = await login({ email, password })
@@ -43,14 +47,18 @@ class User {
     } catch (error) {
       this.error = {}
       let errorCode = error.code
-      let errorMessage = error.message
+      let errorMessage
       // Par défaut on met l'erreur sur le champ email
       let input = 'email'
-      if (errorCode === 'auth/invalid-email' || errorCode === 'auth/user-not-found' || errorCode === 'auth/user-disabled') {
-        input = 'email'
-      }
-      if (errorCode === 'auth/wrong-password') {
-        input = 'password'
+      switch (errorCode) {
+        case errorCode === 'auth/invalid-email' || errorCode === 'auth/user-not-found' || errorCode === 'auth/user-disabled':
+          input = 'email'
+          errorMessage = "L'adresse email renseignée est invalide"
+          break
+        case errorCode === 'auth/wrong-password':
+          input = 'password'
+          errorMessage = 'Mot de passe incorrecte'
+          break
       }
       this.setError(input, errorMessage)
       onError()

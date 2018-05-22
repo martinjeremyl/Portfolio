@@ -9,6 +9,7 @@ import Input from '../../components/Input'
 class Login extends Component {
   updateField = ({ target: { name, value } }) => this.props.userStore.setUserCreation(name, value)
   onLoginSuccessful = () => {
+    this.props.userStore.removeErrors({})
     this.props.history.push('/travels')
   }
 
@@ -93,9 +94,10 @@ class Login extends Component {
           style={{
             display: 'block',
             color: 'white',
-            paddingTop: '20px',
+            marginTop: '40px',
             textDecoration: 'none'
           }}
+          onClick={this.props.userStore.removeErrors}
         >
             S'inscrire
         </Link>

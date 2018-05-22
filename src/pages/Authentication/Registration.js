@@ -157,6 +157,7 @@ class Registration extends Component {
               paddingBottom: '20px',
               textDecoration: 'none'
             }}
+            onClick={this.props.userStore.removeErrors}
           >
             Se connecter
           </Link>
