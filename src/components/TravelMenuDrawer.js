@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
 import SwipeableDrawer from 'material-ui/SwipeableDrawer'
 import { withStyles } from 'material-ui/styles'
 import List, { ListItem } from 'material-ui/List'
 import Icon from 'material-ui/Icon'
+import Button from 'material-ui/Button'
 
 import ModuleIcon from './ModuleIcon'
 
@@ -22,8 +23,18 @@ const styles = {
 @inject('appStore', 'routingStore')
 @observer
 class TravelMenuDrawer extends Component {
+  state = {
+    open: false
+  }
+
+  toggleDrawer = open => () => {
+    this.setState({
+      open: open
+    })
+  }
+
   render () {
-    const { classes, parent } = this.props
+    const { classes } = this.props
     const backgroundImage = require('../img/backgrounds/module_background.png')
 
     const sideList = (
@@ -49,26 +60,31 @@ class TravelMenuDrawer extends Component {
     )
 
     return (
-      <SwipeableDrawer
-        open={parent.state.left}
-        onClose={parent.toggleDrawer(false)}
-        onOpen={parent.toggleDrawer(true)}
-        style={{ height: '100%' }}
-      >
-        <div
-          tabIndex={0}
-          role='button'
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: 'cover',
-            height: '100%'
-          }}
-          onClick={parent.toggleDrawer(false)}
-          onKeyDown={parent.toggleDrawer(false)}
+      <Fragment>
+        <Button onClick={this.toggleDrawer(true)}>
+          <Icon style={{color: 'white'}}>menu</Icon>
+        </Button>
+        <SwipeableDrawer
+          open={this.state.open}
+          onClose={this.toggleDrawer(false)}
+          onOpen={this.toggleDrawer(true)}
+          style={{ height: '100%' }}
         >
-          {sideList}
-        </div>
-      </SwipeableDrawer>
+          <div
+            tabIndex={0}
+            role='button'
+            style={{
+              backgroundImage: `url(${backgroundImage})`,
+              backgroundSize: 'cover',
+              height: '100%'
+            }}
+            onClick={this.toggleDrawer(false)}
+            onKeyDown={this.toggleDrawer(false)}
+          >
+            {sideList}
+          </div>
+        </SwipeableDrawer>
+      </Fragment>
     )
   }
 }
