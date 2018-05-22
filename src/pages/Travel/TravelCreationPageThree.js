@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react'
 
 import Avatar from '../../components/Avatar'
 import Input from '../../components/Input'
+import Button from '../../components/Button'
 
 const MAIL_REGEX =
   // eslint-disable-next-line no-useless-escape
@@ -11,7 +12,8 @@ const MAIL_REGEX =
 @observer
 class TravelCreationPage extends Component {
   state = {
-    newEmail: ''
+    newEmail: '',
+    hasEmailError: false
   }
 
   componentDidMount () {
@@ -32,7 +34,7 @@ class TravelCreationPage extends Component {
 
   render () {
     const { travelStore } = this.props
-    const { newEmail } = this.state
+    const { newEmail, hasEmailError } = this.state
 
     return (
       <div>
@@ -47,21 +49,20 @@ class TravelCreationPage extends Component {
               <div key={key}>
                 <Avatar style={{ display: 'inline-block' }} />
                 <Input value={participant} />
-                <button
+                <Button
                   onClick={() => {
                     travelStore.updateTravelCreation(
                       'participants',
                       travelStore.participants.filter((_, particpantKey) => particpantKey !== key)
                     )
                   }}
-                >
-                  Effacer
-                </button>
+                  value='Effacer'
+                />
               </div>
             )
         )}
-        <Input onChange={this.handleNewEmail} value={newEmail} />
-        <button
+        <Input onChange={this.handleNewEmail} value={newEmail} error={hasEmailError} />
+        <Button
           onClick={() => {
             if (MAIL_REGEX.test(newEmail)) {
               travelStore.updateTravelCreation('participants', [
@@ -72,11 +73,14 @@ class TravelCreationPage extends Component {
               this.setState({
                 newEmail: ''
               })
+            } else {
+              this.setState({
+                hasEmailError: true
+              })
             }
           }}
-        >
-          Ajouter
-        </button>
+          value='Ajouter'
+        />
       </div>
     )
   }
