@@ -30,6 +30,7 @@ class TravelDetailPage extends Component {
       <div>
         <Header />
         <Navbar />
+        <h1>{this.props.travelStore.travel.name}</h1>
         {/*
           <div>
             {JSON.stringify(this.props.travelStore.travel)}

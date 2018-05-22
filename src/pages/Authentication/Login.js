@@ -9,6 +9,7 @@ import Input from '../../components/Input'
 class Login extends Component {
   updateField = ({ target: { name, value } }) => this.props.userStore.setUserCreation(name, value)
   onLoginSuccessful = () => {
+    this.props.userStore.removeErrors({})
     this.props.history.push('/travels')
   }
 
@@ -27,83 +28,79 @@ class Login extends Component {
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: 'cover',
           width: '100%',
-          height: '100%',
+          height: '100vh',
           margin: '0',
           padding: '0',
           textAlign: 'center'
         }}
       >
-        <div
+        <img
+          src={`${logo}`}
           style={{
-            paddingTop: '100px'
+            marginTop: '15%',
+            maxWidth: '50%',
+            height: 'auto'
           }}
-        >
-          <img
-            src={`${logo}`}
-            style={{
-              maxWidth: '50%',
-              height: 'auto'
-            }}
-          />
-          <Input
-            style={{
-              width: '70%',
-              marginTop: '40px'
-            }}
-            name='email'
-            placeholder='Email'
-            type='email'
-            value={email}
-            error={userStore.error && userStore.error.email !== undefined}
-            label={userStore.error && userStore.error.email !== undefined ? userStore.error.email : ''}
-            whiteInput
-            onChange={this.updateField}
-          />
-          <Input
-            style={{
-              width: '70%',
-              marginTop: '40px',
-              textAlign: 'center'
-            }}
-            name='password'
-            type='password'
-            placeholder='Mot de passe'
-            value={password}
-            error={userStore.error && userStore.error.password !== undefined}
-            label={userStore.error && userStore.error.password !== undefined ? userStore.error.password : ''}
-            whiteInput
-            onChange={this.updateField}
-          />
-          <Button
-            onClick={() => {
-              userStore.login({
-                email,
-                password,
-                onSuccess: this.onLoginSuccessful,
-                onError: () => this.setState({})
-              })
-            }}
-            value='Connexion'
-            style={{
-              background: 'linear-gradient(to left, #F2BF95, #E45C55)',
-              color: 'white',
-              width: '70%',
-              marginTop: '150px'
-            }}
-          />
+        />
+        <Input
+          style={{
+            width: '70%',
+            marginTop: '40px'
+          }}
+          name='email'
+          placeholder='Email'
+          type='email'
+          value={email}
+          error={userStore.error && userStore.error.email !== undefined}
+          label={userStore.error && userStore.error.email !== undefined ? userStore.error.email : ''}
+          whiteInput
+          onChange={this.updateField}
+        />
+        <Input
+          style={{
+            width: '70%',
+            marginTop: '40px',
+            textAlign: 'center'
+          }}
+          name='password'
+          type='password'
+          placeholder='Mot de passe'
+          value={password}
+          error={userStore.error && userStore.error.password !== undefined}
+          label={userStore.error && userStore.error.password !== undefined ? userStore.error.password : ''}
+          whiteInput
+          onChange={this.updateField}
+        />
+        <Button
+          onClick={() => {
+            userStore.login({
+              email,
+              password,
+              onSuccess: this.onLoginSuccessful,
+              onError: () => this.setState({})
+            })
+          }}
+          value='Connexion'
+          style={{
+            background: 'linear-gradient(to left, #F2BF95, #E45C55)',
+            color: 'white',
+            width: '70%',
+            marginTop: '50%'
+          }}
+        />
 
-          <Link
-            to='/register'
-            style={{
-              display: 'block',
-              color: 'white',
-              marginTop: '40px',
-              textDecoration: 'none'
-            }}
-          >
+        <Link
+          to='/register'
+          style={{
+            display: 'block',
+            color: 'white',
+            marginTop: '40px',
+            textDecoration: 'none'
+          }}
+          onClick={this.props.userStore.removeErrors}
+        >
             S'inscrire
-          </Link>
-        </div>
+        </Link>
       </div>
     )
   }

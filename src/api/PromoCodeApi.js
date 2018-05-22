@@ -2,7 +2,7 @@ import FirebaseRequestApi from './FirebaseRequestApi'
 
 class PromoCodeApi extends FirebaseRequestApi {
   constructor () {
-    super('promoCode')
+    super('promoCodes')
   }
 }
 

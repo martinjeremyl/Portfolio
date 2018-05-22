@@ -12,6 +12,10 @@ class Registration extends Component {
   updateField = ({ target: { name, value } }) => this.props.userStore.setUserCreation(name, value)
   updateBirthdayField = (value) => this.props.userStore.setUserCreation('birthday', value.format())
 
+  onLoginSuccessful = () => {
+    this.props.history.push('/travels')
+  }
+
   render () {
     const {
       userStore
@@ -26,7 +30,7 @@ class Registration extends Component {
         background: 'linear-gradient(to left, #F2BF95, #E45C55)',
         color: 'white',
         width: '70%',
-        marginTop: '30px'
+        marginTop: '40px'
       },
       primary: {
         color: 'white',
@@ -131,7 +135,13 @@ class Registration extends Component {
             onClick={() => {
               userStore.register(userStore.authenticatingUser)
               if (Object.keys(userStore.error).length === 0) {
-                this.props.history.push('/travels')
+                this.setState({})
+                userStore.login({
+                  email,
+                  password,
+                  onSuccess: this.onLoginSuccessful,
+                  onError: () => this.setState({})
+                })
               } else {
                 this.setState({})
               }
@@ -143,9 +153,11 @@ class Registration extends Component {
             style={{
               display: 'block',
               color: 'white',
-              marginTop: '40px',
+              paddingTop: '20px',
+              paddingBottom: '20px',
               textDecoration: 'none'
             }}
+            onClick={this.props.userStore.removeErrors}
           >
             Se connecter
           </Link>

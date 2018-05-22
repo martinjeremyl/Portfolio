@@ -4,6 +4,9 @@ import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
+import IconButton from 'material-ui/IconButton'
+
+import BackButton from './BackButton'
 
 const routesTitle = {
   '/login': 'Connexion',
@@ -31,12 +34,19 @@ const styles = {
 @observer
 class Header extends Component {
   render () {
-    const { classes, renderRightButton, title } = this.props
+    const { classes, renderLeftButton, renderRightButton, routingStore, title } = this.props
 
     return (
       <div className={classes.root}>
         <AppBar position='static'>
           <Toolbar disableGutters>
+            {
+              renderLeftButton
+                ? renderLeftButton()
+                : this.props.routingStore.location.pathname === '/travels'
+                  ? <IconButton color='inherit' />
+                  : <BackButton onClick={routingStore.goBack} />
+            }
             <Typography variant='title' color='inherit' className={classes.flex}>
               {
                 title !== undefined
@@ -45,7 +55,9 @@ class Header extends Component {
               }
             </Typography>
             {
-              renderRightButton && renderRightButton()
+              renderRightButton
+                ? renderRightButton()
+                : <IconButton color='inherit' />
             }
           </Toolbar>
         </AppBar>
