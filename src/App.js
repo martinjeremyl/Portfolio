@@ -70,12 +70,6 @@ class App extends Component {
                   isConnected={appStore.isConnected}
                   component={TravelDetail}
                 />
-                <PrivateRoute
-                  exact
-                  path='/spending/:id'
-                  isConnected={appStore.isConnected}
-                  component={SpendingPage}
-                />
                 {/* fallback route to redirect the user */}
                 <Route path='*' component={Authentication} />
               </Switch>
