@@ -28,7 +28,8 @@ class TravelCreationPage extends Component {
 
   handleNewEmail = ({ target: { value } }) => {
     this.setState({
-      newEmail: value
+      newEmail: value,
+      hasEmailError: false
     })
   }
 
@@ -53,7 +54,7 @@ class TravelCreationPage extends Component {
                   onClick={() => {
                     travelStore.updateTravelCreation(
                       'participants',
-                      travelStore.participants.filter((_, particpantKey) => particpantKey !== key)
+                      travelStore.participants.filter((_, participantKey) => participantKey !== key)
                     )
                   }}
                   value='Effacer'
