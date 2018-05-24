@@ -38,7 +38,6 @@ class TravelCreationPage extends Component {
     const { travelStore } = this.props
     const { newEmail, hasEmailError } = this.state
 
-    const { newEmail } = this.state
     const styles = {
       fullContainer: {
         padding: '20px'
@@ -52,7 +51,7 @@ class TravelCreationPage extends Component {
         flewGrow: '1'
       },
       myMail: {
-        flexGrow: '5'
+        flexGrow: '4'
       },
       newMail: {
         flexGrow: '3',
@@ -88,9 +87,9 @@ class TravelCreationPage extends Component {
                 <Input value={participant} style={styles.myMail} disabled />
               </div>
             ) : (
-              <div key={key} style={styles.personContainer}>
-                <Avatar style={styles.avatar} />
-                <Input value={participant} />
+              <div key={key} style={styles.newPersonContainer}>
+                <FontAwesomeIcon icon={['fal', 'user']} className={'fa-2x'} style={styles.iconStyle} />
+                <Input value={participant} style={styles.newMail} />
                 <Button
                   onClick={() => {
                     travelStore.updateTravelCreation(
@@ -103,26 +102,36 @@ class TravelCreationPage extends Component {
               </div>
             )
         )}
-        <Input onChange={this.handleNewEmail} value={newEmail} error={hasEmailError} />
-        <Button
-          onClick={() => {
-            if (MAIL_REGEX.test(newEmail)) {
-              travelStore.updateTravelCreation('participants', [
-                ...travelStore.participants,
-                newEmail
-              ])
+        <div style={styles.newPersonContainer}>
+          <FontAwesomeIcon icon={['fal', 'envelope']} className={'fa-2x'} style={styles.iconStyle} />
 
-              this.setState({
-                newEmail: ''
-              })
-            } else {
-              this.setState({
-                hasEmailError: true
-              })
-            }
-          }}
-          value='Ajouter'
-        />
+          <Input
+            onChange={this.handleNewEmail}
+            style={styles.newMail}
+            value={newEmail}
+            error={hasEmailError}
+            label={hasEmailError && newEmail !== undefined ? 'Adresse email invalide' : ''}
+          />
+          <Button
+            onClick={() => {
+              if (MAIL_REGEX.test(newEmail)) {
+                travelStore.updateTravelCreation('participants', [
+                  ...travelStore.participants,
+                  newEmail
+                ])
+
+                this.setState({
+                  newEmail: ''
+                })
+              } else {
+                this.setState({
+                  hasEmailError: true
+                })
+              }
+            }}
+            value='Ajouter'
+          />
+        </div>
       </div>
     )
   }
