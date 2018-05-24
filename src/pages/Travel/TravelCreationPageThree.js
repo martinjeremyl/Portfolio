@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react'
 import Avatar from '../../components/Avatar'
 import Input from '../../components/Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Button from '../../components/Button'
 
 const MAIL_REGEX =
   // eslint-disable-next-line no-useless-escape
@@ -12,7 +13,8 @@ const MAIL_REGEX =
 @observer
 class TravelCreationPage extends Component {
   state = {
-    newEmail: ''
+    newEmail: '',
+    hasEmailError: false
   }
 
   componentDidMount () {
@@ -27,12 +29,15 @@ class TravelCreationPage extends Component {
 
   handleNewEmail = ({ target: { value } }) => {
     this.setState({
-      newEmail: value
+      newEmail: value,
+      hasEmailError: false
     })
   }
 
   render () {
     const { travelStore } = this.props
+    const { newEmail, hasEmailError } = this.state
+
     const { newEmail } = this.state
     const styles = {
       fullContainer: {
@@ -86,50 +91,38 @@ class TravelCreationPage extends Component {
               <div key={key} style={styles.personContainer}>
                 <Avatar style={styles.avatar} />
                 <Input value={participant} />
-                <div
-                  style={styles.deletePerson}
+                <Button
                   onClick={() => {
                     travelStore.updateTravelCreation(
                       'participants',
-                      travelStore.participants.filter((_, particpantKey) => particpantKey !== key)
+                      travelStore.participants.filter((_, participantKey) => participantKey !== key)
                     )
                   }}
-                >
-                  <FontAwesomeIcon icon={['fal', 'trash-alt']} className={'fa-2x'} style={styles.iconDelete} />
-                </div>
+                  value='Effacer'
+                />
               </div>
             )
         )}
-        <div style={styles.newPersonContainer}>
-          <FontAwesomeIcon
-            style={styles.iconStyle}
-            icon={['fal', 'envelope']}
-            className={'fa-2x'}
-          />
+        <Input onChange={this.handleNewEmail} value={newEmail} error={hasEmailError} />
+        <Button
+          onClick={() => {
+            if (MAIL_REGEX.test(newEmail)) {
+              travelStore.updateTravelCreation('participants', [
+                ...travelStore.participants,
+                newEmail
+              ])
 
-          <Input
-            onChange={this.handleNewEmail}
-            value={newEmail}
-            label='Inviter : '
-            style={styles.newMail}
-          />
-          <FontAwesomeIcon
-            style={styles.iconStyle}
-            className={'fa-2x'}
-            icon={['fal', 'user-plus']}
-            onClick={() => {
-              if (MAIL_REGEX.test(newEmail)) {
-                travelStore.updateTravelCreation('participants', [
-                  ...travelStore.participants,
-                  newEmail
-                ])
-                this.setState({
-                  newEmail: ''
-                })
-              }
-            }} />
-        </div>
-
+              this.setState({
+                newEmail: ''
+              })
+            } else {
+              this.setState({
+                hasEmailError: true
+              })
+            }
+          }}
+          value='Ajouter'
+        />
       </div>
     )
   }

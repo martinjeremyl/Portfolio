@@ -30,6 +30,12 @@ class User {
   }
 
   @action
+  async getUserByAuthenticationId (userId) {
+    // Get a user thanks to its userid value
+    return this.api.findBy({ field: 'userId', operator: '==', value: userId })
+  }
+
+  @action
   setError (key, value) {
     this.error[key] = value
   }

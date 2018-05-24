@@ -28,7 +28,7 @@ const styles = {
     color: 'black'
   }
 }
-@inject('appStore', 'userStore', 'travelStore')
+@inject('userStore', 'travelStore')
 @observer
 class ListItemVoyage extends Component {
   render () {
@@ -93,7 +93,7 @@ class ListItemVoyage extends Component {
                 travel.participants.map(item => {
                   return (
                     <Avatar
-                      key={item.id}
+                      key={item}
                       src={item.avatar}
                       style={{
                         width: '25px',
