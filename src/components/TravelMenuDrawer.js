@@ -8,6 +8,7 @@ import Icon from 'material-ui/Icon'
 import Button from 'material-ui/Button'
 
 import ModuleIcon from './ModuleIcon'
+import Link from './Link'
 
 const styles = {
   list: {
@@ -20,7 +21,7 @@ const styles = {
   }
 }
 
-@inject('appStore', 'routingStore')
+@inject('appStore', 'routingStore', 'travelStore')
 @observer
 class TravelMenuDrawer extends Component {
   state = {
@@ -41,13 +42,15 @@ class TravelMenuDrawer extends Component {
       <div className={classes.list}>
         <List style={{color: 'white'}}>
           {
-            this.props.appStore.allModules.map(({ id, name, icon }, iteration) => (
-              <ListItem button key={id}>
-                <ModuleIcon icon={icon} size='60px' color='white' />
-                <div className={classes.moduleText}>
-                  {name}
-                </div>
-              </ListItem>
+            this.props.appStore.allModules.map(({ id, name, icon, link }, iteration) => (
+              <Link to={`/travels/${this.props.travelStore.currentTravelId}${link}`} key={id}>
+                <ListItem button>
+                  <ModuleIcon icon={icon} size='60px' color='white' />
+                  <div className={classes.moduleText}>
+                    {name}
+                  </div>
+                </ListItem>
+              </Link>
             ))
           }
           <ListItem button onClick={this.props.routingStore.goBack}>

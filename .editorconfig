@@ -18,7 +18,7 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 # A line should not have more than this amount of chars (not supported by all plugins)
 max_line_length = 100
-
+javascript.implicitProjectConfig.experimentalDecorators = true
 [{Makefile,**.mk}]
 # Use tabs for indentation (Makefiles require tabs)
 indent_style = tab

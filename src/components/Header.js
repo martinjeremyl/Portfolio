@@ -12,7 +12,8 @@ const routesTitle = {
   '/login': 'Connexion',
   '/register': 'Inscription',
   '/travels': 'Mes voyages',
-  '/travel/': 'Détails du voyage'
+  '/travel/': 'Détails du voyage',
+  'createSpending': 'Création d une dépense'
 }
 const routesTitleProxy = new Proxy(routesTitle, {
   get (target, property) {
