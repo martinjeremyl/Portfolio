@@ -128,6 +128,7 @@ class Registration extends Component {
             imageCallback={image => {
               userStore.setUserCreation('avatar', image)
             }}
+            fullName={`${name} ${surname}`}
           />
           <Button
             style={styles.button}

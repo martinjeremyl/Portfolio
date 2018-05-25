@@ -95,11 +95,6 @@ class ListItemVoyage extends Component {
                     <Avatar
                       key={item}
                       src={item.avatar}
-                      style={{
-                        width: '25px',
-                        height: '25px',
-                        fontSize: '25px'
-                      }}
                     />
                   )
                 })}

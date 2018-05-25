@@ -13,7 +13,7 @@ class AvatarProfile extends Component {
 
   render () {
     return (
-      <Avatar className={`${this.props.classes.avatar} ${this.props.classes.row}`}>
+      <Avatar style={this.props.style} className={`${this.props.classes.avatar} ${this.props.classes.row}`}>
         {this.getInitial(this.props.name)}
       </Avatar>
     )

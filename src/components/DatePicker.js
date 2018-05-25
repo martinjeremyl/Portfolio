@@ -155,9 +155,8 @@ class MaterialDatePicker extends PureComponent {
 
   render () {
     const { selectedDate } = this.state
-    const newProps = { ...this.props }
+    const { whiteInput, ...newProps } = { ...this.props }
     delete newProps['getdate']
-    const { whiteInput } = this.props
 
     return (
       <MuiPickersUtilsProvider
