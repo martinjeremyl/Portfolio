@@ -51,6 +51,7 @@ class Input extends React.Component {
     multiline: '',
     currency: 'EUR'
   }
+
   render () {
     const { classes, whiteInput, ...props } = this.props
 
