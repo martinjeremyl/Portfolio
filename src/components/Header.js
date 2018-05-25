@@ -38,7 +38,7 @@ class Header extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position='static'>
+        <AppBar position='fixed'>
           <Toolbar disableGutters className='mainBackgroundColor'>
             {
               renderLeftButton
