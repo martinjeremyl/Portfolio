@@ -90,3 +90,10 @@ h2 {
     -webkit-transform: scale(1);
   }
 }
+
+/* Correction affichage du label erreur sur petit téléphone  */
+@media only screen and (max-device-width:320px) {
+  .SmallLabelInputFontSize label{
+    font-size : 0.8em;
+  }
+} 

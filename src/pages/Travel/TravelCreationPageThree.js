@@ -109,6 +109,7 @@ class TravelCreationPage extends Component {
             onChange={this.handleNewEmail}
             style={styles.newMail}
             value={newEmail}
+            className={'SmallLabelInputFontSize'}
             error={hasEmailError}
             label={hasEmailError && newEmail !== undefined ? 'Adresse email invalide' : ''}
           />
