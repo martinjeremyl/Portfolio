@@ -35,7 +35,7 @@ class SpendingPage extends Component {
     return (
       <div>
         <Header />
-        <div style={{ width: '100%', marginTop: '20px', textAlign: 'center' }}>
+        <div style={{ width: '100%', textAlign: 'center' }}>
           {spendingStore.spendings.map(item => <ListItemSpending key={item.id} spending={item} />)}
         </div>
         <Navbar />

@@ -95,3 +95,7 @@ h2 {
 .mainBackgroundColor{
   background: linear-gradient(to left, #F2BF95, #E45C55) !important;
 }
+
+.mainColor{
+  color: #F57464;
+}
