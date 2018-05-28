@@ -45,7 +45,8 @@ class Login extends Component {
         <Input
           style={{
             width: '70%',
-            marginTop: '40px'
+            marginTop: '40px',
+            paddingTop: '8%'
           }}
           name='email'
           placeholder='Email'
@@ -60,6 +61,7 @@ class Login extends Component {
           style={{
             width: '70%',
             marginTop: '40px',
+            paddingTop: '8%',
             textAlign: 'center'
           }}
           name='password'

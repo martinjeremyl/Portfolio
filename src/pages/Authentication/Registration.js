@@ -61,7 +61,11 @@ class Registration extends Component {
           />
           <Input
             name='name'
-            style={styles.input}
+            style={{
+              width: '70%',
+              marginTop: '40px',
+              paddingTop: '5%'
+            }}
             placeholder='Nom'
             value={name}
             whiteInput
@@ -72,7 +76,11 @@ class Registration extends Component {
           />
           <Input
             name='surname'
-            style={styles.input}
+            style={{
+              width: '70%',
+              marginTop: '40px',
+              paddingTop: '5%'
+            }}
             placeholder='Prénom'
             value={surname}
             whiteInput
@@ -83,7 +91,11 @@ class Registration extends Component {
           />
           <Input
             name='email'
-            style={styles.input}
+            style={{
+              width: '70%',
+              marginTop: '40px',
+              paddingTop: '5%'
+            }}
             placeholder='Email'
             type='email'
             value={email}
@@ -104,7 +116,11 @@ class Registration extends Component {
           />
           <Input
             name='password'
-            style={styles.input}
+            style={{
+              width: '70%',
+              marginTop: '40px',
+              paddingTop: '5%'
+            }}
             type='password'
             placeholder='Mot de passe'
             value={password}
@@ -115,7 +131,11 @@ class Registration extends Component {
           />
           <Input
             name='passwordConfirmation'
-            style={styles.input}
+            style={{
+              width: '70%',
+              marginTop: '40px',
+              paddingTop: '3%'
+            }}
             type='password'
             placeholder='Confirmation du mot de passe'
             value={passwordConfirmation}
