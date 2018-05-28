@@ -35,15 +35,15 @@ class TravelMenuDrawer extends Component {
   }
 
   render () {
-    const { classes } = this.props
+    const { classes, appStore, travelStore, routingStore } = this.props
     const backgroundImage = require('../../../img/backgrounds/module_background.png')
 
     const sideList = (
       <div className={classes.list}>
         <List style={{color: 'white'}}>
           {
-            this.props.appStore.allModules.map(({ id, name, icon, link }, iteration) => (
-              <Link to={`/travels/${this.props.travelStore.currentTravelId}${link}`} key={id}>
+            appStore.allModules.map(({ id, name, icon, link }, iteration) => (
+              <Link to={`/travels/${travelStore.currentTravelId}${link}`} key={id}>
                 <ListItem button>
                   <ModuleIcon icon={icon} size='60px' color='white' />
                   <div className={classes.moduleText}>
@@ -53,7 +53,7 @@ class TravelMenuDrawer extends Component {
               </Link>
             ))
           }
-          <ListItem button onClick={this.props.routingStore.goBack}>
+          <ListItem button onClick={routingStore.goBack}>
             <Icon className='module-icon'>
               arrow_back
             </Icon>
@@ -90,10 +90,6 @@ class TravelMenuDrawer extends Component {
       </Fragment>
     )
   }
-}
-
-TravelMenuDrawer.propTypes = {
-  classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(TravelMenuDrawer)

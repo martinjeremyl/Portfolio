@@ -10,6 +10,7 @@ import Registration from './pages/Authentication/Registration'
 import Travel from './pages/Travel/TravelPage'
 import TravelDetail from './pages/Travel/TravelDetailPage'
 import TravelCreation from './pages/Travel/TravelCreationPage'
+import Housing from './pages/Housing/HousingPage'
 import SpendingPage from './pages/Spending/SpendingPage'
 import Loader from './components/Loader'
 import { PrivateRoute } from './components/PrivateRoute'
@@ -55,6 +56,12 @@ class App extends Component {
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/register' component={Registration} />
                 <Route exact path='/travels/:id/createSpending' component={SpendingCreation} />
+                <PrivateRoute
+                  exact
+                  path='/travels/:id/housings'
+                  isConnected={appStore.isConnected}
+                  component={Housing}
+                />
                 <PrivateRoute
                   exact
                   path='/travels'

@@ -13,6 +13,7 @@ const routesTitle = {
   '/register': 'Inscription',
   '/travels': 'Mes voyages',
   '/travel/': 'Détails du voyage',
+  'housings': 'Liste des logements',
   'createSpending': 'Création d une dépense'
 }
 const routesTitleProxy = new Proxy(routesTitle, {

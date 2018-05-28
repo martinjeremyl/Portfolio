@@ -25,6 +25,11 @@ class TravelDetailPage extends Component {
     travelStore.setCurrentTravelId(match.params.id)
   }
 
+  renderMenuButton = () => {
+    // Render the burger menu icon with the swapeable drawer
+    return (<TravelMenuDrawer travelId={this.props.travelStore.currentTravelId} />)
+  }
+
   render () {
     const { travelStore } = this.props
 

@@ -1,7 +1,6 @@
 import { observable, action, computed, toJS, autorun } from 'mobx'
 import HousingApi from '../api/HousingApi'
 import appStore from './AppStore'
-import travelStore from './travelStore'
 
 class Housing {
   currentHousingId = observable.box('')
@@ -41,17 +40,6 @@ class Housing {
   @action
   setCurrentHousingId (HousingId) {
     this.currentHousingId.set(HousingId)
-  }
-
-  @action
-  async fetchHousings () {
-    const response = await this.api.list({
-      field: 'travelId',
-      operator: '==',
-      value: travelStore.currentTravelId
-    })
-
-    this.Housings$.replace(response)
   }
 
   @action
