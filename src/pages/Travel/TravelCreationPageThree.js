@@ -4,10 +4,7 @@ import { observer, inject } from 'mobx-react'
 import Avatar from '../../components/Avatar'
 import Input from '../../components/Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Button from '../../components/Button'
 
-const MAIL_REGEX =
-  // eslint-disable-next-line no-useless-escape
 import Button from '../../components/buttons/Button'
 
 const MAIL_REGEX =

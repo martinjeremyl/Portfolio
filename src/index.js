@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'mobx-react'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faBadgeCheck, faCheckCircle, faPen, faTrashAlt, faUserPlus, faEnvelope, faUser } from '@fortawesome/pro-light-svg-icons'
+import { faCoffee, faBadgeCheck, faCheckCircle, faPen, faTrashAlt, faUserPlus, faEnvelope, faUser, faTimes, faUsers, faCogs, faInfoCircle } from '@fortawesome/pro-light-svg-icons'
 
 import './index.css'
 
@@ -11,7 +11,7 @@ import store from './stores/RootStore'
 // Pour le HMR
 window.stores = window.stores || store
 
-const usedIcons = [faCoffee, faBadgeCheck, faCheckCircle, faPen, faTrashAlt, faUserPlus, faEnvelope, faUser]
+const usedIcons = [faCoffee, faBadgeCheck, faCheckCircle, faPen, faTrashAlt, faUserPlus, faEnvelope, faUser, faTimes, faUsers, faCogs, faInfoCircle]
 
 library.add(...usedIcons)
 
