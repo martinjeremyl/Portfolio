@@ -19,7 +19,6 @@ class AddUsersDialog extends Component {
     addRecipient (member) {
       this.props.spendingStore.addRecipient(member)
     }
-
     setCreator (member) {
       this.props.spendingStore.setCreator(member)
     }
