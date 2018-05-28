@@ -1,9 +1,16 @@
 import React from 'react'
 import { withStyles } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
+import red from 'material-ui/colors/red'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui'
 
 const materialWhiteTheme = createMuiTheme({
+  palette: {
+    error: {
+      ...red,
+      500: '#F57464'
+    }
+  },
   overrides: {
     MuiInput: {
       root: {
@@ -38,7 +45,7 @@ const materialDefaultTheme = createMuiTheme({
     },
     MuiFormLabel: {
       focused: {
-        color: '#313C47 !important'
+        color: '#F57464 !important'
       }
     }
   }

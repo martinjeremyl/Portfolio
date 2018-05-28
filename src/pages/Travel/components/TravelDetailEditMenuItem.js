@@ -13,7 +13,7 @@ const TravelDetailEditMenuItem = ({ onClick, children }) => (
       style={{
         color: '#fff',
         fontSize: 25,
-        margin: 'auto',
+        margin: '10% auto 0% auto',
         textAlign: 'center'
       }}
     >
