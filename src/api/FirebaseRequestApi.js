@@ -55,6 +55,15 @@ class FirebaseRequestApi {
     return FirebaseRequestApi.convertDocumentSnapshotToJson(object)
   }
 
+  async getSubCollection (id, subCollection) {
+    // Get the sub collection of an object. Return an empty array if there are none
+    let object = await db.collection(this.collection).doc(id).collection(subCollection).get()
+    if (object) {
+      return FirebaseRequestApi.convertDocumentsSnapshotToJson(object.docs)
+    }
+    return []
+  }
+
   async findBy ({ field = null, operator = null, value = null } = {}) {
     // Désolé
     return (await this.list({ field, operator, value }))[0]

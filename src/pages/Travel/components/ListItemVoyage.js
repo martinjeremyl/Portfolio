@@ -90,12 +90,13 @@ class ListItemVoyage extends Component {
                 display: 'flex'
               }}
             >
-              {travel.participants &&
-                travel.participants.map(item => {
+              {travel.members &&
+                travel.members.map(member => {
                   return (
                     <Avatar
-                      key={item}
-                      src={item.avatar}
+                      key={member.id}
+                      src={member.avatar}
+                      name={member.surname + ' ' + member.name}
                     />
                   )
                 })}

@@ -13,6 +13,7 @@ const routesTitle = {
   '/register': 'Inscription',
   '/travels': 'Mes voyages',
   '/travel/': 'Détails du voyage',
+  'housings': 'Liste des logements',
   'createSpending': 'Création d une dépense'
 }
 const routesTitleProxy = new Proxy(routesTitle, {
@@ -23,7 +24,8 @@ const routesTitleProxy = new Proxy(routesTitle, {
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginBottom: '56px'
   },
   flex: {
     flex: 1,

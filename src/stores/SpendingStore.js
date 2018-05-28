@@ -2,6 +2,7 @@ import { observable, action, computed, toJS, autorun } from 'mobx'
 import SpendingApi from '../api/SpendingApi'
 import appStore from './AppStore'
 import travelStore from './TravelStore'
+import UserStore from './UserStore'
 import TravelApi from '../api/TravelApi'
 
 class Spending {
@@ -13,7 +14,7 @@ class Spending {
     date: null,
     name: '',
     amount: '',
-    creator: '',
+    creator: undefined,
     recipients: []
   })
 
@@ -44,20 +45,39 @@ class Spending {
 
   @action
   async fetchSpendings () {
-    const response = await this.api.list({
-      field: 'travelId',
-      operator: '==',
-      value: travelStore.currentTravelId.get()
-    })
-    this.spendings$.replace(response)
+    let spendings = await this.getAllSpendings()
+    this.spendings$.replace(spendings)
   }
 
+  @action
+  async fetchPersonalSpendings () {
+    let spendings = await this.getAllSpendings()
+    let filteredResponse = []
+    // J'ai pas trouvé mieu en essayant avec des filter() etc ca ne fonctionnait pas
+    spendings.forEach(element => {
+      if (element.creator.userId === UserStore.user.uid) {
+        filteredResponse.push(element)
+      } else if (Array.isArray(element.recipients)) {
+        element.recipients.forEach(element => {
+          if (element.userId === UserStore.user.uid) {
+            filteredResponse.push(element)
+          }
+        })
+      }
+    })
+    this.spendings$.replace(filteredResponse)
+  }
+
+  @action
+  async getAllSpendings () {
+    const response = await this.travelApi.get(travelStore.currentTravelId.get())
+    return response.spendings
+  }
   @action
   updateSpendingCreation (key, value) {
     this.spendingCreation[key] = value
   }
 
-  @action
   setErrors (key, value) {
     this.errors[key] = value
   }
@@ -88,7 +108,7 @@ class Spending {
     } else if (spending.date !== null && spending.date.length === 0) {
       this.errors.date = 'Merci de renseigner une date'
       onError()
-    } else if (spending.creator === undefined && spending.creator !== '') {
+    } else if (spending.creator.length === 0 && spending.creator !== '') {
       this.errors.creator = 'Une dépense nécessite un payeur'
       onError()
     } else if (spending.recipients.length === 0) {
