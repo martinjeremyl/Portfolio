@@ -71,6 +71,16 @@ class Travel {
     this.travels.replace(finalTravels)
   }
 
+  async fetchCurrentTravelParticipants () {
+    let travel = await this.api.get(this.currentTravelId.get())
+    let currentTravelParticipants = await Promise.all(
+      travel.participants.map(participant =>
+        this.userApi.findBy({ field: 'userId', operator: '==', value: participant })
+      )
+    )
+    return currentTravelParticipants
+  }
+
   @action
   changeTravelCreationStep (step) {
     this.travelCreationStep = step

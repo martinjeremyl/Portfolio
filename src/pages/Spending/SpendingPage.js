@@ -5,40 +5,43 @@ import FixedActionButton from '../../components/buttons/FixedActionButton'
 import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog'
 import Header from '../../components/Header'
 import Navbar from '../../components/Navbar'
-import ListItemVoyage from './components/ListItemVoyage'
+import ListItemSpending from './components/ListItemSpending'
 
-@inject('appStore', 'travelStore')
+@inject('appStore', 'spendingStore')
 @observer
-class TravelPage extends Component {
+class SpendingPage extends Component {
   state = {
     open: false
   }
 
+  componentWillMount () {
+    this.props.spendingStore.fetchSpendings()
+  }
   handleOpen = () => {
-    this.props.appStore.openConfirmDeleteDialog('testId')
+    this.setState({ open: true })
   }
 
   handleClose = () => {
-    this.props.appStore.closeConfirmDeleteDialog()
+    this.setState({ open: false })
   }
 
-  deleteTravel = () => {
-    // Supprime le voyage dont l'id est stocké dans le store lorsque la fenêtre est ouverte
-    this.props.travelStore.delete(this.props.appStore.idObjectToDelete.get())
+  deleteSpending = () => {
+    // Supprime la dépense dont l'id est stocké dans le store lorsque la fenêtre est ouverte
+    this.props.spendingStore.delete(this.props.appStore.idObjectToDelete.get())
   }
 
   render () {
-    const { appStore, travelStore } = this.props
+    const { appStore, spendingStore } = this.props
     return (
       <div>
         <Header />
-        <Navbar />
         <div style={{ width: '100%', marginTop: '20px', textAlign: 'center' }}>
-          {travelStore.travels.map(item => <ListItemVoyage key={item.id} travel={item} />)}
+          {spendingStore.spendings.map(item => <ListItemSpending key={item.id} spending={item} />)}
         </div>
+        <Navbar />
         <ConfirmDeleteDialog
           isOpen={appStore.confirmDeleteDialogStatus.get()}
-          deleteFunction={this.deleteTravel}
+          deleteFunction={this.deleteSpending}
         />
         <Link to='travels/create'>
           <FixedActionButton color='secondary' />
@@ -48,4 +51,4 @@ class TravelPage extends Component {
   }
 }
 
-export default TravelPage
+export default SpendingPage

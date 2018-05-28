@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter, Link } from 'react-router-dom'
 import Input from '../../components/Input'
-import Button from '../../components/Button'
-import MaterialDatePicker from '../../components/DatePicker'
+import Button from '../../components/buttons/Button'
+import MaterialDatePicker from '../../components/datetime/DatePicker'
 import ImageUpload from '../../components/ImageUpload'
 
 @inject('userStore')
@@ -27,7 +27,6 @@ class Registration extends Component {
         marginTop: '30px'
       },
       button: {
-        background: 'linear-gradient(to left, #F2BF95, #E45C55)',
         color: 'white',
         width: '70%',
         marginTop: '40px'
@@ -129,9 +128,11 @@ class Registration extends Component {
             imageCallback={image => {
               userStore.setUserCreation('avatar', image)
             }}
+            fullName={`${name} ${surname}`}
           />
           <Button
             style={styles.button}
+            className='mainBackgroundColor'
             onClick={() => {
               userStore.register(userStore.authenticatingUser)
               if (Object.keys(userStore.error).length === 0) {

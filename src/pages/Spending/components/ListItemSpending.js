@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import Avatar from './Avatar'
+import Avatar from '../../../components/Avatar'
 import Card, { CardContent } from 'material-ui/Card'
 import { withStyles } from 'material-ui/styles'
-import DateDisplay from './DateDisplay'
+import DateDisplay from '../../../components/datetime/DateDisplay'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import moment from 'moment'
 
 const styles = {
   card: {
@@ -24,7 +25,7 @@ class ListItemSpending extends Component {
       <Card style={styles.card}>
         <CardContent>
           <div>
-            <DateDisplay date={spending.date} />
+            <DateDisplay date={moment(spending.date)} />
           </div>
           <div>
             <Avatar src={spending.creator.avatar} />
@@ -34,10 +35,10 @@ class ListItemSpending extends Component {
           </div>
           <div>
             <div>
-              {spending.label}
+              {spending.name}
             </div>
             <div>
-              {spending.participants && spending.recipients.map((item) => {
+              {spending.recipients && spending.recipients.map((item) => {
                 return <Avatar key={item.id} src={item.avatar} />
               })}
             </div>

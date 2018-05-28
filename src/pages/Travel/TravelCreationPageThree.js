@@ -8,6 +8,10 @@ import Button from '../../components/Button'
 
 const MAIL_REGEX =
   // eslint-disable-next-line no-useless-escape
+import Button from '../../components/buttons/Button'
+
+const MAIL_REGEX =
+  // eslint-disable-next-line no-useless-escape
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 @inject('travelStore', 'userStore')
 @observer

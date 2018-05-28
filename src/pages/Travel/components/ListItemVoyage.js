@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import Avatar from './Avatar'
 import Card, { CardContent, CardMedia } from 'material-ui/Card'
 import { withStyles } from 'material-ui/styles'
-import Link from './Link'
+
+import Avatar from '../../../components/Avatar'
+import Link from '../../../components/Link'
 
 const styles = {
   card: {
@@ -34,13 +35,13 @@ class ListItemVoyage extends Component {
   render () {
     const travel = this.props.travel
 
-    const imagePlage = require('../img/imgVoyages/Plage.jpg')
-    const imageMontain = require('../img/imgVoyages/Montain.jpg')
-    const imageAurore = require('../img/imgVoyages/Aurore.jpg')
-    const imageNeige = require('../img/imgVoyages/Neige.jpg')
-    const imageVille = require('../img/imgVoyages/Ville.jpg')
-    const imageChamp = require('../img/imgVoyages/Champ.jpg')
-    const imageForet = require('../img/imgVoyages/Foret.jpg')
+    const imagePlage = require('../../../img/imgVoyages/Plage.jpg')
+    const imageMontain = require('../../../img/imgVoyages/Montain.jpg')
+    const imageAurore = require('../../../img/imgVoyages/Aurore.jpg')
+    const imageNeige = require('../../../img/imgVoyages/Neige.jpg')
+    const imageVille = require('../../../img/imgVoyages/Ville.jpg')
+    const imageChamp = require('../../../img/imgVoyages/Champ.jpg')
+    const imageForet = require('../../../img/imgVoyages/Foret.jpg')
 
     let image
 
@@ -95,11 +96,6 @@ class ListItemVoyage extends Component {
                     <Avatar
                       key={item}
                       src={item.avatar}
-                      style={{
-                        width: '25px',
-                        height: '25px',
-                        fontSize: '25px'
-                      }}
                     />
                   )
                 })}

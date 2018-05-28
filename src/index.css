@@ -14,6 +14,7 @@ body {
   overflow-x: hidden;
   margin: 0;
   font-family: "Proxima-Nova-Alt-Regular";
+  padding-top: 60px;
 }
 
 html {
@@ -89,6 +90,10 @@ h2 {
     transform: scale(1);
     -webkit-transform: scale(1);
   }
+}
+
+.mainBackgroundColor{
+  background: linear-gradient(to left, #F2BF95, #E45C55) !important;
 }
 
 /* Correction affichage du label erreur sur petit téléphone  */

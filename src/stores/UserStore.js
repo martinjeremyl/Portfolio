@@ -57,11 +57,19 @@ class User {
       // Par défaut on met l'erreur sur le champ email
       let input = 'email'
       switch (errorCode) {
-        case errorCode === 'auth/invalid-email' || errorCode === 'auth/user-not-found' || errorCode === 'auth/user-disabled':
+        case 'auth/invalid-email':
           input = 'email'
           errorMessage = "L'adresse email renseignée est invalide"
           break
-        case errorCode === 'auth/wrong-password':
+        case 'auth/user-not-found':
+          input = 'email'
+          errorMessage = "L'utilisateur n'existe pas"
+          break
+        case 'auth/user-disabled':
+          input = 'email'
+          errorMessage = "L'utilisateur est désactivé"
+          break
+        case 'auth/wrong-password':
           input = 'password'
           errorMessage = 'Mot de passe incorrecte'
           break

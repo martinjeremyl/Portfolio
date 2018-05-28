@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter, Link } from 'react-router-dom'
-import Button from '../../components/Button'
+import Button from '../../components/buttons/Button'
 import Input from '../../components/Input'
 
 @inject('userStore')
@@ -81,8 +81,8 @@ class Login extends Component {
             })
           }}
           value='Connexion'
+          className='mainBackgroundColor'
           style={{
-            background: 'linear-gradient(to left, #F2BF95, #E45C55)',
             color: 'white',
             width: '70%',
             marginTop: '50%'

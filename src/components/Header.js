@@ -6,13 +6,14 @@ import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import IconButton from 'material-ui/IconButton'
 
-import BackButton from './BackButton'
+import BackButton from './buttons/BackButton'
 
 const routesTitle = {
   '/login': 'Connexion',
   '/register': 'Inscription',
   '/travels': 'Mes voyages',
-  '/travel/': 'Détails du voyage'
+  '/travel/': 'Détails du voyage',
+  'createSpending': 'Création d une dépense'
 }
 const routesTitleProxy = new Proxy(routesTitle, {
   get (target, property) {
@@ -38,8 +39,8 @@ class Header extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position='static'>
-          <Toolbar disableGutters>
+        <AppBar position='fixed'>
+          <Toolbar disableGutters className='mainBackgroundColor'>
             {
               renderLeftButton
                 ? renderLeftButton()

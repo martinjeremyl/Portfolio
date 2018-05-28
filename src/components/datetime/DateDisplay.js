@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { dateFormatter } from '../utils/dateTimeFormatter'
+import { dateFormatter } from '../../utils/dateTimeFormatter'
 
 export default class DateDisplay extends Component {
   render () {
