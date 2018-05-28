@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 
-import Avatar from '../../components/Avatar'
+// import Avatar from '../../components/Avatar'
 import Input from '../../components/Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -49,7 +49,7 @@ class TravelCreationPage extends Component {
         alignContent: 'center'
       },
       Avatar: {
-        flewGrow: '1'
+        flexGrow: '1'
       },
       myMail: {
         flexGrow: '4'
@@ -68,13 +68,13 @@ class TravelCreationPage extends Component {
         marginLeft: '15px'
       },
       iconStyle: {
-        flewGrow: '1'
+        flexGrow: '1'
       },
       newPersonContainer: {
         display: 'flex',
         justifyContent: 'space-evenly',
         alignContent: 'center',
-        marginTop: '20px'
+        marginBottom: '20px'
       }
     }
 
@@ -82,25 +82,25 @@ class TravelCreationPage extends Component {
       <div style={styles.fullContainer}>
         {travelStore.participants.map(
           (participant, key) =>
-            key === 0 ? (
-              <div key={key} style={styles.personContainer}>
-                <Avatar style={styles.Avatar} />
-                <Input value={participant} style={styles.myMail} disabled />
-              </div>
-            ) : (
-              <div key={key} style={styles.newPersonContainer}>
-                <FontAwesomeIcon icon={['fal', 'user']} className={'fa-2x'} style={styles.iconStyle} />
-                <Input value={participant} style={styles.newMail} />
-                <Button
-                  onClick={() => {
-                    travelStore.updateTravelCreation(
-                      'participants',
-                      travelStore.participants.filter((_, participantKey) => participantKey !== key)
-                    )
-                  }}
-                  value='Effacer'
-                />
-              </div>
+          //   key === 0 ? (
+          //     <div key={key} style={styles.personContainer}>
+          //       <Avatar style={styles.Avatar} />
+          //       <Input value={participant} style={styles.myMail} disabled />
+          //     </div>
+          //   ) : (
+            (<div key={key} style={styles.newPersonContainer}>
+              <FontAwesomeIcon icon={['fal', 'user']} className={'fa-2x'} style={styles.iconStyle} />
+              <Input value={participant} style={styles.newMail} />
+              <Button
+                onClick={() => {
+                  travelStore.updateTravelCreation(
+                    'participants',
+                    travelStore.participants.filter((_, participantKey) => participantKey !== key)
+                  )
+                }}
+                value='Effacer'
+              />
+            </div>
             )
         )}
         <div style={styles.newPersonContainer}>
