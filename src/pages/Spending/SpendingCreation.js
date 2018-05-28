@@ -57,6 +57,7 @@ class SpendingCreation extends Component {
             label={(spendingStore.errors && spendingStore.errors.name !== undefined) && spendingStore.errors.name}
             onChange={this.updateField}
             style={{width: '80%', marginTop: '20px'}}
+            className='smallLabelInputFontSize'
           />
           <Input
             name='amount'
@@ -67,6 +68,7 @@ class SpendingCreation extends Component {
             label={(spendingStore.errors && spendingStore.errors.amount !== undefined) && spendingStore.errors.amount}
             onChange={this.updateField}
             style={{width: '80%', marginTop: '20px'}}
+            className='smallLabelInputFontSize'
           />
           <MaterialDatePicker
             name='date'
@@ -75,6 +77,7 @@ class SpendingCreation extends Component {
             label={(spendingStore.errors && spendingStore.errors.date !== undefined) && spendingStore.errors.date}
             onChange={this.updateDateField}
             style={{width: '80%', marginTop: '20px'}}
+            className='smallLabelInputFontSize'
           />
 
           <div
@@ -96,7 +99,7 @@ class SpendingCreation extends Component {
               }
               {(spendingStore.errors && spendingStore.errors.creator !== undefined) && spendingStore.errors.creator}
               <Button
-                value={<FontAwesomeIcon icon={['fal', 'pen']} style={{color: '#F57464', fontSize: '20px'}}/>}
+                value={<FontAwesomeIcon icon={['fal', 'pen']} className='mainColor' style={{fontSize: '20px'}}/>}
                 onClick={() => {
                   return this.handleClickOpen(false)
                 }}
@@ -149,7 +152,7 @@ class SpendingCreation extends Component {
               }
               {(spendingStore.errors && spendingStore.errors.recipients !== undefined) && spendingStore.errors.recipients}
               <Button
-                value={<FontAwesomeIcon icon={['fal', 'pen']} style={{color: '#F57464', fontSize: '20px'}}/>}
+                value={<FontAwesomeIcon icon={['fal', 'pen']} className='mainColor' style={{ fontSize: '20px'}}/>}
                 onClick={() => {
                   return this.handleClickOpen(true)
                 }}
