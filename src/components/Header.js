@@ -24,7 +24,8 @@ const routesTitleProxy = new Proxy(routesTitle, {
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginBottom: '56px'
   },
   flex: {
     flex: 1,
