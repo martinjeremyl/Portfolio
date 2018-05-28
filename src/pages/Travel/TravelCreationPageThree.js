@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 
-import Avatar from '../../components/Avatar'
+// import Avatar from '../../components/Avatar'
 import Input from '../../components/Input'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import Button from '../../components/buttons/Button'
 
 const MAIL_REGEX =
@@ -37,51 +39,101 @@ class TravelCreationPage extends Component {
     const { travelStore } = this.props
     const { newEmail, hasEmailError } = this.state
 
+    const styles = {
+      fullContainer: {
+        padding: '20px'
+      },
+      personContainer: {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        alignContent: 'center'
+      },
+      Avatar: {
+        flexGrow: '1'
+      },
+      myMail: {
+        flexGrow: '4'
+      },
+      newMail: {
+        flexGrow: '3',
+        marginRight: '15px',
+        marginLeft: '15px'
+      },
+      deletePerson: {
+        flexGrow: '1',
+        color: 'red' // TODO color
+      },
+      iconDelete: {
+        marginRight: '15px',
+        marginLeft: '15px'
+      },
+      iconStyle: {
+        flexGrow: '1'
+      },
+      newPersonContainer: {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        alignContent: 'center',
+        marginBottom: '20px'
+      }
+    }
+
     return (
-      <div>
+      <div style={styles.fullContainer}>
         {travelStore.participants.map(
           (participant, key) =>
-            key === 0 ? (
-              <div key={key}>
-                <Avatar style={{ display: 'inline-block' }} />
-                <Input value={participant} disabled />
-              </div>
-            ) : (
-              <div key={key}>
-                <Avatar style={{ display: 'inline-block' }} />
-                <Input value={participant} />
-                <Button
-                  onClick={() => {
-                    travelStore.updateTravelCreation(
-                      'participants',
-                      travelStore.participants.filter((_, participantKey) => participantKey !== key)
-                    )
-                  }}
-                  value='Effacer'
-                />
-              </div>
+          //   key === 0 ? (
+          //     <div key={key} style={styles.personContainer}>
+          //       <Avatar style={styles.Avatar} />
+          //       <Input value={participant} style={styles.myMail} disabled />
+          //     </div>
+          //   ) : (
+            (<div key={key} style={styles.newPersonContainer}>
+              <FontAwesomeIcon icon={['fal', 'user']} className={'fa-2x'} style={styles.iconStyle} />
+              <Input value={participant} style={styles.newMail} />
+              <Button
+                onClick={() => {
+                  travelStore.updateTravelCreation(
+                    'participants',
+                    travelStore.participants.filter((_, participantKey) => participantKey !== key)
+                  )
+                }}
+                value='Effacer'
+              />
+            </div>
             )
         )}
-        <Input onChange={this.handleNewEmail} value={newEmail} error={hasEmailError} />
-        <Button
-          onClick={() => {
-            if (MAIL_REGEX.test(newEmail)) {
-              travelStore.updateTravelCreation('participants', [
-                ...travelStore.participants,
-                newEmail
-              ])
+        <div style={styles.newPersonContainer}>
+          <FontAwesomeIcon icon={['fal', 'envelope']} className={'fa-2x'} style={styles.iconStyle} />
 
-              this.setState({
-                newEmail: ''
-              })
-            } else {
-              this.setState({
-                hasEmailError: true
-              })
-            }
-          }}
-          value='Ajouter'
-        />
+          <Input
+            onChange={this.handleNewEmail}
+            style={styles.newMail}
+            value={newEmail}
+            className={'SmallLabelInputFontSize'}
+            error={hasEmailError}
+            label={hasEmailError && newEmail !== undefined ? 'Adresse email invalide' : ''}
+          />
+          <Button
+            onClick={() => {
+              if (MAIL_REGEX.test(newEmail)) {
+                travelStore.updateTravelCreation('participants', [
+                  ...travelStore.participants,
+                  newEmail
+                ])
+
+                this.setState({
+                  newEmail: ''
+                })
+              } else {
+                this.setState({
+                  hasEmailError: true
+                })
+              }
+            }}
+            value='Ajouter'
+          />
+        </div>
       </div>
     )
   }
