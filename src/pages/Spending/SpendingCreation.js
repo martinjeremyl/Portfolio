@@ -35,7 +35,7 @@ class SpendingCreation extends Component {
 
   onLoginSuccessful = () => {
     // On mettra ici la redirection vers la page détail de la dépense ou la liste des dépenses
-    console.log('success')
+    this.props.history.push('/travels')
   }
   render () {
     let {spendingStore} = this.props

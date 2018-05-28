@@ -22,10 +22,10 @@ class LabelBottomNavigation extends React.Component {
 
   fetchSpendings () {
     switch (this.state.value) {
-      case 'person':
+      case 'group':
         this.props.spendingStore.fetchSpendings()
         break
-      case 'group':
+      case 'person':
         this.props.spendingStore.fetchPersonalSpendings()
         break
       case 'balance':
@@ -42,8 +42,8 @@ class LabelBottomNavigation extends React.Component {
     const { value } = this.state
     return (
       <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
-        <BottomNavigationAction value='person' icon={<PersonIcon />} />
         <BottomNavigationAction value='group' icon={<GroupIcon />} />
+        <BottomNavigationAction value='person' icon={<PersonIcon />} />
         <BottomNavigationAction value='balance' icon={<BalanceIcon />} />
       </BottomNavigation>
     )

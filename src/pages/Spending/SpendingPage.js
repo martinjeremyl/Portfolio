@@ -8,7 +8,7 @@ import Navbar from '../../components/Navbar'
 import ListItemSpending from './components/ListItemSpending'
 import LabelBottomNavigation from '../../components/LabelBottomNavigation'
 
-@inject('appStore', 'spendingStore')
+@inject('appStore', 'spendingStore', 'travelStore')
 @observer
 class SpendingPage extends Component {
   state = {
@@ -33,7 +33,7 @@ class SpendingPage extends Component {
   }
 
   render () {
-    const { appStore, spendingStore } = this.props
+    const { appStore, spendingStore, travelStore } = this.props
     return (
       <div>
         <Header />
@@ -46,7 +46,7 @@ class SpendingPage extends Component {
           isOpen={appStore.confirmDeleteDialogStatus.get()}
           deleteFunction={this.deleteSpending}
         />
-        <Link to='travels/create'>
+        <Link to={`/travels/${travelStore.currentTravelId}/createSpending`}>
           <FixedActionButton color='secondary' />
         </Link>
       </div>

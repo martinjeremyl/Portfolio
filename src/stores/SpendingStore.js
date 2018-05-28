@@ -108,7 +108,7 @@ class Spending {
     } else if (spending.date !== null && spending.date.length === 0) {
       this.errors.date = 'Merci de renseigner une date'
       onError()
-    } else if (spending.creator === undefined && spending.creator !== '') {
+    } else if (spending.creator.length === 0 && spending.creator !== '') {
       this.errors.creator = 'Une dépense nécessite un payeur'
       onError()
     } else if (spending.recipients.length === 0) {
