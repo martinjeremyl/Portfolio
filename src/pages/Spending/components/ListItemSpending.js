@@ -28,7 +28,7 @@ class ListItemSpending extends Component {
             <DateDisplay date={moment(spending.date)} />
           </div>
           <div>
-            <Avatar src={spending.creator.avatar} />
+            <Avatar src={spending && spending.creator && spending.creator.avatar && spending.creator.avatar} />
           </div>
           <div>
             {spending.amount}

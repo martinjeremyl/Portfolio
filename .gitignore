@@ -7,4 +7,5 @@ yarn-error.log
 package-lock.json
 .vscode
 .DS_Store
+.tsconfig.json
 .editorconfig

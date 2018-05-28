@@ -6,6 +6,7 @@ import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog'
 import Header from '../../components/Header'
 import Navbar from '../../components/Navbar'
 import ListItemSpending from './components/ListItemSpending'
+import LabelBottomNavigation from '../../components/LabelBottomNavigation'
 
 @inject('appStore', 'spendingStore')
 @observer
@@ -17,6 +18,7 @@ class SpendingPage extends Component {
   componentWillMount () {
     this.props.spendingStore.fetchSpendings()
   }
+
   handleOpen = () => {
     this.setState({ open: true })
   }
@@ -35,10 +37,11 @@ class SpendingPage extends Component {
     return (
       <div>
         <Header />
-        <div style={{ width: '100%', marginTop: '20px', textAlign: 'center' }}>
-          {spendingStore.spendings.map(item => <ListItemSpending key={item.id} spending={item} />)}
-        </div>
         <Navbar />
+        <div style={{ width: '100%', marginTop: '20px', textAlign: 'center' }}>
+          {spendingStore.spendings.map(item => <ListItemSpending key={item.uid} spending={item} />)}
+        </div>
+        <LabelBottomNavigation />
         <ConfirmDeleteDialog
           isOpen={appStore.confirmDeleteDialogStatus.get()}
           deleteFunction={this.deleteSpending}
