@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { observer, inject } from 'mobx-react'
-import { Link } from 'react-router-dom'
+import React, {Component} from 'react'
+import {observer, inject} from 'mobx-react'
+import {Link} from 'react-router-dom'
 import FixedActionButton from '../../components/buttons/FixedActionButton'
 import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog'
 import Header from '../../components/Header'
@@ -15,16 +15,16 @@ class SpendingPage extends Component {
     open: false
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this.props.spendingStore.fetchSpendings()
   }
 
   handleOpen = () => {
-    this.setState({ open: true })
+    this.setState({open: true})
   }
 
   handleClose = () => {
-    this.setState({ open: false })
+    this.setState({open: false})
   }
 
   deleteSpending = () => {
@@ -32,22 +32,22 @@ class SpendingPage extends Component {
     this.props.spendingStore.delete(this.props.appStore.idObjectToDelete.get())
   }
 
-  render () {
-    const { appStore, spendingStore, travelStore } = this.props
+  render() {
+    const {appStore, spendingStore, travelStore} = this.props
     return (
       <div>
-        <Header />
-        <Navbar />
-        <div style={{ width: '100%', marginTop: '20px', textAlign: 'center' }}>
-          {spendingStore.spendings.map(item => <ListItemSpending key={item.uid} spending={item} />)}
+        <Header/>
+        <Navbar/>
+        <div style={{width: '100%', marginTop: '20px', textAlign: 'center'}}>
+          {spendingStore.spendings.map(item => <ListItemSpending key={item.uid} spending={item}/>)}
         </div>
-        <LabelBottomNavigation />
+        <LabelBottomNavigation/>
         <ConfirmDeleteDialog
           isOpen={appStore.confirmDeleteDialogStatus.get()}
           deleteFunction={this.deleteSpending}
         />
         <Link to={`/travels/${travelStore.currentTravelId}/createSpending`}>
-          <FixedActionButton color='secondary' />
+          <FixedActionButton color='secondary'/>
         </Link>
       </div>
     )
