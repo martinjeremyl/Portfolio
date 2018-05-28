@@ -95,9 +95,19 @@ h2 {
   background: linear-gradient(to left, #F2BF95, #E45C55) !important;
 }
 
+
+.iconMenuTravel{
+  font-size: 45px;
+}
+
+.labelMenuTravel{
+  font-size: 20px;
+}
+
 /* Correction affichage du label erreur sur petit téléphone  */
 @media only screen and (max-device-width:320px) {
   .SmallLabelInputFontSize label{
     font-size : 0.8em;
   }
 } 
+
