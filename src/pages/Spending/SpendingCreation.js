@@ -138,12 +138,7 @@ class SpendingCreation extends Component {
                     return (<Avatar
                       style={{
 
-                        margin: '10px 10px 10px 0',
-                        /*width: '38px',
-                        height: '38px',
-                        border: '1px solid #F57464',
-                        background: 'none',
-                        color: '#F57464'*/
+                        margin: '10px 10px 10px 0'
                       }}
                       onClick={() => {
                         return this.handleClickOpen(true)
