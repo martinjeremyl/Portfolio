@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Button from 'material-ui/Button'
-import TravelMenuDrawer from '../../components/TravelMenuDrawer'
+
+import TravelMenuDrawer from './components/TravelMenuDrawer'
 import Navbar from '../../components/Navbar'
 import Header from '../../components/Header'
-import TravelDetailEditMenu from '../../components/TravelDetailEditMenu'
+import TravelDetailEditMenu from './components/TravelDetailEditMenu'
 
 @inject('travelStore')
 @observer

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter, Link } from 'react-router-dom'
-import Button from '../../components/Button'
+import Button from '../../components/buttons/Button'
 import Input from '../../components/Input'
 
 @inject('userStore')

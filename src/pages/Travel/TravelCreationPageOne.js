@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {observer, inject} from 'mobx-react'
 
 import Input from '../../components/Input'
-import DatePicker from '../../components/DatePicker'
+import DatePicker from '../../components/datetime/DatePicker'
 import CarouselComponent from '../../components/Carousel'
 
 @inject('travelStore', 'userStore')

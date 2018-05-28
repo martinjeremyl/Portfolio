@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react'
 
 import Avatar from '../../components/Avatar'
 import Input from '../../components/Input'
-import Button from '../../components/Button'
+import Button from '../../components/buttons/Button'
 
 const MAIL_REGEX =
   // eslint-disable-next-line no-useless-escape

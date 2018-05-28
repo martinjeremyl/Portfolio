@@ -8,7 +8,7 @@ import Icon from 'material-ui/Icon'
 import Button from 'material-ui/Button'
 
 import ModuleIcon from './ModuleIcon'
-import Link from './Link'
+import Link from '../../../components/Link'
 
 const styles = {
   list: {
@@ -36,7 +36,7 @@ class TravelMenuDrawer extends Component {
 
   render () {
     const { classes } = this.props
-    const backgroundImage = require('../img/backgrounds/module_background.png')
+    const backgroundImage = require('../../../img/backgrounds/module_background.png')
 
     const sideList = (
       <div className={classes.list}>

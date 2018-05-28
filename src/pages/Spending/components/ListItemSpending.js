@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import Avatar from './Avatar'
+import Avatar from '../../../components/Avatar'
 import Card, { CardContent } from 'material-ui/Card'
 import { withStyles } from 'material-ui/styles'
-import DateDisplay from './DateDisplay'
+import DateDisplay from '../../../components/datetime/DateDisplay'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import moment from 'moment'
 
