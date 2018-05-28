@@ -1,6 +1,5 @@
-import { observable, action, computed, toJS, autorun } from 'mobx'
+import { observable, action, computed, toJS } from 'mobx'
 import HousingApi from '../api/HousingApi'
-import appStore from './AppStore'
 
 class Housing {
   currentHousingId = observable.box('')
@@ -19,12 +18,6 @@ class Housing {
 
   constructor () {
     this.api = new HousingApi()
-
-    autorun(() => {
-      if (appStore.isConnected) {
-        this.fetchHousings()
-      }
-    })
   }
 
   @computed
