@@ -1,19 +1,36 @@
+@font-face {
+  font-family: "Proxima-Nova-Alt-Regular";
+  src: url("./fonts/Proxima-Nova-Alt-Regular.otf");
+}
+
+html,
+body,
+#app,
+.container {
+  width: 100%;
+  height: 100%;
+}
 body {
   overflow-x: hidden;
   margin: 0;
+  font-family: "Proxima-Nova-Alt-Regular";
+  padding-top: 60px;
 }
+
+html {
+  font-family: "Proxima-Nova-Alt-Regular";
+}
+
 h1 {
   font-size: 2em;
   color: #757f82;
+  font-family: "Proxima-Nova-Alt-Regular";
 }
+
 h2 {
   font-size: 1.7em;
   color: #e7796c;
-}
-
-.module-icon {
-  color: white;
-  font-size: 60px !important;
+  font-family: "Proxima-Nova-Alt-Regular";
 }
 
 .spinner {
@@ -45,11 +62,12 @@ h2 {
 }
 
 .react-datepicker__time-box {
-  width: 6vw !important;
-  margin: 0 !important;
+  width: 6vw;
+  margin: 0;
 }
+
 .react-datepicker__time-container {
-  width: 9vw !important;
+  width: 9vw;
 }
 
 @-webkit-keyframes sk-bounce {
@@ -72,4 +90,8 @@ h2 {
     transform: scale(1);
     -webkit-transform: scale(1);
   }
+}
+
+.mainBackgroundColor{
+  background: linear-gradient(to left, #F2BF95, #E45C55) !important;
 }

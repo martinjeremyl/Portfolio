@@ -1,46 +1,78 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import {observer, inject} from 'mobx-react'
+import Stepper, {Step, StepButton} from 'material-ui/Stepper'
 
-import Input from '../../components/Input'
-import Button from '../../components/Button'
-import { observer, inject } from 'mobx-react'
-import userStore from '../../stores/UserStore'
+import TravelCreationPageOne from './TravelCreationPageOne'
+import TravelCreationPageTwo from './TravelCreationPageTwo'
+import TravelCreationPageThree from './TravelCreationPageThree'
 
-@inject('travelStore', 'userStore')
+import Header from '../../components/Header'
+
+@inject('userStore', 'travelStore')
 @observer
 class TravelCreationPage extends Component {
   state = {
-    name: '',
-    dateBegin: Date.now(),
-    dateEnd: Date.now(),
     participants: [this.props.userStore.user.uid],
-    modules: []
+    activeStep: 2,
+    completed: new Set(),
+    skipped: new Set()
   }
 
-  updateField = ({ target: { name, value } }) => {
+  handleInputsChange = ({target: {name, value}}) => {
+    this.props.travelStore.updateTravelCreation(name, value)
+  }
+
+  handleStep = step => {
     this.setState({
-      [name]: value
+      activeStep: step
     })
   }
 
-  render () {
-    const { name } = this.state
+  isStepComplete(step) {
+    return this.state.completed.has(step)
+  }
 
+  renderSwitch = () => {
+    switch (this.state.activeStep) {
+      case 0:
+        return <TravelCreationPageOne handleInputsChange={this.handleInputsChange}/>
+
+      case 1:
+        return <TravelCreationPageTwo handleInputsChange={this.handleInputsChange}/>
+
+      case 2:
+        return <TravelCreationPageThree handleInputsChange={this.handleInputsChange}/>
+
+      default:
+        return null
+    }
+  }
+
+  render() {
     return (
-      <div className='container is-fluid'>
-        <Input name='name' onChange={this.updateField} value={name} />
-        {/* <Input
-          name='dateBegin'
-          onChange={this.updateField}
-          value={dateBegin}
-        />
-        <Input name='dateEnd' onChange={this.updateField} value={dateEnd} />
-        */}
-        <Button color='primary' onClick={() => {
-          this.props.travelStore.create(this.state)
-          this.props.parent.handleClose()
-        }}>
-          Ajouter
-        </Button>
+      <div style={{width: '100%'}}>
+        <Header/>
+        {this.renderSwitch()}
+
+        <Stepper
+          alternativeLabel
+          nonLinear
+          activeStep={this.state.activeStep}
+          style={{position: 'fixed', bottom: '0px', width: '100%', padding: '15px 0px 0px 0px'}}
+        >
+          {[1, 2, 3, 4].map((label, index) => {
+            return (
+              <Step key={label}>
+                <StepButton
+                  onClick={() => {
+                    this.handleStep(index)
+                  }}
+                  completed={this.isStepComplete(index)}
+                />
+              </Step>
+            )
+          })}
+        </Stepper>
       </div>
     )
   }

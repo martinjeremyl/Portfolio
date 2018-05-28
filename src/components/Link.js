@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
-import { observer, inject } from 'mobx-react'
 import { Link as RRLink } from 'react-router-dom'
 
-@inject('appStore')
-@observer
 class Link extends Component {
   render () {
     return (
       <RRLink
         style={{
-          backgroundColor: 'transparent',
-          color: '#000'
+          color: 'inherit',
+          textDecoration: 'none',
+          fontSize: '20px'
         }}
-        to={this.props.to}
+        {...this.props}
       >
         {this.props.children}
       </RRLink>

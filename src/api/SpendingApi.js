@@ -2,7 +2,7 @@ import FirebaseRequestApi from './FirebaseRequestApi'
 
 class SpendingApi extends FirebaseRequestApi {
   constructor () {
-    super('spending')
+    super('spendings')
   }
 }
 

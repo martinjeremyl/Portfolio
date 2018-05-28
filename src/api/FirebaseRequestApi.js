@@ -34,9 +34,7 @@ class FirebaseRequestApi {
    * Liste les documents d'une collection
    * @param {*} whereClause Paramètre optionnel ajoutant une clause where sur la requête
    */
-  async list (whereClause = { field: null, operator: null, value: null }) {
-    const { field, operator, value } = whereClause
-
+  async list ({ field = null, operator = null, value = null } = {}) {
     if (field && operator && value) {
       return FirebaseRequestApi.convertDocumentsSnapshotToJson(
         (await db
@@ -52,11 +50,14 @@ class FirebaseRequestApi {
   }
 
   // TODO: use convertDocumentsSnapshotToJson()
-  get (id) {
-    return db
-      .collection(this.collection)
-      .doc(id)
-      .get()
+  async get (id) {
+    let object = await db.collection(this.collection).doc(id).get()
+    return FirebaseRequestApi.convertDocumentSnapshotToJson(object)
+  }
+
+  async findBy ({ field = null, operator = null, value = null } = {}) {
+    // Désolé
+    return (await this.list({ field, operator, value }))[0]
   }
 
   // TODO: return OK response

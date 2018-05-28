@@ -9,10 +9,11 @@ import Login from './pages/Authentication/Login'
 import Registration from './pages/Authentication/Registration'
 import Travel from './pages/Travel/TravelPage'
 import TravelDetail from './pages/Travel/TravelDetailPage'
-
+import TravelCreation from './pages/Travel/TravelCreationPage'
+import SpendingPage from './pages/Spending/SpendingPage'
 import Loader from './components/Loader'
-import Header from './components/Header'
 import { PrivateRoute } from './components/PrivateRoute'
+import SpendingCreation from './pages/Spending/SpendingCreation'
 
 const appColorPalette = {
   light: '#ffb09c',
@@ -45,24 +46,50 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <Router history={routingStore.history}>
-          {
-            appStore.isLoading
-              ? <Loader />
-              : (
-                <Fragment>
-                  <Switch>
-                    <Route exact path='/' component={Authentication} />
-                    <Route exact path='/login' component={Login} />
-                    <Route exact path='/register' component={Registration} />
-                    <PrivateRoute exact path='/travels' isConnected={appStore.isConnected} component={Travel} />
-                    <PrivateRoute exact path='/travel/:id' isConnected={appStore.isConnected} component={TravelDetail} />
-
-                    {/* fallback route to redirect the user */}
-                    <Route path='*' component={Authentication} />
-                  </Switch>
-                </Fragment>
-              )
-          }
+          {appStore.isLoading ? (
+            <Loader />
+          ) : (
+            <Fragment>
+              <Switch>
+                <Route exact path='/' component={Authentication} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/register' component={Registration} />
+                <Route exact path='/travels/:id/createSpending' component={SpendingCreation} />
+                <PrivateRoute
+                  exact
+                  path='/travels'
+                  isConnected={appStore.isConnected}
+                  component={Travel}
+                />
+                <PrivateRoute
+                  exact
+                  path='/travels/create'
+                  isConnected={appStore.isConnected}
+                  component={TravelCreation}
+                />
+                <PrivateRoute
+                  exact
+                  path='/travels/:id'
+                  isConnected={appStore.isConnected}
+                  component={TravelDetail}
+                />
+                <PrivateRoute
+                  exact
+                  path='/spending/:id'
+                  isConnected={appStore.isConnected}
+                  component={SpendingPage}
+                />
+                <PrivateRoute
+                  exact
+                  path='/travels/:id/spendings'
+                  isConnected={appStore.isConnected}
+                  component={SpendingPage}
+                />
+                {/* fallback route to redirect the user */}
+                <Route path='*' component={Authentication} />
+              </Switch>
+            </Fragment>
+          )}
         </Router>
       </MuiThemeProvider>
     )

@@ -7,9 +7,7 @@ import { withRouter } from 'react-router'
 @observer
 class Authentication extends Component {
   render () {
-    return this.props.appStore.isConnected
-      ? <Redirect to='/travels' />
-      : <Redirect to='/login' />
+    return this.props.appStore.isConnected ? <Redirect to='/travels' /> : <Redirect to='/login' />
   }
 }
 
