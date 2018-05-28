@@ -5,11 +5,11 @@ import Avatar from '../../../components/Avatar'
 import { withStyles } from 'material-ui/styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Grid from '@material-ui/core/Grid'
+import Card from 'material-ui/Card'
 
 const styles = {
   card: {
-    padding: '8px',
-    borderBottom: '1px solid #eee'
+    width: '100%'
   },
   spender: {
     position: 'relative',
@@ -40,16 +40,11 @@ const styles = {
   },
   spendName: {
     textAlign: 'left',
-    fontSize: '1.5em',
+    fontSize: '1.2em',
     padding: '1%',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     whiteSpace: 'nowrap'
-  },
-  icone: {
-    border: '1px solid',
-    borderRadius: '50%',
-    padding: '11px'
   }
 }
 
@@ -60,29 +55,31 @@ class ListItemSpending extends Component {
     const spending = this.props.spending
 
     return (
-      <div style={styles.card}>
-        <Grid container spacing={0}>
-          <Grid item xs={2} style={styles.spender}>
-            <div style={styles.dottedLine} />
-            <Avatar src={spending.creator.avatar} style={{margin: 'auto'}} />
+      <div>
+        <Card style={styles.card}>
+          <Grid container spacing={0} style={{padding: '8px'}}>
+            <Grid item xs={2} style={styles.spender}>
+              <div style={styles.dottedLine} />
+              <Avatar src={spending.creator && spending.creator.avatar} style={{margin: 'auto'}} />
+            </Grid>
+            <Grid item xs={3} style={styles.amount}>
+              {spending.amount} €
+            </Grid>
+            <Grid item xs={5}>
+              <div style={styles.spendName}>
+                {spending.name}
+              </div>
+              <div style={styles.rowAvatar}>
+                {spending.recipients && spending.recipients.map((item) => {
+                  return <Avatar key={item.id} src={item.avatar} style={styles.avatarRecipients} />
+                })}
+              </div>
+            </Grid>
+            <Grid item xs={2} style={styles.amount}>
+              <FontAwesomeIcon icon={['fal', 'pen']} className={'fa-lg mainColor'} />
+            </Grid>
           </Grid>
-          <Grid item xs={3} style={styles.amount}>
-            {spending.amount} €
-          </Grid>
-          <Grid item xs={5}>
-            <div style={styles.spendName}>
-              {spending.name}
-            </div>
-            <div style={styles.rowAvatar}>
-              {spending.recipients && spending.recipients.map((item) => {
-                return <Avatar key={item.id} src={item.avatar} style={styles.avatarRecipients} />
-              })}
-            </div>
-          </Grid>
-          <Grid item xs={2} style={styles.amount}>
-            <FontAwesomeIcon icon={['fal', 'pen']} className={'fa-lg mainColor'} style={styles.icone} />
-          </Grid>
-        </Grid>
+        </Card>
       </div>
     )
   }

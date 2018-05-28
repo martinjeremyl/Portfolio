@@ -9,7 +9,7 @@ import { observer, inject } from 'mobx-react'
 
 const styles = {
   root: {
-    width: 500
+    width: '100%'
   }
 }
 
