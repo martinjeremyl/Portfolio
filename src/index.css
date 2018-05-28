@@ -14,6 +14,7 @@ body {
   overflow-x: hidden;
   margin: 0;
   font-family: "Proxima-Nova-Alt-Regular";
+  padding-top: 60px;
 }
 
 html {
