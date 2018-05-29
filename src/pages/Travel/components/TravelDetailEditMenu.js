@@ -24,7 +24,8 @@ const TravelDetailEditMenu = ({isEditTravelMenuOpen, closeEditTravelMenu}) => (
         left: 0,
         height: '100vh',
         width: '100vw',
-        marginTop: '56px',
+        zIndex: '100',
+        paddingTop: '10%'
       }}>
         <div
           style={{
