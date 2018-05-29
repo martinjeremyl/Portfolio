@@ -27,6 +27,9 @@ const styles = {
     padding: '0',
     margin: '0',
     color: 'black'
+  },
+  avatar: {
+    margin: '0px 5px'
   }
 }
 @inject('userStore', 'travelStore')
@@ -91,14 +94,13 @@ class ListItemVoyage extends Component {
               }}
             >
               {travel.members &&
-                travel.members.map(member => {
-                  return (
-                    <Avatar
-                      key={member.id}
-                      src={member.avatar}
-                      name={member.surname + ' ' + member.name}
-                    />
-                  )
+                travel.members.map((recipient, index) => {
+                  if (index < 4) {
+                    return <Avatar key={recipient.id} style={styles.avatar} src={recipient.avatar} name={`${recipient.name} ${recipient.surname}`} />
+                  } else if (index === travel.members.length - 1) {
+                    return (<Avatar style={styles.avatar}
+                      name={`+ ${travel.members.length - 4}`} />)
+                  }
                 })}
             </div>
           </CardMedia>
