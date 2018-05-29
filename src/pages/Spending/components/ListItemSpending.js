@@ -17,8 +17,8 @@ const styles = {
     display: 'flex'
   },
   dottedLine: {
-    borderRight: 'dashed 3px',
-    width: '50%',
+    borderRight: 'dashed 4px',
+    width: 'calc(50% - 2px)',
     height: '100%',
     position: 'absolute'
   },
