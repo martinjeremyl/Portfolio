@@ -53,14 +53,18 @@ const styles = {
 class ListItemSpending extends Component {
   render () {
     const spending = this.props.spending
-
+    console.log(spending.creator)
     return (
       <div>
         <Card style={styles.card}>
           <Grid container spacing={0} style={{padding: '8px'}}>
             <Grid item xs={2} style={styles.spender}>
               <div style={styles.dottedLine} />
-              <Avatar src={spending.creator && spending.creator.avatar} style={{margin: 'auto'}} />
+              <Avatar
+                src={spending.creator && spending.creator.avatar}
+                // name={`${spending.creator.name} ${spending.creator.surname}`}
+                style={{margin: 'auto'}}
+              />
             </Grid>
             <Grid item xs={3} style={styles.amount}>
               {spending.amount} €
@@ -70,9 +74,19 @@ class ListItemSpending extends Component {
                 {spending.name}
               </div>
               <div style={styles.rowAvatar}>
-                {spending.recipients && spending.recipients.map((item) => {
-                  return <Avatar key={item.id} src={item.avatar} style={styles.avatarRecipients} />
+
+                {spending.recipients && spending.recipients.map((recipient, index) => {
+                  if (index < 3) {
+                    return <Avatar key={recipient.id} src={recipient.avatar} name={`${recipient.name} ${recipient.surname}`} style={styles.avatarRecipients} />
+                  } else if (index === spending.recipients.length - 1) {
+                    return (<Avatar style={styles.avatarRecipients}
+                      onClick={() => {
+                        return this.handleClickOpen(true)
+                      }}
+                      name={`+ ${spending.recipients.length - 3}`} />)
+                  }
                 })}
+
               </div>
             </Grid>
             <Grid item xs={2} style={styles.amount}>
