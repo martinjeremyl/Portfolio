@@ -14,15 +14,25 @@ class SpendingCreation extends Component {
   state = {
     open: false,
     isMultiple: false,
-    dialogEntityType: 'spending'
+    dialogEntityType: 'spending',
+    isModification: this.props.location.pathname.includes('edit')
   }
 
   updateField = ({target: {name, value}}) => {
     this.props.spendingStore.updateSpendingCreation(name, value)
   }
 
-  updateDateField = (value) => this.props.spendingStore.updateSpendingCreation('date', value.format())
+  componentDidMount () {
+    this.state.isModification || this.props.spendingStore.currentSpendingId.get().length === 0 ? this.getSpending() : this.props.spendingStore.clearSpendingCreation()
+  }
+  updateDateField = value => {
+    this.props.spendingStore.updateSpendingCreation('date', value.format())
+  }
 
+  async getSpending () {
+    await this.props.spendingStore.fetchSpendings()
+    this.props.spendingStore.setSpendingCreation(this.props.spendingStore.spendings[this.props.match.params.index])
+  }
   handleClickOpen = (multiple) => {
     this.setState({
       open: true,
@@ -44,6 +54,7 @@ class SpendingCreation extends Component {
     const {name, amount, date, creator, recipients} = spendingStore.spendingCreation
     return (
       <div>
+
         <Header/>
         <div style={{
           textAlign: 'center',

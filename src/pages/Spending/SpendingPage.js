@@ -15,7 +15,10 @@ class SpendingPage extends Component {
     open: false
   }
 
-  componentWillMount() {
+
+  componentWillMount () {
+    this.props.travelStore.setCurrentTravelId(this.props.match.params.id)
+
     this.props.spendingStore.fetchSpendings()
   }
 
@@ -36,10 +39,12 @@ class SpendingPage extends Component {
     const {appStore, spendingStore, travelStore} = this.props
     return (
       <div>
-        <Header/>
-        <Navbar/>
-        <div style={{width: '100%', marginTop: '20px', textAlign: 'center'}}>
-          {spendingStore.spendings.map(item => <ListItemSpending key={item.uid} spending={item}/>)}
+
+        <Header />
+        <Navbar />
+        <div style={{ width: '100%', marginTop: '20px', textAlign: 'center' }}>
+          {spendingStore.spendings.map((item, index) => item !== undefined && <ListItemSpending key={index} index={index} spending={item} />)}
+
         </div>
         <LabelBottomNavigation/>
         <ConfirmDeleteDialog
