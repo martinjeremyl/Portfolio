@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import { Link } from 'react-router-dom'
 import FixedActionButton from '../../components/buttons/FixedActionButton'
-import OneDepense from '../../components/OneDepense'
 import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog'
 import Header from '../../components/Header'
 import Navbar from '../../components/Navbar'
@@ -30,12 +29,6 @@ class TravelPage extends Component {
 
   render () {
     const { appStore, travelStore } = this.props
-    const depenseTest = {
-      name: 'Taxi',
-      spenderAvatar: '',
-      amount: 235,
-      recipientsAvatars: ['']
-    }
     return (
       <div>
         <Header />
