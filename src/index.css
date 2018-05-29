@@ -10,6 +10,7 @@ body,
   width: 100%;
   height: 100%;
 }
+
 body {
   overflow-x: hidden;
   margin: 0;
@@ -91,8 +92,20 @@ h2 {
   }
 }
 
-.mainBackgroundColor{
+.mainBackgroundColor {
   background: linear-gradient(to left, #F2BF95, #E45C55) !important;
+}
+
+.mainColor{
+  color: #F57464;
+}
+
+.mainColor {
+  color: #F57464;
+}
+
+.smallLabelInputFontSize label{
+  font-size: 0.7em;
 }
 
 
@@ -109,5 +122,4 @@ h2 {
   .SmallLabelInputFontSize label{
     font-size : 0.8em;
   }
-} 
-
+}

@@ -10,7 +10,7 @@ class BackButton extends Component {
         aria-label='Menu'
         onClick={this.props.onClick}
       >
-        <ArrowBack />
+        <ArrowBack style={{fontSize: '30px'}} />
       </IconButton>
     )
   }
