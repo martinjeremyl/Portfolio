@@ -5,7 +5,6 @@ import FixedActionButton from '../../components/buttons/FixedActionButton'
 
 import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog'
 import Header from '../../components/Header'
-import Navbar from '../../components/Navbar'
 import ListItemSpending from './components/ListItemSpending'
 import LabelBottomNavigation from '../../components/LabelBottomNavigation'
 import IconButton from 'material-ui/IconButton'
@@ -50,11 +49,9 @@ class SpendingPage extends Component {
     const {appStore, spendingStore, travelStore} = this.props
     return (
       <div>
-        <Header renderRightButton={this.addButton}/>
-        <Navbar/>
-        <div style={{width: '100%', marginTop: '20px', textAlign: 'center'}}>
-          {spendingStore.spendings.map((item, index) => item !== undefined &&
-            <ListItemSpending key={index} index={index} spending={item}/>)}
+        <Header renderRightButton={this.addButton} />
+        <div style={{ width: '100%', textAlign: 'center' }}>
+          {spendingStore.spendings.map((item, index) => item !== undefined && <ListItemSpending key={index} index={index} spending={item} />)}
 
         </div>
         <LabelBottomNavigation/>
