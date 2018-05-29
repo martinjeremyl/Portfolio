@@ -15,7 +15,6 @@ body {
   overflow-x: hidden;
   margin: 0;
   font-family: "Proxima-Nova-Alt-Regular";
-  padding-top: 60px;
 }
 
 html {
@@ -120,4 +119,4 @@ h2 {
   .SmallLabelInputFontSize label{
     font-size : 0.8em;
   }
-} 
+}

@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react'
 import {observer, inject} from 'mobx-react'
 import {Link} from 'react-router-dom'
@@ -11,7 +10,6 @@ import ListItemSpending from './components/ListItemSpending'
 import LabelBottomNavigation from '../../components/LabelBottomNavigation'
 import IconButton from 'material-ui/IconButton'
 import AddIcon from '@material-ui/icons/Add'
-import { Link } from 'react-router-dom'
 
 @inject('appStore', 'spendingStore', 'travelStore')
 @observer
@@ -20,8 +18,7 @@ class SpendingPage extends Component {
     open: false
   }
 
-
-  componentWillMount () {
+  componentWillMount() {
     this.props.travelStore.setCurrentTravelId(this.props.match.params.id)
 
     this.props.spendingStore.fetchSpendings()
@@ -43,20 +40,21 @@ class SpendingPage extends Component {
     return (
       <Link to={`/travels/${this.props.travelStore.currentTravelId}/createSpending`}>
         <IconButton color='inherit' aria-label='Menu'>
-          <AddIcon style={{color: 'white', fontSize: '36px'}} />
+          <AddIcon style={{color: 'white', fontSize: '36px'}}/>
         </IconButton>
       </Link>
     )
   }
 
-  render () {
-    const { appStore, spendingStore } = this.props
+  render() {
+    const {appStore, spendingStore, travelStore} = this.props
     return (
       <div>
-        <Header renderRightButton={this.addButton} />
-        <Navbar />
-        <div style={{ width: '100%', marginTop: '20px', textAlign: 'center' }}>
-          {spendingStore.spendings.map((item, index) => item !== undefined && <ListItemSpending key={index} index={index} spending={item} />)}
+        <Header renderRightButton={this.addButton}/>
+        <Navbar/>
+        <div style={{width: '100%', marginTop: '20px', textAlign: 'center'}}>
+          {spendingStore.spendings.map((item, index) => item !== undefined &&
+            <ListItemSpending key={index} index={index} spending={item}/>)}
 
         </div>
         <LabelBottomNavigation/>
@@ -64,10 +62,6 @@ class SpendingPage extends Component {
           isOpen={appStore.confirmDeleteDialogStatus.get()}
           deleteFunction={this.deleteSpending}
         />
-
-        <Link to={`/travels/${travelStore.currentTravelId}/createSpending`}>
-          <FixedActionButton color='secondary'/>
-        </Link>
       </div>
     )
   }
