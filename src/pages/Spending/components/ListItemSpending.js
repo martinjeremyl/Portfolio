@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Avatar from '../../../components/Avatar'
-// import Card, { CardContent } from 'material-ui/Card'
+import Card from 'material-ui/Card'
 import { withStyles } from 'material-ui/styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Grid from '@material-ui/core/Grid'
-import Card from 'material-ui/Card'
+// import moment from 'moment'
+// import DateDisplay from '../../../components/datetime/DateDisplay'
 
 const styles = {
   card: {
@@ -53,67 +54,50 @@ class ListItemSpending extends Component {
   render () {
     const { spending, spendingStore, routingStore, travelStore, index } = this.props
     return (
+
       <Card style={styles.card}>
-        <CardContent>
-          <div>
-            <DateDisplay date={spending && spending.date !== undefined && moment(spending.date)} />
-          </div>
-          <div>
-            <Avatar src={spending && spending.creator && spending.creator.avatar && spending.creator.avatar} />
-          </div>
-          <div>
-            {spending !== undefined && spending.amount}
-          </div>
-          <div>
-            <div>
-        <Card style={styles.card}>
-          <Grid container spacing={0} style={{padding: '8px'}}>
-            <Grid item xs={2} style={styles.spender}>
-              <div style={styles.dottedLine} />
-              <Avatar
-                src={spending.creator && spending.creator.avatar}
-                // name={`${spending.creator.name} ${spending.creator.surname}`}
-                style={{margin: 'auto'}}
-              />
-            </Grid>
-            <Grid item xs={3} style={styles.amount}>
-              {spending.amount} €
-            </Grid>
-            <Grid item xs={5}>
-              <div style={styles.spendName}>
-                {spending.name}
-              </div>
-              <div style={styles.rowAvatar}>
-
-                {spending.recipients && spending.recipients.map((recipient, index) => {
-                  if (index < 3) {
-                    return <Avatar key={recipient.id} src={recipient.avatar} name={`${recipient.name} ${recipient.surname}`} style={styles.avatarRecipients} />
-                  } else if (index === spending.recipients.length - 1) {
-                    return (<Avatar style={styles.avatarRecipients}
-                      onClick={() => {
-                        return this.handleClickOpen(true)
-                      }}
-                      name={`+ ${spending.recipients.length - 3}`} />)
-                  }
-                })}
-
-              </div>
-            </Grid>
-            <Grid item xs={2} style={styles.amount}>
-              <FontAwesomeIcon icon={['fal', 'pen']} className={'fa-lg mainColor'} />
-            </Grid>
+        <Grid container spacing={0} style={{padding: '8px'}}>
+          <Grid item xs={2} style={styles.spender}>
+            <div style={styles.dottedLine} />
+            <Avatar
+              src={spending.creator && spending.creator.avatar}
+              name={`${spending.creator.name} ${spending.creator.surname}`}
+              style={{margin: 'auto'}}
+            />
           </Grid>
-        </Card>
-      </div>
+          <Grid item xs={3} style={styles.amount}>
+            {spending.amount} €
+          </Grid>
+          <Grid item xs={5}>
+            <div style={styles.spendName}>
+              {spending.name}
+            </div>
+            <div style={styles.rowAvatar}>
+              {spending.recipients && spending.recipients.map((recipient, index) => {
+                if (index < 3) {
+                  return <Avatar key={recipient.id} src={recipient.avatar} name={`${recipient.name} ${recipient.surname}`} style={styles.avatarRecipients} />
+                } else if (index === spending.recipients.length - 1) {
+                  return (<Avatar style={styles.avatarRecipients}
+                    onClick={() => {
+                      return this.handleClickOpen(true)
+                    }}
+                    name={`+ ${spending.recipients.length - 3}`} />)
+                }
+              })}
+
+            </div>
+          </Grid>
+          <Grid item xs={2} style={styles.amount}>
+            <FontAwesomeIcon icon={['fal', 'pen']} className={'fa-lg mainColor'}
+              onClick={() => {
+                spendingStore.setSpendingCreation(spending)
+                spendingStore.setCurrentSpendingId(index)
+                routingStore.history.push(`/travels/${travelStore.currentTravelId}/editSpending/${index}`)
+              }} />
+          </Grid>
+        </Grid>
+      </Card>
     )
-            <FontAwesomeIcon onClick={() => {
-              spendingStore.setSpendingCreation(spending)
-              spendingStore.setCurrentSpendingId(index)
-              routingStore.history.push(`/travels/${travelStore.currentTravelId}/editSpending/${index}`)
-            }} icon={['fal', 'pen']} />
-          </div>
-        </CardContent>
-      </Card>)
   }
 }
 export default withStyles(styles)(ListItemSpending)
