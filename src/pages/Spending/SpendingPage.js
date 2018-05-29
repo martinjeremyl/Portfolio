@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog'
 import Header from '../../components/Header'
-import Navbar from '../../components/Navbar'
 import ListItemSpending from './components/ListItemSpending'
 import LabelBottomNavigation from '../../components/LabelBottomNavigation'
 import IconButton from 'material-ui/IconButton'
@@ -48,8 +47,7 @@ class SpendingPage extends Component {
     return (
       <div>
         <Header renderRightButton={this.addButton} />
-        <Navbar />
-        <div style={{ width: '100%', marginTop: '20px', textAlign: 'center' }}>
+        <div style={{ width: '100%', textAlign: 'center' }}>
           {spendingStore.spendings.map((item, index) => item !== undefined && <ListItemSpending key={index} index={index} spending={item} />)}
         </div>
         <LabelBottomNavigation />
