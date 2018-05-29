@@ -13,15 +13,25 @@ class SpendingCreation extends Component {
   state = {
     open: false,
     isMultiple: false,
-    dialogEntityType: 'spending'
+    dialogEntityType: 'spending',
+    isModification: this.props.location.pathname.includes('edit')
   }
 
   updateField = ({ target: {name, value} }) => {
     this.props.spendingStore.updateSpendingCreation(name, value)
   }
 
-  updateDateField = (value) => this.props.spendingStore.updateSpendingCreation('date', value.format())
+  componentDidMount () {
+    this.state.isModification || this.props.spendingStore.currentSpendingId.get().length === 0 ? this.getSpending() : this.props.spendingStore.clearSpendingCreation()
+  }
+  updateDateField = value => {
+    this.props.spendingStore.updateSpendingCreation('date', value.format())
+  }
 
+  async getSpending () {
+    await this.props.spendingStore.fetchSpendings()
+    this.props.spendingStore.setSpendingCreation(this.props.spendingStore.spendings[this.props.match.params.index])
+  }
   handleClickOpen = (multiple) => {
     this.setState({
       open: true,
@@ -79,7 +89,7 @@ class SpendingCreation extends Component {
         />
         <h3>Membres concernés :</h3>
         {
-          recipients.map(recipient => <Avatar name={`${recipient.name} ${recipient.surname}`} />)
+          recipients !== undefined && recipients.map(recipient => <Avatar name={`${recipient.name} ${recipient.surname}`} />)
         }
         {(spendingStore.errors && spendingStore.errors.recipients !== undefined) && spendingStore.errors.recipients }
         <Button
@@ -93,18 +103,45 @@ class SpendingCreation extends Component {
           isMultiple={this.state.isMultiple}
           dialogEntityType={this.state.dialogEntityType}
         />
-        <Button
-          value='Valider'
-          onClick={() => {
-            spendingStore.create({
-              onSuccess: this.onLoginSuccessful,
-              onError: () => {
-                this.setState({})
-              },
-              travelId: this.props.match.params.id
-            })
-          }}
-        />
+        { this.state.isModification === false &&
+          <Button
+            value='Valider'
+            onClick={() => {
+              spendingStore.create({
+                onSuccess: this.onLoginSuccessful,
+                onError: () => {
+                  this.setState({})
+                },
+                travelId: this.props.match.params.id
+              })
+            }}
+          />
+        }
+        { this.state.isModification === true &&
+        <div>
+          <Button
+            value='Modifier'
+            onClick={() => {
+              spendingStore.update({
+                onSuccess: this.onLoginSuccessful,
+                onError: () => {
+                  this.setState({})
+                },
+                travelId: this.props.match.params.id
+              })
+            }}
+          />
+          <Button
+            value='supprimer'
+            onClick={() => {
+              spendingStore.delete({
+                onSuccess: this.onLoginSuccessful,
+                travelId: this.props.match.params.id
+              })
+            }}
+          />
+        </div>
+        }
       </div>
     )
   }

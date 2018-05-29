@@ -16,35 +16,39 @@ const styles = {
     paddingTop: '56.25%'
   }
 }
-@inject('appStore', 'userStore')
+@inject('spendingStore', 'travelStore', 'routingStore')
 @observer
 class ListItemSpending extends Component {
   render () {
-    const spending = this.props.spending
+    const { spending, spendingStore, routingStore, travelStore, index } = this.props
     return (
       <Card style={styles.card}>
         <CardContent>
           <div>
-            <DateDisplay date={moment(spending.date)} />
+            <DateDisplay date={spending && spending.date !== undefined && moment(spending.date)} />
           </div>
           <div>
             <Avatar src={spending && spending.creator && spending.creator.avatar && spending.creator.avatar} />
           </div>
           <div>
-            {spending.amount}
+            {spending !== undefined && spending.amount}
           </div>
           <div>
             <div>
-              {spending.name}
+              {spending !== undefined && spending.name}
             </div>
             <div>
-              {spending.recipients && spending.recipients.map((item) => {
+              {spending !== undefined && spending.recipients && spending.recipients.map((item) => {
                 return <Avatar key={item.id} src={item.avatar} />
               })}
             </div>
           </div>
           <div>
-            <FontAwesomeIcon icon={['fal', 'pen']} />
+            <FontAwesomeIcon onClick={() => {
+              spendingStore.setSpendingCreation(spending)
+              spendingStore.setCurrentSpendingId(index)
+              routingStore.history.push(`/travels/${travelStore.currentTravelId}/editSpending/${index}`)
+            }} icon={['fal', 'pen']} />
           </div>
         </CardContent>
       </Card>)

@@ -54,13 +54,13 @@ class Spending {
     let spendings = await this.getAllSpendings()
     let filteredResponse = []
     // J'ai pas trouvé mieu en essayant avec des filter() etc ca ne fonctionnait pas
-    spendings.forEach(element => {
+    spendings.forEach((element, index) => {
       if (element.creator.userId === UserStore.user.uid) {
-        filteredResponse.push(element)
+        filteredResponse[index] = element
       } else if (Array.isArray(element.recipients)) {
-        element.recipients.forEach(element => {
-          if (element.userId === UserStore.user.uid) {
-            filteredResponse.push(element)
+        element.recipients.forEach(e => {
+          if (e.userId === UserStore.user.uid) {
+            filteredResponse[index] = element
           }
         })
       }
@@ -76,6 +76,18 @@ class Spending {
   @action
   updateSpendingCreation (key, value) {
     this.spendingCreation[key] = value
+  }
+
+  @action
+  async clearSpendingCreation () {
+    this.setSpendingCreation({
+      id: '',
+      date: null,
+      name: '',
+      amount: '',
+      creator: undefined,
+      recipients: []
+    })
   }
 
   setErrors (key, value) {
@@ -95,24 +107,23 @@ class Spending {
   setCreator (creator) {
     this.spendingCreation.creator = creator
   }
+
+  @action
+  setSpendingCreation (data) {
+    this.spendingCreation.id = data.id
+    this.spendingCreation.date = data.date
+    this.spendingCreation.name = data.name
+    this.spendingCreation.amount = data.amount
+    this.spendingCreation.creator = data.creator
+    this.spendingCreation.recipients = data.recipients
+  }
   @action
   async create ({ onSuccess, onError, travelId }) {
     this.errors = {}
     const spending = this.spendingCreation
-    if (spending.name.length === 0) {
-      this.errors.name = 'Merci de renseigner un nom pour cette dépense'
-      onError()
-    } else if (spending.amount.length === 0 || isNaN(spending.amount)) {
-      this.errors.amount = 'Merci de renseigner un montant valide'
-      onError()
-    } else if (spending.date !== null && spending.date.length === 0) {
-      this.errors.date = 'Merci de renseigner une date'
-      onError()
-    } else if (spending.creator.length === 0 && spending.creator !== '') {
-      this.errors.creator = 'Une dépense nécessite un payeur'
-      onError()
-    } else if (spending.recipients.length === 0) {
-      this.errors.recipients = 'La dépense doit concerner au moins une personne '
+    this.handleErrors(spending)
+    if (spending.errors !== undefined) {
+      console.log('in error', spending.errors === undefined)
       onError()
     } else {
       const newSpending = await this.api.create(spending)
@@ -128,13 +139,42 @@ class Spending {
   }
 
   @action
-  async delete (id) {
-    const deletion = await this.api.delete(id)
-
-    if (deletion.error === false) {
-      const newSpendings$ = this.spendings$.filter(spending => spending.id !== id)
-      this.spendings$.replace(newSpendings$)
+  async update ({ onSuccess, onError, travelId }) {
+    this.errors = {}
+    const spending = this.spendingCreation
+    this.handleErrors(spending)
+    if (spending.errors !== undefined) {
+      onError()
+    } else {
+      let travel = await this.travelApi.get(travelId)
+      travel.spendings[this.currentSpendingId] = spending
+      this.travelApi.update(travel.id, travel)
+      this.spendings$[this.currentSpendingId] = spending
+      onSuccess()
     }
+  }
+
+  handleErrors (spending) {
+    if (spending.name.length === 0) {
+      this.errors.name = 'Merci de renseigner un nom pour cette dépense'
+    } else if (spending.amount.length === 0 || isNaN(spending.amount)) {
+      this.errors.amount = 'Merci de renseigner un montant valide'
+    } else if (spending.date !== null && spending.date.length === 0) {
+      this.errors.date = 'Merci de renseigner une date'
+    } else if (spending.creator !== undefined && spending.creator.length < 1 && spending.creator !== '') {
+      this.errors.creator = 'Une dépense nécessite un payeur'
+    } else if (spending.creator !== null && spending.recipients.length === 0) {
+      this.errors.recipients = 'La dépense doit concerner au moins une personne '
+    }
+  }
+
+  @action
+  async delete ({onSuccess, travelId}) {
+    let travel = await this.travelApi.get(travelId)
+    travel.spendings.splice(this.currentSpendingId, 1)
+    this.travelApi.update(travel.id, travel)
+    this.spendings$.splice(this.currentSpendingId, 1)
+    onSuccess()
   }
 }
 
