@@ -46,7 +46,14 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@babel/runtime@7.0.0-beta.47", "@babel/runtime@^7.0.0-beta.42":
+"@babel/runtime@7.0.0-beta.49":
+  version "7.0.0-beta.49"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.49.tgz#03b3bf07eb982072c8e851dd2ddd5110282e61bf"
+  dependencies:
+    core-js "^2.5.6"
+    regenerator-runtime "^0.11.1"
+
+"@babel/runtime@^7.0.0-beta.42":
   version "7.0.0-beta.47"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.47.tgz#273f5e71629e80f6cbcd7507503848615e59f7e0"
   dependencies:
@@ -1727,6 +1734,10 @@ core-js@^1.0.0:
 core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.3:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.6.tgz#0fe6d45bf3cac3ac364a9d72de7576f4eb221b9d"
+
+core-js@^2.5.6:
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -5020,11 +5031,7 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-<<<<<<< HEAD
-react-dom@^16.3.0:
-=======
 "react-dom@>= 16.3.2":
->>>>>>> master
   version "16.4.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.4.0.tgz#099f067dd5827ce36a29eaf9a6cdc7cbf6216b1e"
   dependencies:
@@ -5112,11 +5119,11 @@ react-scrollbar-size@^2.0.2:
     react-event-listener "^0.5.1"
     stifle "^1.0.2"
 
-react-spring@^5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-5.2.1.tgz#b6ea5fcf43489333f3364eaf08efa76de66de7bd"
+react-spring@^5.3.7:
+  version "5.3.7"
+  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-5.3.7.tgz#ead5e88740663332d771677db9ae9b403055637f"
   dependencies:
-    "@babel/runtime" "7.0.0-beta.47"
+    "@babel/runtime" "7.0.0-beta.49"
 
 react-text-mask@^5.1.0:
   version "5.4.1"
@@ -5142,11 +5149,7 @@ react-transition-group@^2.2.1:
     loose-envify "^1.3.1"
     prop-types "^15.6.1"
 
-<<<<<<< HEAD
-react@^16.3.0:
-=======
 "react@>= 16.3.2":
->>>>>>> master
   version "16.4.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.4.0.tgz#402c2db83335336fba1962c08b98c6272617d585"
   dependencies:
