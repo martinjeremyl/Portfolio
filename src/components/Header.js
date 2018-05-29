@@ -4,14 +4,17 @@ import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
+import IconButton from 'material-ui/IconButton'
 
-import BackButton from './BackButton'
+import BackButton from './buttons/BackButton'
 
 const routesTitle = {
   '/login': 'Connexion',
   '/register': 'Inscription',
   '/travels': 'Mes voyages',
-  '/travel/': 'Détails du voyage'
+  '/travel/': 'Détails du voyage',
+  'housings': 'Liste des logements',
+  'createSpending': 'Création d une dépense'
 }
 const routesTitleProxy = new Proxy(routesTitle, {
   get (target, property) {
@@ -21,7 +24,8 @@ const routesTitleProxy = new Proxy(routesTitle, {
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginBottom: '56px'
   },
   flex: {
     flex: 1,
@@ -33,16 +37,18 @@ const styles = {
 @observer
 class Header extends Component {
   render () {
-    const { classes, renderRightButton, routingStore, title } = this.props
+    const { classes, renderLeftButton, renderRightButton, routingStore, title } = this.props
 
     return (
       <div className={classes.root}>
-        <AppBar position='static'>
-          <Toolbar disableGutters>
+        <AppBar position='fixed'>
+          <Toolbar disableGutters className='mainBackgroundColor'>
             {
-              this.props.routingStore.location.pathname === '/travels'
-                ? ''
-                : <BackButton onClick={routingStore.goBack} />
+              renderLeftButton
+                ? renderLeftButton()
+                : this.props.routingStore.location.pathname === '/travels'
+                  ? <IconButton color='inherit' />
+                  : <BackButton onClick={routingStore.goBack} />
             }
             <Typography variant='title' color='inherit' className={classes.flex}>
               {
@@ -52,7 +58,9 @@ class Header extends Component {
               }
             </Typography>
             {
-              renderRightButton && renderRightButton()
+              renderRightButton
+                ? renderRightButton()
+                : <IconButton color='inherit' />
             }
           </Toolbar>
         </AppBar>

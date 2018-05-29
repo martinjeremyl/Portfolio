@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import { Link } from 'react-router-dom'
-import FixedActionButton from '../../components/FixedActionButton'
+import FixedActionButton from '../../components/buttons/FixedActionButton'
 import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog'
 import Header from '../../components/Header'
 import Navbar from '../../components/Navbar'
-import ListItemVoyage from '../../components/ListItemVoyage'
+import ListItemVoyage from './components/ListItemVoyage'
 
 @inject('appStore', 'travelStore')
 @observer
@@ -15,11 +15,11 @@ class TravelPage extends Component {
   }
 
   handleOpen = () => {
-    this.setState({ open: true })
+    this.props.appStore.openConfirmDeleteDialog('testId')
   }
 
   handleClose = () => {
-    this.setState({ open: false })
+    this.props.appStore.closeConfirmDeleteDialog()
   }
 
   deleteTravel = () => {

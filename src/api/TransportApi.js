@@ -2,7 +2,7 @@ import FirebaseRequestApi from './FirebaseRequestApi'
 
 class TransportApi extends FirebaseRequestApi {
   constructor () {
-    super('transport')
+    super('transports')
   }
 }
 

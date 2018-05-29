@@ -10,9 +10,11 @@ import Registration from './pages/Authentication/Registration'
 import Travel from './pages/Travel/TravelPage'
 import TravelDetail from './pages/Travel/TravelDetailPage'
 import TravelCreation from './pages/Travel/TravelCreationPage'
-
+import Housing from './pages/Housing/HousingPage'
+import SpendingPage from './pages/Spending/SpendingPage'
 import Loader from './components/Loader'
 import { PrivateRoute } from './components/PrivateRoute'
+import SpendingCreation from './pages/Spending/SpendingCreation'
 
 const appColorPalette = {
   light: '#ffb09c',
@@ -53,6 +55,14 @@ class App extends Component {
                 <Route exact path='/' component={Authentication} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/register' component={Registration} />
+                <Route exact path='/travels/:id/createSpending' component={SpendingCreation} />
+                <Route exact path='/travels/:id/editSpending/:index' component={SpendingCreation} />
+                <PrivateRoute
+                  exact
+                  path='/travels/:id/housings'
+                  isConnected={appStore.isConnected}
+                  component={Housing}
+                />
                 <PrivateRoute
                   exact
                   path='/travels'
@@ -71,7 +81,18 @@ class App extends Component {
                   isConnected={appStore.isConnected}
                   component={TravelDetail}
                 />
-
+                <PrivateRoute
+                  exact
+                  path='/spending/:id'
+                  isConnected={appStore.isConnected}
+                  component={SpendingPage}
+                />
+                <PrivateRoute
+                  exact
+                  path='/travels/:id/spendings'
+                  isConnected={appStore.isConnected}
+                  component={SpendingPage}
+                />
                 {/* fallback route to redirect the user */}
                 <Route path='*' component={Authentication} />
               </Switch>

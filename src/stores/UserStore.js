@@ -30,10 +30,20 @@ class User {
   }
 
   @action
+  async getUserByAuthenticationId (userId) {
+    // Get a user thanks to its userid value
+    return this.api.findBy({ field: 'userId', operator: '==', value: userId })
+  }
+
+  @action
   setError (key, value) {
     this.error[key] = value
   }
 
+  @action
+  removeErrors () {
+    this.error = []
+  }
   @action
   async login ({ email, password, onSuccess, onError }) {
     try {
@@ -43,14 +53,26 @@ class User {
     } catch (error) {
       this.error = {}
       let errorCode = error.code
-      let errorMessage = error.message
+      let errorMessage
       // Par défaut on met l'erreur sur le champ email
       let input = 'email'
-      if (errorCode === 'auth/invalid-email' || errorCode === 'auth/user-not-found' || errorCode === 'auth/user-disabled') {
-        input = 'email'
-      }
-      if (errorCode === 'auth/wrong-password') {
-        input = 'password'
+      switch (errorCode) {
+        case 'auth/invalid-email':
+          input = 'email'
+          errorMessage = "L'adresse email renseignée est invalide"
+          break
+        case 'auth/user-not-found':
+          input = 'email'
+          errorMessage = "L'utilisateur n'existe pas"
+          break
+        case 'auth/user-disabled':
+          input = 'email'
+          errorMessage = "L'utilisateur est désactivé"
+          break
+        case 'auth/wrong-password':
+          input = 'password'
+          errorMessage = 'Mot de passe incorrecte'
+          break
       }
       this.setError(input, errorMessage)
       onError()

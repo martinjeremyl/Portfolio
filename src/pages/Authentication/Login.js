@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter, Link } from 'react-router-dom'
-import Button from '../../components/Button'
+import Button from '../../components/buttons/Button'
 import Input from '../../components/Input'
 
 @inject('userStore')
@@ -9,6 +9,7 @@ import Input from '../../components/Input'
 class Login extends Component {
   updateField = ({ target: { name, value } }) => this.props.userStore.setUserCreation(name, value)
   onLoginSuccessful = () => {
+    this.props.userStore.removeErrors({})
     this.props.history.push('/travels')
   }
 
@@ -44,7 +45,8 @@ class Login extends Component {
         <Input
           style={{
             width: '70%',
-            marginTop: '40px'
+            marginTop: '40px',
+            paddingTop: '8%'
           }}
           name='email'
           placeholder='Email'
@@ -59,6 +61,7 @@ class Login extends Component {
           style={{
             width: '70%',
             marginTop: '40px',
+            paddingTop: '8%',
             textAlign: 'center'
           }}
           name='password'
@@ -80,8 +83,8 @@ class Login extends Component {
             })
           }}
           value='Connexion'
+          className='mainBackgroundColor'
           style={{
-            background: 'linear-gradient(to left, #F2BF95, #E45C55)',
             color: 'white',
             width: '70%',
             marginTop: '50%'
@@ -93,9 +96,10 @@ class Login extends Component {
           style={{
             display: 'block',
             color: 'white',
-            paddingTop: '20px',
+            marginTop: '40px',
             textDecoration: 'none'
           }}
+          onClick={this.props.userStore.removeErrors}
         >
             S'inscrire
         </Link>

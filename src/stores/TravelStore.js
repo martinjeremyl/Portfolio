@@ -37,7 +37,13 @@ class Travel {
   }
 
   @computed
+  get participants () {
+    return toJS(this.travelCreation.participants.value)
+  }
+
+  @computed
   get travel () {
+    // Find the first travel in the collection that have the id of the current travel id
     return toJS(this.travels.find(travel => travel.id === this.currentTravelId.get()))
   }
 
@@ -56,6 +62,7 @@ class Travel {
     const finalTravels = await Promise.all(
       filteredTravels.map(async travel => ({
         ...travel,
+        housings: await this.api.getSubCollection(travel.id, 'housings'),
         members: await Promise.all(
           travel.participants.map(participant =>
             this.userApi.findBy({ field: 'userId', operator: '==', value: participant })
@@ -64,6 +71,16 @@ class Travel {
       }))
     )
     this.travels.replace(finalTravels)
+  }
+
+  async fetchCurrentTravelParticipants () {
+    let travel = await this.api.get(this.currentTravelId.get())
+    let currentTravelParticipants = await Promise.all(
+      travel.participants.map(participant =>
+        this.userApi.findBy({ field: 'userId', operator: '==', value: participant })
+      )
+    )
+    return currentTravelParticipants
   }
 
   @action
@@ -79,6 +96,8 @@ class Travel {
         field.value = value
         break
       case 'object':
+        field.value.replace(value)
+
         // this.travelCreation[key].value.push(value)
         break
 

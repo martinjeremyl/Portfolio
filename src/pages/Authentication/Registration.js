@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { inject, observer } from 'mobx-react'
 import { withRouter, Link } from 'react-router-dom'
 import Input from '../../components/Input'
-import Button from '../../components/Button'
-import MaterialDatePicker from '../../components/DatePicker'
+import Button from '../../components/buttons/Button'
+import MaterialDatePicker from '../../components/datetime/DatePicker'
 import ImageUpload from '../../components/ImageUpload'
 
 @inject('userStore')
@@ -27,7 +27,6 @@ class Registration extends Component {
         marginTop: '30px'
       },
       button: {
-        background: 'linear-gradient(to left, #F2BF95, #E45C55)',
         color: 'white',
         width: '70%',
         marginTop: '40px'
@@ -62,7 +61,11 @@ class Registration extends Component {
           />
           <Input
             name='name'
-            style={styles.input}
+            style={{
+              width: '70%',
+              marginTop: '40px',
+              paddingTop: '5%'
+            }}
             placeholder='Nom'
             value={name}
             whiteInput
@@ -73,7 +76,11 @@ class Registration extends Component {
           />
           <Input
             name='surname'
-            style={styles.input}
+            style={{
+              width: '70%',
+              marginTop: '40px',
+              paddingTop: '5%'
+            }}
             placeholder='Prénom'
             value={surname}
             whiteInput
@@ -84,7 +91,11 @@ class Registration extends Component {
           />
           <Input
             name='email'
-            style={styles.input}
+            style={{
+              width: '70%',
+              marginTop: '40px',
+              paddingTop: '5%'
+            }}
             placeholder='Email'
             type='email'
             value={email}
@@ -105,7 +116,11 @@ class Registration extends Component {
           />
           <Input
             name='password'
-            style={styles.input}
+            style={{
+              width: '70%',
+              marginTop: '40px',
+              paddingTop: '5%'
+            }}
             type='password'
             placeholder='Mot de passe'
             value={password}
@@ -116,7 +131,11 @@ class Registration extends Component {
           />
           <Input
             name='passwordConfirmation'
-            style={styles.input}
+            style={{
+              width: '70%',
+              marginTop: '40px',
+              paddingTop: '3%'
+            }}
             type='password'
             placeholder='Confirmation du mot de passe'
             value={passwordConfirmation}
@@ -129,9 +148,11 @@ class Registration extends Component {
             imageCallback={image => {
               userStore.setUserCreation('avatar', image)
             }}
+            fullName={`${name} ${surname}`}
           />
           <Button
             style={styles.button}
+            className='mainBackgroundColor'
             onClick={() => {
               userStore.register(userStore.authenticatingUser)
               if (Object.keys(userStore.error).length === 0) {
@@ -157,6 +178,7 @@ class Registration extends Component {
               paddingBottom: '20px',
               textDecoration: 'none'
             }}
+            onClick={this.props.userStore.removeErrors}
           >
             Se connecter
           </Link>

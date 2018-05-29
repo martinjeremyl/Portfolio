@@ -1,25 +1,26 @@
 import { observable, action, computed, toJS, autorun } from 'mobx'
 import SpendingApi from '../api/SpendingApi'
 import appStore from './AppStore'
-import travelStore from './travelStore'
+import travelStore from './TravelStore'
+import UserStore from './UserStore'
+import TravelApi from '../api/TravelApi'
 
 class Spending {
   currentSpendingId = observable.box('')
   spendings$ = observable.array([])
-
-  @observable
-  spendingCreation = {
+  errors = observable.array([])
+  spendingCreation = observable({
     id: '',
-    date: '',
-    label: '',
+    date: null,
+    name: '',
     amount: '',
-    creator: '',
+    creator: undefined,
     recipients: []
-  }
+  })
 
   constructor () {
     this.api = new SpendingApi()
-
+    this.travelApi = new TravelApi()
     autorun(() => {
       if (appStore.isConnected) {
         this.fetchSpendings()
@@ -44,29 +45,136 @@ class Spending {
 
   @action
   async fetchSpendings () {
-    const response = await this.api.list({
-      field: 'travelId',
-      operator: '==',
-      value: travelStore.currentTravelId
+    let spendings = await this.getAllSpendings()
+    this.spendings$.replace(spendings)
+  }
+
+  @action
+  async fetchPersonalSpendings () {
+    let spendings = await this.getAllSpendings()
+    let filteredResponse = []
+    // J'ai pas trouvé mieu en essayant avec des filter() etc ca ne fonctionnait pas
+    spendings.forEach((element, index) => {
+      if (element.creator.userId === UserStore.user.uid) {
+        filteredResponse[index] = element
+      } else if (Array.isArray(element.recipients)) {
+        element.recipients.forEach(e => {
+          if (e.userId === UserStore.user.uid) {
+            filteredResponse[index] = element
+          }
+        })
+      }
     })
-
-    this.spendings$.replace(response)
+    this.spendings$.replace(filteredResponse)
   }
 
   @action
-  async create (data) {
-    const newSpending = await this.api.create(data)
-    this.spendings$.push(newSpending)
+  async getAllSpendings () {
+    const response = await this.travelApi.get(travelStore.currentTravelId.get())
+    return response.spendings
+  }
+  @action
+  updateSpendingCreation (key, value) {
+    this.spendingCreation[key] = value
   }
 
   @action
-  async delete (id) {
-    const deletion = await this.api.delete(id)
+  async clearSpendingCreation () {
+    this.setSpendingCreation({
+      id: '',
+      date: null,
+      name: '',
+      amount: '',
+      creator: undefined,
+      recipients: []
+    })
+  }
 
-    if (deletion.error === false) {
-      const newSpendings$ = this.spendings$.filter(spending => spending.id !== id)
-      this.spendings$.replace(newSpendings$)
+  setErrors (key, value) {
+    this.errors[key] = value
+  }
+  @action
+  addRecipient (newRecipient) {
+    let doublon = this.spendingCreation.recipients.toJS().findIndex(recipient => recipient.id === newRecipient.id)
+    if (doublon === -1) {
+      this.spendingCreation.recipients.push(newRecipient)
+    } else {
+      this.spendingCreation.recipients.splice(doublon, 1)
     }
+  }
+
+  @action
+  setCreator (creator) {
+    this.spendingCreation.creator = creator
+  }
+
+  @action
+  setSpendingCreation (data) {
+    this.spendingCreation.id = data.id
+    this.spendingCreation.date = data.date
+    this.spendingCreation.name = data.name
+    this.spendingCreation.amount = data.amount
+    this.spendingCreation.creator = data.creator
+    this.spendingCreation.recipients = data.recipients
+  }
+  @action
+  async create ({ onSuccess, onError, travelId }) {
+    this.errors = {}
+    const spending = this.spendingCreation
+    this.handleErrors(spending)
+    if (spending.errors !== undefined) {
+      console.log('in error', spending.errors === undefined)
+      onError()
+    } else {
+      const newSpending = await this.api.create(spending)
+      let travel = await this.travelApi.get(travelId)
+      if (travel.spendings === undefined) {
+        travel.spendings = []
+      }
+      travel.spendings.push(newSpending)
+      this.travelApi.update(travel.id, travel)
+      this.spendings$.push(newSpending)
+      onSuccess()
+    }
+  }
+
+  @action
+  async update ({ onSuccess, onError, travelId }) {
+    this.errors = {}
+    const spending = this.spendingCreation
+    this.handleErrors(spending)
+    if (spending.errors !== undefined) {
+      onError()
+    } else {
+      let travel = await this.travelApi.get(travelId)
+      travel.spendings[this.currentSpendingId] = spending
+      this.travelApi.update(travel.id, travel)
+      this.spendings$[this.currentSpendingId] = spending
+      onSuccess()
+    }
+  }
+
+  handleErrors (spending) {
+    if (spending.name.length === 0) {
+      this.errors.name = 'Merci de renseigner un nom pour cette dépense'
+    } else if (spending.amount.length === 0 || isNaN(spending.amount)) {
+      this.errors.amount = 'Merci de renseigner un montant valide'
+    } else if (spending.date !== null && spending.date.length === 0) {
+      this.errors.date = 'Merci de renseigner une date'
+    } else if (spending.creator !== undefined && spending.creator.length < 1 && spending.creator !== '') {
+      this.errors.creator = 'Une dépense nécessite un payeur'
+    } else if (spending.creator !== null && spending.recipients.length === 0) {
+      this.errors.recipients = 'La dépense doit concerner au moins une personne '
+    }
+  }
+
+  @action
+  async delete ({onSuccess, travelId}) {
+    let travel = await this.travelApi.get(travelId)
+    travel.spendings.splice(this.currentSpendingId, 1)
+    this.travelApi.update(travel.id, travel)
+    this.spendings$.splice(this.currentSpendingId, 1)
+    onSuccess()
   }
 }
 

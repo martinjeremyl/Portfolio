@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Avatar from './Avatar'
 
 class ImageUpload extends Component {
   state = { file: '', imagePreviewUrl: '' }
@@ -31,10 +32,10 @@ class ImageUpload extends Component {
           marginLeft: '15%',
           width: '70px',
           height: '70px',
-          background: imagePreviewUrl ? 'transparent' : '#F57464',
+          background: 'transparent',
           borderRadius: '50%',
           position: 'relative',
-          border: '1px solid #F57464'
+          border: `1px solid ${imagePreviewUrl ? '#F57464' : 'transparent'}`
         }}
       >
         <input
@@ -48,21 +49,32 @@ class ImageUpload extends Component {
           type='file'
           onChange={e => this.handleImageChange(e)}
         />
-
-        <img
-          style={{
-            opcaity: imagePreviewUrl ? 1 : 0,
-            pointerEvents: 'none',
-            width: '100%',
-            height: '100%',
-            borderRadius: '50%',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            zIndex: 100
-          }}
-          src={imagePreviewUrl || ''}
-        />
+        {
+          imagePreviewUrl
+            ? (
+              <img
+                style={{
+                  pointerEvents: 'none',
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '50%',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  zIndex: 100
+                }}
+                src={imagePreviewUrl}
+              />
+            )
+            : (
+              <Avatar name={this.props.fullName} style={{
+                margin: '-70px 0 0 0',
+                pointerEvents: 'none',
+                width: 70,
+                height: 70
+              }} />
+            )
+        }
       </div>
     )
   }

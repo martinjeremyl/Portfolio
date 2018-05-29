@@ -9,6 +9,7 @@ class FixedActionButton extends Component {
         variant='fab'
         color={this.props.color}
         aria-label='add'
+        className='mainBackgroundColor'
         style={{
           position: 'fixed',
           bottom: '30px',

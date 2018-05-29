@@ -23,7 +23,8 @@ class carouselComponent extends React.Component {
       <div style={{
         width: 200,
         position: 'relative',
-        display: 'block'
+        display: 'block',
+        margin: '0px auto 0px auto'
       }}>
         <Carousel
           initialSlideHeight={100}

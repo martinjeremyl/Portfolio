@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { observer, inject } from 'mobx-react'
-import Stepper, { Step, StepButton } from 'material-ui/Stepper'
+import React, {Component} from 'react'
+import {observer, inject} from 'mobx-react'
+import Stepper, {Step, StepButton} from 'material-ui/Stepper'
 
 import TravelCreationPageOne from './TravelCreationPageOne'
 import TravelCreationPageTwo from './TravelCreationPageTwo'
@@ -13,12 +13,12 @@ import Header from '../../components/Header'
 class TravelCreationPage extends Component {
   state = {
     participants: [this.props.userStore.user.uid],
-    activeStep: 0,
+    activeStep: 2,
     completed: new Set(),
     skipped: new Set()
   }
 
-  handleInputsChange = ({ target: { name, value } }) => {
+  handleInputsChange = ({target: {name, value}}) => {
     this.props.travelStore.updateTravelCreation(name, value)
   }
 
@@ -28,37 +28,37 @@ class TravelCreationPage extends Component {
     })
   }
 
-  isStepComplete (step) {
+  isStepComplete(step) {
     return this.state.completed.has(step)
   }
 
   renderSwitch = () => {
     switch (this.state.activeStep) {
       case 0:
-        return <TravelCreationPageOne handleInputsChange={this.handleInputsChange} />
+        return <TravelCreationPageOne handleInputsChange={this.handleInputsChange}/>
 
       case 1:
-        return <TravelCreationPageTwo handleInputsChange={this.handleInputsChange} />
+        return <TravelCreationPageTwo handleInputsChange={this.handleInputsChange}/>
 
       case 2:
-        return <TravelCreationPageThree handleInputsChange={this.handleInputsChange} />
+        return <TravelCreationPageThree handleInputsChange={this.handleInputsChange}/>
 
       default:
         return null
     }
   }
 
-  render () {
+  render() {
     return (
-      <div style={{ width: '100%' }}>
-        <Header />
+      <div style={{width: '100%'}}>
+        <Header/>
         {this.renderSwitch()}
 
         <Stepper
           alternativeLabel
           nonLinear
           activeStep={this.state.activeStep}
-          style={{ position: 'fixed', bottom: '10px', width: '100%', padding: '0' }}
+          style={{position: 'fixed', bottom: '0px', width: '100%', padding: '15px 0px 0px 0px'}}
         >
           {[1, 2, 3, 4].map((label, index) => {
             return (
