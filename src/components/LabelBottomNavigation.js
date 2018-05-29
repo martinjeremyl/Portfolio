@@ -2,14 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation'
-import GroupIcon from '@material-ui/icons/Group'
-import PersonIcon from '@material-ui/icons/Person'
-import BalanceIcon from '@material-ui/icons/AccountBalance'
 import { observer, inject } from 'mobx-react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const styles = {
   root: {
-    width: '100%'
+    width: '100%',
+    background: 'linear-gradient(to left, #F2BF95, #E45C55)',
+    bottom: '0%',
+    position: 'fixed'
+  },
+  button: {
+    color: 'white',
+    fontSize: '32px'
   }
 }
 
@@ -42,9 +47,9 @@ class LabelBottomNavigation extends React.Component {
     const { value } = this.state
     return (
       <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
-        <BottomNavigationAction value='group' icon={<GroupIcon />} />
-        <BottomNavigationAction value='person' icon={<PersonIcon />} />
-        <BottomNavigationAction value='balance' icon={<BalanceIcon />} />
+        <BottomNavigationAction value='group' icon={<FontAwesomeIcon className={classes.button} icon={['fal', 'users']} />} />
+        <BottomNavigationAction value='person' icon={<FontAwesomeIcon className={classes.button} icon={['fal', 'user']} />} />
+        <BottomNavigationAction value='balance' icon={<FontAwesomeIcon className={classes.button} icon={['fal', 'balance-scale']} />} />
       </BottomNavigation>
     )
   }
