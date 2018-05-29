@@ -12,7 +12,7 @@ class TravelCreationPage extends Component {
     const {name, startDate, endDate, note, handleInputsChange, travelStore} = this.props
 
     return (
-      <div style={{textAlign: 'center', marginBottom: '20%', paddingTop: '56px'}}>
+      <div style={{textAlign: 'center', marginBottom: '20%'}}>
         <Input
           name='name'
           onChange={handleInputsChange}
