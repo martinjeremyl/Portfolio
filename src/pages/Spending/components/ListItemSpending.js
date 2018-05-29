@@ -58,7 +58,7 @@ class ListItemSpending extends Component {
       <Card style={styles.card}>
         <Grid container spacing={0} style={{padding: '8px'}}>
           <Grid item xs={2} style={styles.spender}>
-            <div style={styles.dottedLine} />
+            <div style={styles.dottedLine} className='mainColor' />
             <Avatar
               src={spending.creator && spending.creator.avatar}
               name={`${spending.creator.name} ${spending.creator.surname}`}
@@ -78,9 +78,6 @@ class ListItemSpending extends Component {
                   return <Avatar key={recipient.id} src={recipient.avatar} name={`${recipient.name} ${recipient.surname}`} style={styles.avatarRecipients} />
                 } else if (index === spending.recipients.length - 1) {
                   return (<Avatar style={styles.avatarRecipients}
-                    onClick={() => {
-                      return this.handleClickOpen(true)
-                    }}
                     name={`+ ${spending.recipients.length - 3}`} />)
                 }
               })}

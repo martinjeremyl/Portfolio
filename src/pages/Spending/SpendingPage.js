@@ -38,7 +38,7 @@ class SpendingPage extends Component {
       <div>
         <Header />
         <div style={{ width: '100%', textAlign: 'center' }}>
-          {spendingStore.spendings.map((item, index) => item !== undefined && <ListItemSpending key={index} index={index} spending={item} />)}
+          {spendingStore.spendings.map((item, index) => <ListItemSpending key={index} index={index} spending={item} />)}
         </div>
         <LabelBottomNavigation />
         <ConfirmDeleteDialog
