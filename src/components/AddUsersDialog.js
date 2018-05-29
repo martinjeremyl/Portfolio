@@ -19,6 +19,7 @@ class AddUsersDialog extends Component {
     addRecipient (member) {
       this.props.spendingStore.addRecipient(member)
     }
+
     setCreator (member) {
       this.props.spendingStore.setCreator(member)
     }
@@ -30,7 +31,6 @@ class AddUsersDialog extends Component {
       }
     }
     async componentDidMount () {
-      this.props.travelStore.setCurrentTravelId(this.props.match.params.id)
       let members = await this.props.travelStore.fetchCurrentTravelParticipants()
       this.setState({members})
     }
@@ -44,9 +44,9 @@ class AddUsersDialog extends Component {
         >
           <DialogTitle id='alert-dialog-title'>{'Ajouter des membres'}</DialogTitle>
           <DialogContent>
-            { this.state.members !== undefined && this.state.members.map(member => {
+            { this.state.members !== undefined && this.state.members.map((member, index) => {
               return (
-                <ListItem onClick={() => { return this.addMember(member) }} key={member.id}>
+                <ListItem onClick={() => { return this.addMember(member) }} key={index}>
                   <Avatar name={`${member.name} ${member.surname}`} />
                   <h4>{`${member.name} ${member.surname}`}</h4>
                 </ListItem>
@@ -65,3 +65,4 @@ class AddUsersDialog extends Component {
 }
 
 export default AddUsersDialog
+

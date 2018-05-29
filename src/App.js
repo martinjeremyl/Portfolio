@@ -56,6 +56,7 @@ class App extends Component {
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/register' component={Registration} />
                 <Route exact path='/travels/:id/createSpending' component={SpendingCreation} />
+                <Route exact path='/travels/:id/editSpending/:index' component={SpendingCreation} />
                 <PrivateRoute
                   exact
                   path='/travels/:id/housings'

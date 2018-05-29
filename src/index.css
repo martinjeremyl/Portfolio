@@ -98,9 +98,19 @@ h2 {
 .mainColor{
   color: #F57464;
 }
+
+.iconMenuTravel{
+  font-size: 45px;
+}
+
+.labelMenuTravel{
+  font-size: 20px;
+}
+
 /* Correction affichage du label erreur sur petit téléphone  */
 @media only screen and (max-device-width:320px) {
   .SmallLabelInputFontSize label{
     font-size : 0.8em;
   }
 } 
+

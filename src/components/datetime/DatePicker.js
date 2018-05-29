@@ -6,9 +6,16 @@ import 'moment/locale/fr'
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
 import { InputAdornment } from 'material-ui/Input'
 import EventIcon from '@material-ui/icons/Event'
+import red from 'material-ui/colors/red'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui'
 
 const materialWhiteTheme = createMuiTheme({
+  palette: {
+    error: {
+      ...red,
+      500: '#F57464'
+    }
+  },
   overrides: {
     MuiFormControl: {
       root: {

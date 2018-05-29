@@ -47,15 +47,25 @@ const styles = {
     whiteSpace: 'nowrap'
   }
 }
-
-@inject('appStore', 'userStore')
+@inject('spendingStore', 'travelStore', 'routingStore')
 @observer
 class ListItemSpending extends Component {
   render () {
-    const spending = this.props.spending
-    console.log(spending.creator)
+    const { spending, spendingStore, routingStore, travelStore, index } = this.props
     return (
-      <div>
+      <Card style={styles.card}>
+        <CardContent>
+          <div>
+            <DateDisplay date={spending && spending.date !== undefined && moment(spending.date)} />
+          </div>
+          <div>
+            <Avatar src={spending && spending.creator && spending.creator.avatar && spending.creator.avatar} />
+          </div>
+          <div>
+            {spending !== undefined && spending.amount}
+          </div>
+          <div>
+            <div>
         <Card style={styles.card}>
           <Grid container spacing={0} style={{padding: '8px'}}>
             <Grid item xs={2} style={styles.spender}>
@@ -96,6 +106,14 @@ class ListItemSpending extends Component {
         </Card>
       </div>
     )
+            <FontAwesomeIcon onClick={() => {
+              spendingStore.setSpendingCreation(spending)
+              spendingStore.setCurrentSpendingId(index)
+              routingStore.history.push(`/travels/${travelStore.currentTravelId}/editSpending/${index}`)
+            }} icon={['fal', 'pen']} />
+          </div>
+        </CardContent>
+      </Card>)
   }
 }
 export default withStyles(styles)(ListItemSpending)
